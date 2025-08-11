@@ -1,34 +1,71 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Services - NIYAMOT CSC</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Services - SmartPay</title>
+<style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f8f9fa; }
+    header { background-color: #007bff; padding: 15px 0; text-align: center; color: white; font-size: 24px; font-weight: bold; }
+    nav ul { list-style: none; padding: 0; margin: 0; display: flex; justify-content: center; background-color: #007bff; }
+    nav ul li { margin: 0 15px; }
+    nav ul li a { color: white; text-decoration: none; font-weight: bold; }
+    nav ul li a:hover { text-decoration: underline; }
+    .container { max-width: 900px; margin: auto; padding: 30px; }
+    h2 { text-align: center; color: #333; margin-bottom: 20px; }
+    .services { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+    .service-box { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); text-align: center; transition: 0.3s; }
+    .service-box:hover { transform: translateY(-5px); box-shadow: 0 8px 16px rgba(0,0,0,0.2); }
+    .service-box i { font-size: 40px; color: #007bff; margin-bottom: 10px; }
+    footer { text-align: center; padding: 15px; background-color: #007bff; color: white; margin-top: 20px; }
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-<header>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="services.html">Services</a>
-    <a href="contact.html">Contact</a>
-  </nav>
-</header>
+
+<header>SmartPay Services</header>
+<nav>
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+</nav>
 
 <div class="container">
-  <h1>Our Services</h1>
-  <ul>
-    <li>Government Form Filling</li>
-    <li>Bill Payments</li>
-    <li>Online Registrations</li>
-    <li>Digital Certificates</li>
-    <li>Printing & Scanning</li>
-  </ul>
+    <h2>Our Services</h2>
+    <div class="services">
+        <div class="service-box">
+            <i class="fas fa-file-alt"></i>
+            <h3>Government Form Filling</h3>
+            <p>Fast and accurate government form submission services.</p>
+        </div>
+        <div class="service-box">
+            <i class="fas fa-receipt"></i>
+            <h3>Bill Payments</h3>
+            <p>Pay electricity, water, and other utility bills easily.</p>
+        </div>
+        <div class="service-box">
+            <i class="fas fa-globe"></i>
+            <h3>Online Registrations</h3>
+            <p>Seamless online registrations for various services.</p>
+        </div>
+        <div class="service-box">
+            <i class="fas fa-certificate"></i>
+            <h3>Digital Certificates</h3>
+            <p>Get your official certificates quickly and securely.</p>
+        </div>
+        <div class="service-box">
+            <i class="fas fa-print"></i>
+            <h3>Printing & Scanning</h3>
+            <p>High-quality printing and scanning services.</p>
+        </div>
+    </div>
 </div>
 
-<footer>
-  <p>© 2025 NIYAMOT CSC. All Rights Reserved.</p>
-</footer>
+<footer>© 2025 SmartPay CSC. All Rights Reserved.</footer>
+
 </body>
 </html>
