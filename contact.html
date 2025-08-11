@@ -1,55 +1,21 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us - SmartPay</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 0; background-color: #f4f7fb; }
-        header { background-color: #007bff; padding: 15px 0; text-align: center; }
-        nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
-        nav a:hover { text-decoration: underline; }
-        .container { max-width: 600px; margin: 50px auto; background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        h1 { text-align: center; color: #333; }
-        label { font-weight: bold; display: block; margin: 10px 0 5px; }
-        input, textarea { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px; }
-        textarea { resize: none; height: 100px; }
-        button { background-color: #007bff; color: white; border: none; padding: 10px 15px; cursor: pointer; border-radius: 5px; font-size: 16px; }
-        button:hover { background-color: #0056b3; }
-        .whatsapp-btn { display: block; text-align: center; background-color: #25d366; color: white; padding: 12px; border-radius: 5px; text-decoration: none; font-weight: bold; margin-top: 20px; }
-        .footer { background-color: #007bff; color: white; text-align: center; padding: 10px 0; margin-top: 30px; }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="services.html">Services</a>
-            <a href="contact.html">Contact</a>
-        </nav>
-    </header>
-
-    <div class="container">
+    <section class="contact-container">
         <h1>Contact Us</h1>
-        <form action="mailto:xpxaxn@gmail.com" method="post" enctype="text/plain">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" placeholder="Enter your name" required>
-
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email" required>
-
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" placeholder="Write your message here..." required></textarea>
-
-            <button type="submit">Send Email</button>
+        <form class="contact-form">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message" rows="5" required></textarea>
+            <button type="submit" class="btn-send">Send Email</button>
+            <a href="https://wa.me/7002805576" class="btn-whatsapp">Message on WhatsApp</a>
         </form>
-        <a class="whatsapp-btn" href="https://wa.me/917002805576" target="_blank">💬 Chat on WhatsApp</a>
-    </div>
-
-    <div class="footer">
-        © 2025 NIYAMOT CSC. All Rights Reserved.
-    </div>
+    </section>
 </body>
 </html>
