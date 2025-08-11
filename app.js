@@ -1,4 +1,5 @@
 
+/* app.js - handles form submit, modal and receipt creation */
 function submitForm(e, title){
     e.preventDefault();
     const form = e.target;
@@ -10,14 +11,13 @@ function submitForm(e, title){
     console.log('Submitted', title, data);
     const modal = document.getElementById('successModal');
     modal.querySelector('h2').textContent = title + ' — Success';
-    const ul = modal.querySelector('.details');
-    ul.innerHTML = '';
+    const details = modal.querySelector('.details');
+    details.innerHTML = '';
     for(const k in data){
-        const li = document.createElement('li');
-        li.textContent = k + ': ' + data[k];
-        ul.appendChild(li);
+        const div = document.createElement('div');
+        div.textContent = k + ': ' + data[k];
+        details.appendChild(div);
     }
-    // store for receipt
     window._lastReceipt = {service: title, data: data};
     modal.classList.add('show');
     return false;
@@ -28,20 +28,19 @@ function downloadReceipt(){
     const service = obj.service || 'Service';
     const data = obj.data || {};
     const doc = new window.jspdf.jsPDF();
-    // Header
+    // header
     doc.setFillColor(11,105,255);
-    doc.rect(0,0,210,25,'F');
+    doc.rect(0,0,210,26,'F');
     doc.setTextColor(255,255,255);
     doc.setFontSize(14);
-    doc.text('SmartPay Receipt', 14, 17);
+    doc.text('SmartPay Receipt', 14, 18);
     doc.setTextColor(0,0,0);
     doc.setFontSize(11);
     let y = 36;
     doc.text('Service: ' + service, 14, y); y+=8;
     for(const k in data){
         const line = k + ': ' + data[k];
-        doc.text(line, 14, y);
-        y += 8;
+        doc.text(line, 14, y); y += 8;
         if(y > 280){ doc.addPage(); y = 20; }
     }
     doc.text('Date: ' + new Date().toLocaleString(), 14, y+6);

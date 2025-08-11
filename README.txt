@@ -1,3 +1,3 @@
-SmartPay Professional Multi-page Demo
+SmartPay FINAL - Professional Multi-page Demo
 
-Home, About, Services, Contact, and per-service form pages. Submit shows success modal and allows receipt download (PDF). Footer & header include WhatsApp and Email links.
+Home, Services, Banking pages and service-specific forms. Submit shows success modal and allows Receipt (PDF) download. WhatsApp and Email links included in header/footer. Bank dropdown (major banks) included in banking forms.
