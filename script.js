@@ -1,15 +1,18 @@
 
-function handleDemoSubmit(evt, formName){
-    evt.preventDefault();
-    const form = evt.target;
+function submitForm(e, title){
+    e.preventDefault();
+    const form = e.target;
     const data = {};
-    for(let el of form.elements){
+    for(const el of form.elements){
         if(!el.name) continue;
-        if(el.type === 'checkbox' || el.type === 'radio') { if(el.checked) data[el.name]=el.value; }
-        else data[el.name] = el.value;
+        data[el.name] = el.value;
     }
-    console.log('Demo submit - ' + formName, data);
-    alert('Demo submit for ' + formName + '\nCheck console for submitted values.');
-    form.reset();
+    console.log('Submitted', title, data);
+    const modal = document.getElementById('successModal');
+    modal.querySelector('h2').textContent = title + ' — Success';
+    modal.querySelector('p').textContent = 'Transaction simulated successfully.';
+    modal.classList.add('show');
+    setTimeout(()=>{ modal.classList.remove('show'); form.reset(); }, 1800);
     return false;
 }
+function closeModal(){ document.getElementById('successModal').classList.remove('show'); }

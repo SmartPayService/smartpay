@@ -1,1 +1,21 @@
-<!doctype html><html lang='hi'><head><meta charset='utf-8'/><meta name='viewport' content='width=device-width,initial-scale=1'/><title>PAN Card - New - SmartPay Demo</title><link rel='stylesheet' href='styles.css'></head><body><div class='container'><h2 style='color:#0b69ff'>PAN Card - New</h2><div class='card'><form onsubmit="return handleDemoSubmit(event, 'PAN Card - New')"><div class='form-row'><label>Full Name</label><input name='field_0' type='text' required placeholder='Full name as per Aadhaar/PAN'></div><div class='form-row'><label>Date of Birth</label><input name='field_1' type='date' required></div><div class='form-row'><label>Aadhaar Number</label><input name='field_2' type='text' required placeholder='12-digit Aadhaar' pattern='[0-9]{12}'></div><div class='form-row'><label>Address</label><textarea name='field_3' required placeholder='Residential address'></textarea></div><div style='margin-top:10px'><button type='submit'>Submit (Demo)</button></div></form></div></div><footer><div class='container' style='text-align:center;margin-top:18px'>Contact: <a href='https://wa.me/917002805576' target='_blank'>WhatsApp</a> | <a href='mailto:xpxaxn@gmail.com'>xpxaxn@gmail.com</a></div></footer><script src='script.js'></script></body></html>
+<!doctype html><html lang='en'><head><meta charset='utf-8'/><meta name='viewport' content='width=device-width,initial-scale=1'/><title>PAN Card - New - SmartPay</title><link rel='stylesheet' href='styles.css'><script src='https://kit.fontawesome.com/a2d9b7d7c1.js' crossorigin='anonymous'></script></head><body>
+<header class="header">
+  <div class="wrap">
+    <div class="logo">SmartPay</div>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="index.html#services">Services</a>
+    </nav>
+  </div>
+</header>
+<div class='container'><div style='margin-top:18px' class='form-card'><h2 style='color:#0b69ff'>PAN Card - New</h2><form onsubmit="return submitForm(event, 'PAN Card - New')"><div class='form-row'><label>Full Name</label><input type='text' name='name' required placeholder='Full name as per Aadhaar'></div><div class='form-row'><label>Date of Birth</label><input type='date' name='dob' required></div><div class='form-row'><label>Aadhaar Number</label><input type='text' name='aadhaar' required placeholder='12-digit Aadhaar' pattern='[0-9]{12}'></div><div class='form-row'><label>Address</label><textarea name='address' required placeholder='Residential address'></textarea></div><div style='text-align:right;margin-top:8px'><button class='primary' type='submit'>Submit</button></div></form></div></div>
+<div id="successModal" class="success-modal" aria-hidden="true">
+  <div class="close-x" onclick="closeModal()">✕</div>
+  <h2>Success</h2>
+  <p>Transaction simulated successfully.</p>
+</div>
+
+<footer class="footer">
+  <div class="container">Contact: <a href="https://wa.me/917002805576" target="_blank">WhatsApp</a> | <a href="mailto:xpxaxn@gmail.com">xpxaxn@gmail.com</a></div>
+</footer>
+<script src='script.js'></script></body></html>

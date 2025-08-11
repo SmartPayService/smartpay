@@ -1,3 +1,4 @@
-SmartPay Demo - Final
+SmartPay Multi-Page Demo
 
-Each service page contains a realistic demo form. Submissions are demo-only: they alert and log to console.
+Home + individual service pages. Forms show a stylish success modal and log submission to console. No live payments.
+Contact links in footer: WhatsApp +917002805576, Email xpxaxn@gmail.com

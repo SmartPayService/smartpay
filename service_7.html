@@ -1,1 +1,21 @@
-<!doctype html><html lang='hi'><head><meta charset='utf-8'/><meta name='viewport' content='width=device-width,initial-scale=1'/><title>FASTag Recharge - SmartPay Demo</title><link rel='stylesheet' href='styles.css'></head><body><div class='container'><h2 style='color:#0b69ff'>FASTag Recharge</h2><div class='card'><form onsubmit="return handleDemoSubmit(event, 'FASTag Recharge')"><div class='form-row'><label>Vehicle Number</label><input name='field_0' type='text' required placeholder='Vehicle Registration No'></div><div class='form-row'><label>FASTag ID</label><input name='field_1' type='text' required placeholder='FASTag ID'></div><div class='form-row'><label>Amount</label><input name='field_2' type='number' required placeholder='Amount' min='1'></div><div style='margin-top:10px'><button type='submit'>Submit (Demo)</button></div></form></div></div><footer><div class='container' style='text-align:center;margin-top:18px'>Contact: <a href='https://wa.me/917002805576' target='_blank'>WhatsApp</a> | <a href='mailto:xpxaxn@gmail.com'>xpxaxn@gmail.com</a></div></footer><script src='script.js'></script></body></html>
+<!doctype html><html lang='en'><head><meta charset='utf-8'/><meta name='viewport' content='width=device-width,initial-scale=1'/><title>FASTag Recharge - SmartPay</title><link rel='stylesheet' href='styles.css'><script src='https://kit.fontawesome.com/a2d9b7d7c1.js' crossorigin='anonymous'></script></head><body>
+<header class="header">
+  <div class="wrap">
+    <div class="logo">SmartPay</div>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="index.html#services">Services</a>
+    </nav>
+  </div>
+</header>
+<div class='container'><div style='margin-top:18px' class='form-card'><h2 style='color:#0b69ff'>FASTag Recharge</h2><form onsubmit="return submitForm(event, 'FASTag Recharge')"><div class='form-row'><label>Vehicle Number</label><input type='text' name='vehicle' required placeholder='Vehicle Reg. No'></div><div class='form-row'><label>FASTag ID</label><input type='text' name='fastag' required placeholder='FASTag ID'></div><div class='form-row'><label>Amount</label><input type='number' name='amount' required placeholder='Amount' min='1'></div><div style='text-align:right;margin-top:8px'><button class='primary' type='submit'>Submit</button></div></form></div></div>
+<div id="successModal" class="success-modal" aria-hidden="true">
+  <div class="close-x" onclick="closeModal()">✕</div>
+  <h2>Success</h2>
+  <p>Transaction simulated successfully.</p>
+</div>
+
+<footer class="footer">
+  <div class="container">Contact: <a href="https://wa.me/917002805576" target="_blank">WhatsApp</a> | <a href="mailto:xpxaxn@gmail.com">xpxaxn@gmail.com</a></div>
+</footer>
+<script src='script.js'></script></body></html>
