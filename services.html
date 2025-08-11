@@ -1,6 +1,5 @@
 
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
@@ -15,13 +14,72 @@
     nav ul li a:hover { text-decoration: underline; }
     .container { max-width: 900px; margin: auto; padding: 30px; }
     h2 { text-align: center; color: #333; margin-bottom: 20px; }
-    .services { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
-    .service-box { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); text-align: center; transition: 0.3s; }
-    .service-box:hover { transform: translateY(-5px); box-shadow: 0 8px 16px rgba(0,0,0,0.2); }
-    .service-box i { font-size: 40px; color: #007bff; margin-bottom: 10px; }
-    footer { text-align: center; padding: 15px; background-color: #007bff; color: white; margin-top: 20px; }
+    .service-category { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); margin-bottom: 20px; }
+    .service-category h3 { margin-top: 0; color: #007bff; }
+    ul { padding-left: 20px; }
 </style>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
 </head>
-<body><div class="service-block"><h2>Recharge &amp; Bill Payment</h2><p>Fast mobile recharge, electricity bills, and more.</p></div><div class="service-block"><h2>AEPS</h2><p>Cash withdrawal and balance inquiry using Aadhaar.</p></div><div class="service-block"><h2>DMT</h2><p>Instant domestic money transfer service.</p></div><div class="service-block"><h2>Micro ATM</h2><p>Withdraw cash using debit cards at local shops.</p></div><div class="service-block"><h2>Insurance</h2><p>Easy premium payments for your policies.</p></div></body>
+<body>
+<header>Our Services</header>
+<nav>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+</nav>
+<div class="container">
+    <h2>We Provide the Following Services</h2>
+    
+    <div class="service-category">
+        <h3>PAN Card</h3>
+        <ul>
+            <li>New PAN</li>
+            <li>PAN Correction</li>
+        </ul>
+    </div>
+    
+    <div class="service-category">
+        <h3>Passport</h3>
+        <ul>
+            <li>New Passport</li>
+            <li>Passport Renewal</li>
+        </ul>
+    </div>
+    
+    <div class="service-category">
+        <h3>Insurance</h3>
+        <ul>
+            <li>Two Wheeler</li>
+            <li>Car</li>
+            <li>Commercial Vehicle</li>
+        </ul>
+    </div>
+    
+    <div class="service-category">
+        <h3>Banking Services</h3>
+        <ul>
+            <li>AEPS
+                <ul>
+                    <li>Cash Withdraw</li>
+                    <li>Cash Deposit</li>
+                    <li>Balance Inquiry</li>
+                    <li>Mini Statement</li>
+                </ul>
+            </li>
+            <li>DMT</li>
+            <li>Micro ATM
+                <ul>
+                    <li>Cash Withdraw</li>
+                    <li>Cash Deposit</li>
+                    <li>Balance Inquiry</li>
+                    <li>Mini Statement</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+</div>
+</body>
 </html>
