@@ -1,4 +1,4 @@
-<!doctype html><html lang='en'><head><meta charset='utf-8'/><meta name='viewport' content='width=device-width,initial-scale=1'/><title>AEPS - Cash Withdraw - SmartPay</title><link rel='stylesheet' href='styles.css'><script src='https://kit.fontawesome.com/a2d9b7d7c1.js' crossorigin='anonymous'></script></head><body>
+<!doctype html><html lang='en'><head><meta charset='utf-8'/><meta name='viewport' content='width=device-width,initial-scale=1'/><title>FASTag Recharge - SmartPay</title><link rel='stylesheet' href='styles.css'><script src='https://kit.fontawesome.com/a2d9b7d7c1.js' crossorigin='anonymous'></script></head><body>
 <div class="topbar">
   <div class="wrap">
     <div class="brand">SmartPay</div>
@@ -14,7 +14,7 @@
     </div>
   </div>
 </div>
-<div class="container"><div class="form-card"><h2 style="color:var(--primary)">AEPS - Cash Withdraw</h2><form data-service="AEPS - Cash Withdraw" onsubmit="return submitForm(event, this.dataset.service)"><div class="form-row"><label>Customer Name</label><input type="text" name="customer_name" required placeholder="Full name"></div><div class="form-row"><label>Mobile Number</label><input type="tel" name="mobile" required placeholder="10-digit mobile" pattern="[0-9]{10}"></div><div class="form-row"><label>Aadhaar Number</label><input type="text" name='aadhaar' required placeholder='12-digit Aadhaar' pattern='[0-9]{12}'></div><div class="form-row"><label>Bank</label><input type="text" name='bank' required placeholder='Bank name'></div><div class="form-row"><label>Amount (₹)</label><input type="number" name='amount' required placeholder='Amount' min='1'></div><div style="text-align:right"><button class="primary" type="submit">Submit</button></div></form></div></div>
+<div class="container"><div class="form-card"><h2 style="color:var(--primary)">FASTag Recharge</h2><form data-service="FASTag Recharge" onsubmit="return submitForm(event, this.dataset.service)"><div class="form-row"><label>Customer Name</label><input type="text" name="customer_name" required placeholder="Full name"></div><div class="form-row"><label>Mobile Number</label><input type="tel" name="mobile" required placeholder="10-digit mobile" pattern="[0-9]{10}"></div><div class="form-row"><label>Vehicle Number</label><input type="text" name='vehicle' required placeholder='Vehicle Reg. No'></div><div class="form-row"><label>FASTag ID</label><input type="text" name='fastag' required placeholder='FASTag ID'></div><div class="form-row"><label>Amount (₹)</label><input type="number" name='amount' required placeholder='Amount' min='1'></div><div style="text-align:right"><button class="primary" type="submit">Submit</button></div></form></div></div>
 <div id="successModal" class="success-modal" aria-hidden="true">
   <div class="close-x" onclick="closeModal()">✕</div>
   <h2>Success</h2>

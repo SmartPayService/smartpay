@@ -1,20 +1,29 @@
 <!doctype html><html lang='en'><head><meta charset='utf-8'/><meta name='viewport' content='width=device-width,initial-scale=1'/><title>Car Insurance - SmartPay</title><link rel='stylesheet' href='styles.css'><script src='https://kit.fontawesome.com/a2d9b7d7c1.js' crossorigin='anonymous'></script></head><body>
-<header class="header">
+<div class="topbar">
   <div class="wrap">
-    <div class="logo">SmartPay</div>
-    <nav class="nav">
+    <div class="brand">SmartPay</div>
+    <div class="nav">
       <a href="index.html">Home</a>
-    </nav>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="contact.html">Contact</a>
+      <a href="#help">Help</a>
+      &nbsp;&nbsp;&nbsp;
+      <a href="https://wa.me/917002805576" target="_blank" style="color:#fff;text-decoration:none;font-weight:700">WhatsApp</a>
+      <a href="mailto:xpxaxn@gmail.com" style="color:#fff;text-decoration:none;font-weight:700;margin-left:10px">Email</a>
+    </div>
   </div>
-</header>
-<div class="container"><div class="form-card"><h2 style="color:#0b69ff">Car Insurance</h2><form data-service="Car Insurance" onsubmit="return submitForm(event, this.dataset.service)"><div class="form-row"><label>Owner Name</label><input type="text" name='owner' required placeholder='Owner name'></div><div class="form-row"><label>Vehicle Number</label><input type="text" name='vehicle' required placeholder='Vehicle No'></div><div class="form-row"><label>Policy Type</label><select name='policy' required><option value="">-- Select --</option><option value="Third Party">Third Party</option><option value="Comprehensive">Comprehensive</option></select></div><div class="form-row"><label>Premium (₹)</label><input type="number" name='amount' required placeholder='Amount' min='1'></div><div style="text-align:right"><button class="primary" type="submit">Submit</button></div></form></div></div>
+</div>
+<div class="container"><div class="form-card"><h2 style="color:var(--primary)">Car Insurance</h2><form data-service="Car Insurance" onsubmit="return submitForm(event, this.dataset.service)"><div class="form-row"><label>Customer Name</label><input type="text" name="customer_name" required placeholder="Full name"></div><div class="form-row"><label>Mobile Number</label><input type="tel" name="mobile" required placeholder="10-digit mobile" pattern="[0-9]{10}"></div><div class="form-row"><label>Owner Name</label><input type="text" name='owner' required placeholder='Owner name'></div><div class="form-row"><label>Vehicle Number</label><input type="text" name='vehicle' required placeholder='Vehicle No'></div><div class="form-row"><label>Policy Type</label><select name='policy' required><option value="">-- Select --</option><option value="Third Party">Third Party</option><option value="Comprehensive">Comprehensive</option></select></div><div class="form-row"><label>Premium (₹)</label><input type="number" name='amount' required placeholder='Amount' min='1'></div><div style="text-align:right"><button class="primary" type="submit">Submit</button></div></form></div></div>
 <div id="successModal" class="success-modal" aria-hidden="true">
   <div class="close-x" onclick="closeModal()">✕</div>
   <h2>Success</h2>
   <p>Your transaction was successful.</p>
-  <ul class="details" style="text-align:left;margin-top:12px;max-height:180px;overflow:auto"></ul>
-  <div style="margin-top:12px"><button onclick="downloadReceipt()" class="primary">Download Receipt</button></div>
+  <div class="details"></div>
+  <div style="margin-top:14px"><button onclick="downloadReceipt()" class="primary">Download Receipt</button></div>
 </div>
 
-<footer class='footer'><div class='container'>Contact: <a href='https://wa.me/917002805576' target='_blank'>WhatsApp</a> | <a href='mailto:xpxaxn@gmail.com'>Email</a></div></footer>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script><script src="script.js"></script></body></html>
+<div class="footer">
+  <small>© 2025 SmartPay. All Rights Reserved. &nbsp; | &nbsp; Contact: <a href="https://wa.me/917002805576" style="color:#fff;text-decoration:underline">WhatsApp</a> &nbsp; | &nbsp; <a href="mailto:xpxaxn@gmail.com" style="color:#fff;text-decoration:underline">Email</a></small>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script><script src="app.js"></script></body></html>

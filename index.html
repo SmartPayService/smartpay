@@ -1,105 +1,33 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SmartPay Multicolor</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<style>
-    body { margin: 0; font-family: Arial, sans-serif; background: #f4f4f4; }
-    header { background: #222; color: #fff; padding: 10px 0; text-align: center; }
-    nav { display: flex; justify-content: center; gap: 20px; }
-    nav a { color: #fff; text-decoration: none; font-weight: bold; }
-    nav a:hover { text-decoration: underline; }
-    .container { display: flex; flex-wrap: wrap; justify-content: center; padding: 20px; gap: 20px; }
-    .card {
-        width: 220px; padding: 20px; color: #fff; border-radius: 15px;
-        text-align: center; cursor: pointer; transition: 0.3s;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-    .card:hover { transform: translateY(-5px); box-shadow: 0 8px 16px rgba(0,0,0,0.3); }
-    .card i { font-size: 40px; margin-bottom: 10px; }
-    .form-container { display: none; padding: 20px; max-width: 400px; margin: auto; background: white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
-    input, select, button { width: 100%; padding: 10px; margin-top: 10px; border-radius: 5px; border: 1px solid #ccc; }
-    button { background: #28a745; color: white; border: none; cursor: pointer; }
-    button:hover { background: #218838; }
-    .success { text-align: center; padding: 20px; }
-    .download-btn { background: #007bff; padding: 10px; display: inline-block; color: white; text-decoration: none; border-radius: 5px; }
-</style>
-</head>
-<body>
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>SmartPay - Home</title>
+<link rel="stylesheet" href="styles.css">
+<script src="https://kit.fontawesome.com/a2d9b7d7c1.js" crossorigin="anonymous"></script>
+</head><body>
 
-<header>
-    <h1>SmartPay</h1>
-    <nav>
-        <a href="#">About</a>
-        <a href="#">Services</a>
-        <a href="#">Contact</a>
-        <a href="#">Help</a>
-    </nav>
-</header>
-
-<div class="container">
-    <div class="card" style="background:#ff7f50" onclick="openForm('Mobile Recharge')">
-        <i class="fas fa-mobile-alt"></i>
-        <h3>Mobile Recharge</h3>
+<div class="topbar">
+  <div class="wrap">
+    <div class="brand">SmartPay</div>
+    <div class="nav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="contact.html">Contact</a>
+      <a href="#help">Help</a>
+      &nbsp;&nbsp;&nbsp;
+      <a href="https://wa.me/917002805576" target="_blank" style="color:#fff;text-decoration:none;font-weight:700">WhatsApp</a>
+      <a href="mailto:xpxaxn@gmail.com" style="color:#fff;text-decoration:none;font-weight:700;margin-left:10px">Email</a>
     </div>
-    <div class="card" style="background:#1e90ff" onclick="openForm('Electricity Bill')">
-        <i class="fas fa-bolt"></i>
-        <h3>Electricity Bill</h3>
-    </div>
-    <div class="card" style="background:#32cd32" onclick="openForm('Water Bill')">
-        <i class="fas fa-tint"></i>
-        <h3>Water Bill</h3>
-    </div>
-    <div class="card" style="background:#ff69b4" onclick="openForm('Gas Bill')">
-        <i class="fas fa-fire"></i>
-        <h3>Gas Bill</h3>
-    </div>
-    <div class="card" style="background:#8a2be2" onclick="openForm('Insurance')">
-        <i class="fas fa-shield-alt"></i>
-        <h3>Insurance</h3>
-    </div>
-    <div class="card" style="background:#ffa500" onclick="openForm('Banking Services')">
-        <i class="fas fa-university"></i>
-        <h3>Banking Services</h3>
-    </div>
+  </div>
 </div>
 
-<div class="form-container" id="serviceForm">
-    <h2 id="formTitle"></h2>
-    <form id="paymentForm" onsubmit="submitForm(event)">
-        <input type="text" placeholder="Name" required>
-        <input type="number" placeholder="Account / Mobile Number" required>
-        <input type="number" placeholder="Amount" required>
-        <button type="submit">Submit</button>
-    </form>
+<div class="hero"><div class="container"><h1>Welcome to SmartPay</h1><p>Your one-stop solution for Recharge, Bills, Banking & More</p></div></div>
+<div class="container"><div class="grid"><div class="card"><div class="icon icon-orange"><i class="fas fa-mobile-alt"></i></div><h3>Recharge &amp; Bill Payment</h3><p>Click to view sub-services</p><a href="recharge_&_bill_payment.html">Open</a></div><div class="card"><div class="icon icon-blue"><i class="fas fa-bolt"></i></div><h3>PAN Card Services</h3><p>Click to view sub-services</p><a href="pan_card_services.html">Open</a></div><div class="card"><div class="icon icon-green"><i class="fas fa-tint"></i></div><h3>Passport Services</h3><p>Click to view sub-services</p><a href="passport_services.html">Open</a></div><div class="card"><div class="icon icon-purple"><i class="fas fa-fire"></i></div><h3>Insurance</h3><p>Click to view sub-services</p><a href="insurance.html">Open</a></div><div class="card"><div class="icon icon-yellow"><i class="fas fa-shield-alt"></i></div><h3>Banking Services</h3><p>Click to view sub-services</p><a href="banking_services.html">Open</a></div></div></div>
+
+<div class="footer">
+  <small>© 2025 SmartPay. All Rights Reserved. &nbsp; | &nbsp; Contact: <a href="https://wa.me/917002805576" style="color:#fff;text-decoration:underline">WhatsApp</a> &nbsp; | &nbsp; <a href="mailto:xpxaxn@gmail.com" style="color:#fff;text-decoration:underline">Email</a></small>
 </div>
 
-<div class="success" id="successMessage" style="display:none;">
-    <h2>Payment Successful!</h2>
-    <a href="#" id="downloadReceipt" class="download-btn" download="receipt.txt">Download Receipt</a>
-</div>
-
-<script>
-function openForm(serviceName) {
-    document.getElementById('formTitle').innerText = serviceName;
-    document.getElementById('serviceForm').style.display = 'block';
-    document.getElementById('successMessage').style.display = 'none';
-}
-
-function submitForm(e) {
-    e.preventDefault();
-    let serviceName = document.getElementById('formTitle').innerText;
-    let receiptContent = "Receipt for " + serviceName + "\nThank you for your payment.";
-    let blob = new Blob([receiptContent], { type: "text/plain" });
-    let url = URL.createObjectURL(blob);
-    document.getElementById('downloadReceipt').href = url;
-    document.getElementById('serviceForm').style.display = 'none';
-    document.getElementById('successMessage').style.display = 'block';
-}
-</script>
-
-</body>
-</html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="app.js"></script>
+</body></html>
