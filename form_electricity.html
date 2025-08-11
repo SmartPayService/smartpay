@@ -1,0 +1,23 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Electricity Bill</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="assets/script.js"></script>
+</head>
+<body>
+<header>Electricity Bill</header>
+<form onsubmit="event.preventDefault(); document.getElementById('success').style.display='block';">
+    <input type="text" id="name" placeholder="Enter Name" required>
+    <input type="text" id="number" placeholder="Enter Number/ID" required>
+    <input type="number" id="amount" placeholder="Enter Amount" required>
+    <button type="submit">Submit</button>
+</form>
+<div id="success" class="success" style="display:none;">
+    ✅ Payment Successful!<br>
+    <button onclick="generateReceipt('Electricity Bill', document.getElementById('name').value, document.getElementById('number').value, document.getElementById('amount').value)">Download Receipt</button>
+</div>
+</body>
+</html>
