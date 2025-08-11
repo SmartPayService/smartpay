@@ -3,30 +3,25 @@ body {
     margin: 0;
     padding: 0;
 }
-
 header {
     background: #007bff;
     padding: 15px;
     text-align: center;
 }
-
 header nav a {
     color: white;
     margin: 0 15px;
     text-decoration: none;
     font-weight: bold;
 }
-
 .hero {
     text-align: center;
     padding: 40px 20px;
     background: #f8f9fa;
 }
-
 .hero h1 span {
     color: #007bff;
 }
-
 .services-section {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -34,7 +29,6 @@ header nav a {
     padding: 40px;
     background: white;
 }
-
 .service-card {
     background: #f1f1f1;
     border-radius: 10px;
@@ -43,27 +37,22 @@ header nav a {
     transition: 0.3s;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
-
 .service-card i {
     font-size: 50px;
     color: #007bff;
     margin-bottom: 15px;
 }
-
 .service-card h3 {
     margin: 0;
 }
-
 .service-card:hover {
     background: #007bff;
     color: white;
     transform: translateY(-5px);
 }
-
 .service-card:hover i {
     color: white;
 }
-
 footer {
     background: #007bff;
     color: white;
