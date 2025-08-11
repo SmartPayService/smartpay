@@ -1,87 +1,48 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NIYAMOT CSC</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f9ff;
-            color: #222;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: #007bff;
-            padding: 15px 0;
-            text-align: center;
-            color: white;
-            font-size: 1.5em;
-            font-weight: bold;
-        }
-        nav {
-            text-align: center;
-            margin: 15px 0;
-        }
-        nav a {
-            margin: 0 15px;
-            text-decoration: none;
-            color: #007bff;
-            font-weight: bold;
-        }
-        nav a:hover {
-            text-decoration: underline;
-        }
-        section {
-            max-width: 800px;
-            margin: auto;
-            padding: 20px;
-        }
-        .service {
-            display: flex;
-            align-items: center;
-            background: white;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            transition: transform 0.2s;
-        }
-        .service:hover {
-            transform: scale(1.02);
-        }
-        .service i {
-            font-size: 1.8em;
-            margin-right: 15px;
-            color: #007bff;
-        }
-        footer {
-            background: #007bff;
-            color: white;
-            text-align: center;
-            padding: 10px 0;
-            margin-top: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <header>Welcome to NIYAMOT CSC</header>
+<header>
     <nav>
-        <a href="#">Home</a>
-        <a href="#">About</a>
-        <a href="#">Services</a>
-        <a href="#">Contact</a>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
     </nav>
-    <section>
-        <h2>Your Trusted Digital Service Center</h2>
-        <div class="service"><i class="fa-solid fa-id-card"></i> PAN Card</div>
-        <div class="service"><i class="fa-solid fa-passport"></i> Passport</div>
-        <div class="service"><i class="fa-solid fa-shield-halved"></i> Insurance</div>
-        <div class="service"><i class="fa-solid fa-building-columns"></i> Banking Services</div>
-    </section>
-    <footer>© 2025 NIYAMOT CSC. All Rights Reserved.</footer>
+</header>
+
+<section class="hero">
+    <h1>Welcome to <span>NIYAMOT CSC</span></h1>
+    <p>Your Trusted Digital Service Center</p>
+</section>
+
+<section class="services-section">
+    <div class="service-card">
+        <i class="fas fa-id-card"></i>
+        <h3>PAN Card</h3>
+    </div>
+    <div class="service-card">
+        <i class="fas fa-passport"></i>
+        <h3>Passport</h3>
+    </div>
+    <div class="service-card">
+        <a href="insurance.html"><i class="fas fa-shield-alt"></i></a>
+        <h3>Insurance</h3>
+    </div>
+    <div class="service-card">
+        <a href="banking.html"><i class="fas fa-university"></i></a>
+        <h3>Banking Services</h3>
+    </div>
+</section>
+
+<footer>
+    <p>© 2025 NIYAMOT CSC. All Rights Reserved.</p>
+</footer>
 </body>
 </html>
