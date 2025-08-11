@@ -1,4 +1,4 @@
-SmartPay Multi-Page Demo
+SmartPay Final Multi-level Demo
 
-Home + individual service pages. Forms show a stylish success modal and log submission to console. No live payments.
-Contact links in footer: WhatsApp +917002805576, Email xpxaxn@gmail.com
+Home -> Category -> Sub-service -> Form -> Success + Download Receipt (PDF)
+Footer contact links included. No 'Demo' text is present.
