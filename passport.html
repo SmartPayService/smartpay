@@ -1,6 +1,51 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Passport Services</title><link rel="stylesheet" href="styles.css"></head><body><div class="header"><div class="container"><strong>SmartPay</strong> &nbsp;&nbsp; | &nbsp; <a href="index.html" style="color:#fff;text-decoration:none">Home</a> &nbsp; <a href="recharge_and_bills.html" style="color:#fff;text-decoration:none;margin-left:12px">Recharge</a></div></div>
-<div class="container"><div class="hero"><h2>Passport Services</h2><p class="small">Apply for new passport or renew</p></div>
-<div class="grid">
-  <a href="form_new_passport.html" style="text-decoration:none;color:inherit"><div class="card"><div class="icon icon-green">🛂</div><div><strong>New Passport</strong><div class="small">Apply online</div></div></div></a>
-  <a href="form_renew_passport.html" style="text-decoration:none;color:inherit"><div class="card"><div class="icon icon-purple">🔁</div><div><strong>Passport Renewal</strong><div class="small">Renew existing passport</div></div></div></a>
-</div></div><div class="footer">Contact: <a href="https://wa.me/917002805576" style="color:#fff">WhatsApp</a></div><script src="app.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script></body></html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>passport - SmartPay</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .container { max-width: 500px; margin: auto; border: 1px solid #ccc; padding: 20px; border-radius: 10px; }
+        .success-message { color: green; font-weight: bold; margin-top: 20px; }
+        .btn { padding: 10px 20px; background: blue; color: white; border: none; cursor: pointer; border-radius: 5px; }
+        .btn:hover { background: darkblue; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Passport</h2>
+        <form onsubmit="showSuccess(event)">
+            <label>Mobile / Customer ID:</label><br>
+            <input type="text" required><br><br>
+            <label>Amount:</label><br>
+            <input type="number" required><br><br>
+            <button type="submit" class="btn">Submit</button>
+        </form>
+        <div id="success" class="success-message" style="display:none;">
+            Payment Successful!
+            <br><br>
+            <button class="btn" onclick="downloadPDF()">Download Receipt</button>
+        </div>
+        <div id="receipt" style="display:none;">
+            <h3>Receipt</h3>
+            <p>Service: Passport</p>
+            <p>Status: Success</p>
+            <p>Date: <script>document.write(new Date().toLocaleString());</script></p>
+        </div>
+    </div>
+    <script>
+        function showSuccess(event) {
+            event.preventDefault();
+            document.getElementById('success').style.display = 'block';
+        }
+        function downloadPDF() {
+            var element = document.getElementById('receipt');
+            element.style.display = 'block';
+            html2pdf().from(element).save('passport_receipt.pdf');
+            setTimeout(() => element.style.display = 'none', 1000);
+        }
+    </script>
+</body>
+</html>

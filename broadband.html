@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>banking - SmartPay</title>
+    <title>broadband - SmartPay</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         body { font-family: Arial, sans-serif; padding: 20px; }
@@ -15,7 +15,7 @@
 </head>
 <body>
     <div class="container">
-        <h2>Banking</h2>
+        <h2>Broadband</h2>
         <form onsubmit="showSuccess(event)">
             <label>Mobile / Customer ID:</label><br>
             <input type="text" required><br><br>
@@ -30,7 +30,7 @@
         </div>
         <div id="receipt" style="display:none;">
             <h3>Receipt</h3>
-            <p>Service: Banking</p>
+            <p>Service: Broadband</p>
             <p>Status: Success</p>
             <p>Date: <script>document.write(new Date().toLocaleString());</script></p>
         </div>
@@ -43,7 +43,7 @@
         function downloadPDF() {
             var element = document.getElementById('receipt');
             element.style.display = 'block';
-            html2pdf().from(element).save('banking_receipt.pdf');
+            html2pdf().from(element).save('broadband_receipt.pdf');
             setTimeout(() => element.style.display = 'none', 1000);
         }
     </script>
