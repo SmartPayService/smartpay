@@ -1,51 +1,41 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>insurance - SmartPay</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <style>
-        body { font-family: Arial, sans-serif; padding: 20px; }
-        .container { max-width: 500px; margin: auto; border: 1px solid #ccc; padding: 20px; border-radius: 10px; }
-        .success-message { color: green; font-weight: bold; margin-top: 20px; }
-        .btn { padding: 10px 20px; background: blue; color: white; border: none; cursor: pointer; border-radius: 5px; }
-        .btn:hover { background: darkblue; }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insurance Services - NIYAMOT CSC</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <h2>Insurance</h2>
-        <form onsubmit="showSuccess(event)">
-            <label>Mobile / Customer ID:</label><br>
-            <input type="text" required><br><br>
-            <label>Amount:</label><br>
-            <input type="number" required><br><br>
-            <button type="submit" class="btn">Submit</button>
-        </form>
-        <div id="success" class="success-message" style="display:none;">
-            Payment Successful!
-            <br><br>
-            <button class="btn" onclick="downloadPDF()">Download Receipt</button>
-        </div>
-        <div id="receipt" style="display:none;">
-            <h3>Receipt</h3>
-            <p>Service: Insurance</p>
-            <p>Status: Success</p>
-            <p>Date: <script>document.write(new Date().toLocaleString());</script></p>
-        </div>
+<header>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="insurance.html">Insurance</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <h1>Insurance Services</h1>
+</section>
+
+<section class="services-section">
+    <div class="service-card">
+        <i class="fas fa-motorcycle"></i>
+        <h3>Two Wheeler</h3>
     </div>
-    <script>
-        function showSuccess(event) {
-            event.preventDefault();
-            document.getElementById('success').style.display = 'block';
-        }
-        function downloadPDF() {
-            var element = document.getElementById('receipt');
-            element.style.display = 'block';
-            html2pdf().from(element).save('insurance_receipt.pdf');
-            setTimeout(() => element.style.display = 'none', 1000);
-        }
-    </script>
+    <div class="service-card">
+        <i class="fas fa-car"></i>
+        <h3>Car</h3>
+    </div>
+    <div class="service-card">
+        <i class="fas fa-truck"></i>
+        <h3>Commercial Vehicle</h3>
+    </div>
+</section>
+
+<footer>
+    <p>© 2025 NIYAMOT CSC. All Rights Reserved.</p>
+</footer>
 </body>
 </html>
