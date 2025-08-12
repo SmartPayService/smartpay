@@ -1,15 +1,15 @@
 
-/* custom styles */
-:root{--primary:#0b69ff}
-body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;background:#f6f9ff}
-.header-brand{font-weight:700;color:white}
-.hero{background:linear-gradient(90deg,rgba(11,105,255,0.08),rgba(11,105,255,0.02));padding:48px;border-radius:12px}
-.card-service{border-radius:12px;transition:transform .18s,box-shadow .18s}
-.card-service:hover{transform:translateY(-6px);box-shadow:0 10px 30px rgba(11,33,53,0.08)}
-.icon-circle{width:56px;height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:white;font-size:22px}
-.icon-orange{background:linear-gradient(135deg,#ff8a65,#ffb36b)}
-.icon-blue{background:linear-gradient(135deg,#42a5f5,#7ab3ff)}
-.icon-green{background:linear-gradient(135deg,#66bb6a,#9be89f)}
-.footer{background:#072b66;color:white;padding:18px 0;border-radius:8px;margin-top:28px}
-.small-muted{color:#6b7280}
-.form-card{border-radius:12px;box-shadow:0 14px 50px rgba(11,33,53,0.06);padding:20px;background:white}
+body{font-family:Inter,system-ui,Arial;background:#f6f9ff;margin:0;color:#0b2135}
+.header{background:linear-gradient(90deg,#0b69ff,#084fca);padding:14px;color:#fff}
+.container{max-width:1100px;margin:24px auto;padding:0 20px}
+.hero{background:linear-gradient(90deg,rgba(11,105,255,0.06),rgba(11,105,255,0.02));padding:36px;border-radius:10px;text-align:center}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:18px}
+.card{background:#fff;padding:18px;border-radius:10px;box-shadow:0 10px 30px rgba(11,33,53,0.06);display:flex;gap:12px;align-items:center}
+.icon{width:56px;height:56px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
+.icon-orange{background:linear-gradient(135deg,#ff8a65,#ffb36b)}.icon-blue{background:linear-gradient(135deg,#42a5f5,#7ab3ff)}.icon-green{background:linear-gradient(135deg,#66bb6a,#9be89f)}.icon-purple{background:linear-gradient(135deg,#7e57c2,#b98bff)}
+.small{color:#6b7280;font-size:13px}
+.footer{background:#072b66;color:white;padding:18px;text-align:center;margin-top:28px}
+.form-card{background:#fff;padding:20px;border-radius:10px;box-shadow:0 10px 30px rgba(11,33,53,0.06);max-width:720px;margin:18px auto}
+label{font-weight:600;margin-bottom:6px;display:block}
+input,select{padding:10px;border-radius:8px;border:1px solid #e9f0ff;width:100%}
+button{background:#0b69ff;color:white;padding:10px 14px;border-radius:8px;border:none;cursor:pointer}

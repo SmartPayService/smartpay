@@ -1,0 +1,7 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Bill Payment</title><link rel="stylesheet" href="styles.css"></head><body><div class="header"><div class="container"><strong>SmartPay</strong> &nbsp;&nbsp; | &nbsp; <a href="index.html" style="color:#fff;text-decoration:none">Home</a> &nbsp; <a href="recharge_and_bills.html" style="color:#fff;text-decoration:none;margin-left:12px">Recharge</a></div></div>
+<div class="container"><div class="form-card"><h3>Bill Payment</h3><form onsubmit="return submitForm(event,'Bill Payment')"><label>Biller</label><select name="biller" required><option value='Electricity - BSES'>Electricity - BSES</option>
+<option value='Electricity - Tata Power'>Electricity - Tata Power</option>
+<option value='Water - MCG'>Water - MCG</option>
+<option value='Gas - Indane'>Gas - Indane</option>
+<option value='Municipal Tax - City Corp'>Municipal Tax - City Corp</option></select><label>Consumer/Account No</label><input name="consumer" required><label>Amount (₹)</label><input type="number" name="amount" required min="1"><div style="text-align:right;margin-top:12px"><button type="submit">Pay</button></div></form></div></div>
+<div class="footer">Contact: <a href="https://wa.me/917002805576" style="color:#fff">WhatsApp</a></div><script src="app.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script></body></html>
