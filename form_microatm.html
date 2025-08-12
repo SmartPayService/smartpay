@@ -1,30 +1,62 @@
-<!doctype html><html lang='en'><head><meta charset='utf-8'/><meta name='viewport' content='width=device-width,initial-scale=1'/><title>Micro ATM - Cash Withdrawal - SmartPay</title><link rel='stylesheet' href='styles.css'><script src='https://kit.fontawesome.com/a2d9b7d7c1.js' crossorigin='anonymous'></script></head><body>
-<div class="topbar">
-  <div class="wrap">
-    <div class="brand">SmartPay</div>
-    <div class="nav">
-      <a href="index.html">Home</a>
-      <a href="services.html">Services</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-      <a href="#help">Help</a>
-      &nbsp;&nbsp;
-      <a href="https://wa.me/917002805576" target="_blank" style="color:#fff;text-decoration:none;font-weight:700">WhatsApp</a>
-      <a href="mailto:xpxaxn@gmail.com" style="color:#fff;text-decoration:none;font-weight:700;margin-left:10px">Email</a>
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Micro ATM - Cash Withdrawal</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="styles.css"></head><body>
+
+<nav class="navbar navbar-expand-lg navbar-dark" style="background:linear-gradient(90deg,#0b69ff,#084fca)">
+  <div class="container">
+    <a class="navbar-brand header-brand" href="index.html">SmartPay</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="#" target="_blank">Help</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://wa.me/917002805576" target="_blank">WhatsApp</a></li>
+        <li class="nav-item"><a class="nav-link" href="mailto:xpxaxn@gmail.com">Email</a></li>
+      </ul>
     </div>
   </div>
-</div>
-<div class='container'><div class='form-card'><h2 style='color:var(--primary)'>Micro ATM - Cash Withdrawal</h2><form data-service='Micro ATM - Cash Withdrawal' onsubmit='return submitForm(event, this.dataset.service)'><div class='form-row'><label>Mobile Number</label><input type='tel' name='mobile' required placeholder='10-digit mobile' pattern='[0-9]{10}'></div><div class='form-row'><label>Select Bank</label><input class="bank-search-input" placeholder="Search bank..." oninput="(function(el){var q=this.value.toLowerCase().trim(); for(var i=0;i<el.options.length;i++){var o=el.options[i]; if(o.value===\"\"){ o.style.display=\"\"; continue;} o.style.display = (q===\"\" || o.text.toLowerCase().indexOf(q)!==-1) ? \"\" : \"none\";} }).call(this, document.currentScript.previousElementSibling); \"><select name='bank' required><option value=''>-- Select --</option><option value='State Bank of India (SBI)'>State Bank of India (SBI)</option><option value='HDFC Bank'>HDFC Bank</option><option value='ICICI Bank'>ICICI Bank</option><option value='Axis Bank'>Axis Bank</option><option value='Punjab National Bank (PNB)'>Punjab National Bank (PNB)</option><option value='Bank of Baroda'>Bank of Baroda</option><option value='Canara Bank'>Canara Bank</option><option value='Union Bank of India'>Union Bank of India</option><option value='Indian Bank'>Indian Bank</option><option value='Bank of India'>Bank of India</option><option value='Kotak Mahindra Bank'>Kotak Mahindra Bank</option><option value='IDBI Bank'>IDBI Bank</option><option value='Central Bank of India'>Central Bank of India</option><option value='UCO Bank'>UCO Bank</option><option value='Indian Overseas Bank'>Indian Overseas Bank</option></select></div><div class='form-row'><label>Amount (₹)</label><input type='number' name='amount' required placeholder='Amount' min='1'></div><div style='text-align:right'><button class='primary' type='submit'>Submit</button></div></form></div></div>
-<div id="successModal" class="success-modal" aria-hidden="true">
-  <div class="close-x" onclick="closeModal()">✕</div>
-  <h2>Success</h2>
-  <p>Your transaction was successful.</p>
-  <div class="details"></div>
-  <div style="margin-top:14px"><button onclick="downloadReceipt()" class="primary">Download Receipt</button></div>
+</nav>
+
+<div class="container py-4">
+  <div class="form-card mx-auto" style="max-width:720px">
+    <h4 style="color:var(--primary)">Micro ATM - Cash Withdrawal</h4>
+    <form onsubmit="return handleSubmit(event, 'Micro ATM - Cash Withdrawal')" data-api="">
+      
+<div class="mb-3"><label class="form-label">Select Bank</label><select class="form-select" name="bank" required><option value=''>Choose bank</option><option>State Bank of India (SBI)</option>
+<option>HDFC Bank</option>
+<option>ICICI Bank</option>
+<option>Axis Bank</option>
+<option>Punjab National Bank (PNB)</option>
+<option>Bank of Baroda</option>
+<option>Canara Bank</option>
+<option>Union Bank of India</option>
+<option>Kotak Mahindra Bank</option>
+<option>IDBI Bank</option>
+<option>Bank of India</option></select></div>
+<div class="mb-3"><label class="form-label">Customer Mobile</label><input class="form-control" type="tel" name="customer_mobile" required pattern="[0-9]{10}"></div>
+<div class="mb-3"><label class="form-label">Amount (₹)</label><input class="form-control" type="number" name="amount" required min="1"></div>
+
+      <div class="d-flex justify-content-end"><button class="btn btn-primary" type="submit">Submit</button></div>
+    </form>
+  </div>
 </div>
 
-<div class="footer">
-  <small>© 2025 SmartPay. All Rights Reserved. &nbsp; | &nbsp; Contact: <a href="https://wa.me/917002805576" style="color:#fff;text-decoration:underline">WhatsApp</a> &nbsp; | &nbsp; <a href="mailto:xpxaxn@gmail.com" style="color:#fff;text-decoration:underline">Email</a></small>
-</div>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js'></script><script src='app.js'></script>    <script src="banks_search.js"></script>
+<!-- success modal -->
+<div class="modal" tabindex="-1" id="successModal"><div class="modal-dialog modal-sm modal-dialog-centered"><div class="modal-content"><div class="modal-header"><h5 class="modal-title"></h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"></div></div></div></div>
+
+
+<footer class="footer">
+  <div class="container text-center">
+    <small>© 2025 SmartPay • Demo. Contact: <a href="https://wa.me/917002805576" class="text-white">WhatsApp</a> | <a href="mailto:xpxaxn@gmail.com" class="text-white">Email</a></small>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="app.js"></script>
 </body></html>

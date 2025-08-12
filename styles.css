@@ -1,41 +1,15 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
-:root{--primary:#0b69ff;--muted:#6b7280;--bg:#f6f9ff}
-*{box-sizing:border-box}body{font-family:Poppins,system-ui,Arial;margin:0;background:var(--bg);color:#0b2135}
-.topbar{background:linear-gradient(90deg,var(--primary),#0a58d6);color:#fff;padding:14px 0;position:sticky;top:0;z-index:60}
-.topbar .wrap{max-width:1100px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between}
-.brand{font-weight:700;font-size:20px}
-.nav a{color:rgba(255,255,255,0.95);margin-left:18px;text-decoration:none;font-weight:600}
-.hero{max-width:1100px;margin:28px auto;padding:36px;border-radius:10px;background:linear-gradient(180deg,rgba(11,105,255,0.06),rgba(11,105,255,0.02));text-align:center}
-.hero h1{margin:0;font-size:28px;color:var(--primary)}
-.hero p{margin:8px 0 0;color:var(--muted)}
-.container{max-width:1100px;margin:24px auto;padding:0 20px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
-.card{background:#fff;padding:22px;border-radius:12px;box-shadow:0 8px 30px rgba(11,33,53,0.06);display:flex;flex-direction:column;gap:10px;align-items:flex-start;transition:transform .18s ease}
-.card:hover{transform:translateY(-6px)}
-.card .icon{width:56px;height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;color:white}
-.icon-orange{background:linear-gradient(135deg,#ff8a65,#ffb36b)}.icon-blue{background:linear-gradient(135deg,#42a5f5,#7ab3ff)}.icon-green{background:linear-gradient(135deg,#66bb6a,#9be89f)}
-.icon-purple{background:linear-gradient(135deg,#7e57c2,#b98bff)}.icon-yellow{background:linear-gradient(135deg,#ffb74d,#ffd66b)}.icon-pink{background:linear-gradient(135deg,#ff7ab3,#ffb3e6)}
-.card h3{margin:0;font-size:18px;color:#0b69ff}
-.card p{margin:0;color:var(--muted);font-size:13px}
-.card a{margin-top:auto;padding:10px 14px;border-radius:8px;background:var(--primary);color:white;text-decoration:none;font-weight:700;display:inline-block}
-.footer{background:#072b66;color:white;padding:18px 0;margin-top:28px;text-align:center}
-.footer a{color:#fff;text-decoration:underline}
-.form-card{background:#fff;padding:24px;border-radius:12px;box-shadow:0 14px 50px rgba(11,33,53,0.08);max-width:900px;margin:24px auto}
-.form-row{display:flex;flex-direction:column;margin-bottom:12px}
-label{font-weight:600;margin-bottom:6px;color:#0b2135}
-input,select,textarea{padding:12px;border:1px solid #e9f0ff;border-radius:10px;font-size:14px}
-.small{font-size:13px;color:var(--muted)}
-button.primary{background:var(--primary);color:white;padding:12px 16px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
-.success-modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:white;padding:20px;border-radius:12px;box-shadow:0 30px 90px rgba(11,33,53,0.18);display:none;z-index:999;width:92%;max-width:520px;text-align:center}
-.success-modal.show{display:block}
-.success-modal h2{color:var(--primary);margin:0 0 8px 0}
-.success-modal .details{max-height:260px;overflow:auto;text-align:left;margin-top:12px;padding-left:16px}
-.close-x{position:absolute;right:12px;top:8px;cursor:pointer;color:#999;font-weight:800}
-@media(max-width:680px){.hero h1{font-size:20px}.grid{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}}
-
-
-/* bank search input */
-.bank-search-wrapper{display:flex;flex-direction:column;margin-bottom:8px}
-.bank-search-input{padding:10px;border:1px solid #e2e8f0;border-radius:8px;margin-bottom:6px;font-size:14px}
-select[name="bank"] option[style]{display:block}
+/* custom styles */
+:root{--primary:#0b69ff}
+body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;background:#f6f9ff}
+.header-brand{font-weight:700;color:white}
+.hero{background:linear-gradient(90deg,rgba(11,105,255,0.08),rgba(11,105,255,0.02));padding:48px;border-radius:12px}
+.card-service{border-radius:12px;transition:transform .18s,box-shadow .18s}
+.card-service:hover{transform:translateY(-6px);box-shadow:0 10px 30px rgba(11,33,53,0.08)}
+.icon-circle{width:56px;height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:white;font-size:22px}
+.icon-orange{background:linear-gradient(135deg,#ff8a65,#ffb36b)}
+.icon-blue{background:linear-gradient(135deg,#42a5f5,#7ab3ff)}
+.icon-green{background:linear-gradient(135deg,#66bb6a,#9be89f)}
+.footer{background:#072b66;color:white;padding:18px 0;border-radius:8px;margin-top:28px}
+.small-muted{color:#6b7280}
+.form-card{border-radius:12px;box-shadow:0 14px 50px rgba(11,33,53,0.06);padding:20px;background:white}

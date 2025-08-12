@@ -1,3 +1,6 @@
-SmartPay FINAL - Professional Multi-page Demo
+SmartPay Bootstrap Demo - Final
 
-Home, Services, Banking pages and service-specific forms. Submit shows success modal and allows Receipt (PDF) download. WhatsApp and Email links included in header/footer. Bank dropdown (major banks) included in banking forms.
+- Bootstrap 5 UI
+- Forms with PDF receipt download (jsPDF)
+- To connect to real API: set data-api attribute on the <form> tag and implement fetch in app.js
+- Upload contents to GitHub Pages or any static host.

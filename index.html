@@ -1,26 +1,80 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>SmartPay Demo - Home</title>
-<style>
-    body { font-family: Arial, sans-serif; background: #f8fbff; color: #003366; text-align: center; }
-    h1 { color: #0056b3; }
-    a { display: block; margin: 10px; padding: 10px; background: #007bff; color: white; text-decoration: none; border-radius: 5px; width: 250px; margin-left: auto; margin-right: auto; }
-    a:hover { background: #0056b3; }
-    footer { margin-top: 30px; font-size: 14px; }
-</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SmartPay - Home</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<h1>SmartPay Demo</h1>
-<a href="pan_services.html">PAN Services</a>
-<a href="recharge.html">Recharge & Bill Payment</a>
-<a href="aeps.html">AEPS</a>
-<a href="dmt.html">DMT</a>
-<a href="micro_atm.html">Micro ATM</a>
-<footer>
-    <p>Contact us on <a href="https://wa.me/911234567890" style="color:#0056b3;">WhatsApp</a> or Email: support@smartpay.com</p>
+
+<nav class="navbar navbar-expand-lg navbar-dark" style="background:linear-gradient(90deg,#0b69ff,#084fca)">
+  <div class="container">
+    <a class="navbar-brand header-brand" href="index.html">SmartPay</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="#" target="_blank">Help</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://wa.me/917002805576" target="_blank">WhatsApp</a></li>
+        <li class="nav-item"><a class="nav-link" href="mailto:xpxaxn@gmail.com">Email</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container py-4">
+  <div class="hero text-center mb-4">
+    <h1 class="display-6">Welcome to SmartPay</h1>
+    <p class="small-muted">Recharge, Bill Payments, Banking & more — demo with PDF receipts</p>
+  </div>
+
+  <div class="row g-3">
+    <div class="col-md-4">
+      <a href="recharge.html" class="text-decoration-none text-dark">
+        <div class="card card-service p-3">
+          <div class="d-flex align-items-center gap-3">
+            <div class="icon-circle icon-orange">📱</div>
+            <div><h5 class="mb-0">Recharge & Bill Payment</h5><div class="small-muted">Mobile, DTH, Electricity</div></div>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-4">
+      <a href="banking.html" class="text-decoration-none text-dark">
+        <div class="card card-service p-3">
+          <div class="d-flex align-items-center gap-3">
+            <div class="icon-circle icon-blue">🏦</div>
+            <div><h5 class="mb-0">Banking Services</h5><div class="small-muted">AEPS, DMT, Micro ATM</div></div>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-4">
+      <a href="pan.html" class="text-decoration-none text-dark">
+        <div class="card card-service p-3">
+          <div class="d-flex align-items-center gap-3">
+            <div class="icon-circle icon-green">🆔</div>
+            <div><h5 class="mb-0">PAN Services</h5><div class="small-muted">New PAN, Correction</div></div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container text-center">
+    <small>© 2025 SmartPay • Demo. Contact: <a href="https://wa.me/917002805576" class="text-white">WhatsApp</a> | <a href="mailto:xpxaxn@gmail.com" class="text-white">Email</a></small>
+  </div>
 </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
