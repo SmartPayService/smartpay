@@ -1,15 +1,12 @@
 
-body{font-family:Inter,system-ui,Arial;background:#f6f9ff;margin:0;color:#0b2135}
-.header{background:linear-gradient(90deg,#0b69ff,#084fca);padding:14px;color:#fff}
-.container{max-width:1100px;margin:24px auto;padding:0 20px}
-.hero{background:linear-gradient(90deg,rgba(11,105,255,0.06),rgba(11,105,255,0.02));padding:36px;border-radius:10px;text-align:center}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:18px}
-.card{background:#fff;padding:18px;border-radius:10px;box-shadow:0 10px 30px rgba(11,33,53,0.06);display:flex;gap:12px;align-items:center}
-.icon{width:56px;height:56px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
-.icon-orange{background:linear-gradient(135deg,#ff8a65,#ffb36b)}.icon-blue{background:linear-gradient(135deg,#42a5f5,#7ab3ff)}.icon-green{background:linear-gradient(135deg,#66bb6a,#9be89f)}.icon-purple{background:linear-gradient(135deg,#7e57c2,#b98bff)}
-.small{color:#6b7280;font-size:13px}
-.footer{background:#072b66;color:white;padding:18px;text-align:center;margin-top:28px}
-.form-card{background:#fff;padding:20px;border-radius:10px;box-shadow:0 10px 30px rgba(11,33,53,0.06);max-width:720px;margin:18px auto}
-label{font-weight:600;margin-bottom:6px;display:block}
-input,select{padding:10px;border-radius:8px;border:1px solid #e9f0ff;width:100%}
-button{background:#0b69ff;color:white;padding:10px 14px;border-radius:8px;border:none;cursor:pointer}
+:root{--pri:#0d6efd;--bg:#f7f9fc;}
+body{background:var(--bg);}
+.hero{background:linear-gradient(135deg,#0d6efd22,#20c99722);border-radius:24px;padding:32px;}
+.card.service{transition:transform .15s ease, box-shadow .15s ease;border:0;border-radius:18px;}
+.card.service:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,0,0,.08);}
+footer{background:#0b1020;color:#dfe3f0;}
+footer a{color:#b9c4ff;text-decoration:none;}
+.badge-soft{background:#eef3ff;color:#0d6efd;border-radius:8px;font-weight:600;}
+.form-wrap{max-width:720px;margin:auto;}
+.receipt-box{display:none;background:#fff;border:1px dashed #d0d7e2;border-radius:12px;padding:16px;}
+.wh-fixed{position:fixed;right:18px;bottom:18px;z-index:999;}
