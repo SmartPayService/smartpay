@@ -2,12 +2,13 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mobile Recharge • SmartPay</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="assets/css/styles.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head><body>
 <nav class="navbar navbar-expand-lg bg-white border-bottom sticky-top">
   <div class="container">
-    <a class="navbar-brand text-primary" href="index.html">SmartPay</a>
+    <a class="navbar-brand text-primary fw-bold" href="index.html"><i class="bi bi-lightning-charge"></i>SmartPay</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbars"><span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="navbars">
       <ul class="navbar-nav me-auto">
@@ -18,9 +19,9 @@
         <li class="nav-item"><a class="nav-link" href="help.html">Help</a></li>
       </ul>
       <div class="d-flex gap-2">
-        <a class="btn btn-outline-primary btn-sm" href="https://wa.me/917002805576" target="_blank">WhatsApp</a>
-        <a class="btn btn-primary btn-sm" href="mailto:xpxaxn@gmail.com">Email</a>
-        <a class="btn btn-dark btn-sm" href="login.html">Login</a>
+        <a class="btn btn-outline-success btn-sm" href="https://wa.me/917002805576" target="_blank"><i class="bi bi-whatsapp"></i> WhatsApp</a>
+        <a class="btn btn-outline-primary btn-sm" href="mailto:xpxaxn@gmail.com"><i class="bi bi-envelope"></i> Email</a>
+        <a class="btn btn-dark btn-sm" href="login.html"><i class="bi bi-box-arrow-in-right"></i> Login</a>
       </div>
     </div>
   </div>
@@ -29,24 +30,27 @@
 
 <script>requireLogin()</script>
 <div class="form-wrap card p-4">
-  <h4 class="mb-3">Mobile Recharge</h4>
+  <h4 class="mb-3"><i class="bi bi-phone"></i> Mobile Recharge</h4>
   <form id="mobForm">
-    <div class="mb-3"><label class="form-label">Mobile Number</label><input type="tel" class="form-control" id="mob" required></div>
+    <div class="mb-3"><label class="form-label">Mobile Number</label><input type="tel" class="form-control" id="mob" pattern="[6-9][0-9]{9}" required></div>
     <div class="mb-3"><label class="form-label">Operator</label><select class="form-select" id="op" required><option value="">Select</option><option>Jio</option><option>Airtel</option><option>Vi</option><option>BSNL</option></select></div>
     <div class="mb-3"><label class="form-label">Amount (₹)</label><input type="number" class="form-control" id="amt" min="1" required></div>
     <button class="btn btn-primary" type="submit">Recharge</button>
     <button class="btn btn-outline-secondary ms-2" type="button" onclick="doLogout()">Logout</button>
   </form>
-  <div id="ok" class="alert alert-success mt-3" style="display:none;">Recharge Successful.</div>
+  <div id="ok" class="alert alert-success mt-3" style="display:none;">Recharge successful.</div>
   <div class="receipt-box mt-3" id="rec"></div>
   <button class="btn btn-success mt-2" id="pdfBtn" style="display:none;">Download Receipt</button>
 </div>
 <script>
 document.getElementById('mobForm').addEventListener('submit', function(e){
  e.preventDefault();
+ const mob=document.getElementById('mob'), op=document.getElementById('op'), amt=document.getElementById('amt');
  const data={txnId:makeTxnId(),lines:{'Service':'Mobile Recharge','Mobile':mob.value,'Operator':op.value,'Amount':'₹'+amt.value},total:amt.value,file:'SmartPay_Mobile_Receipt.pdf'};
- ok.style.display='block'; rec.style.display='block'; rec.innerHTML=`<strong>Txn:</strong> ${data.txnId}<br><strong>Mobile:</strong> ${mob.value}<br><strong>Operator:</strong> ${op.value}<br><strong>Amount:</strong> ₹${amt.value}`;
- pdfBtn.style.display='inline-block'; pdfBtn.onclick=()=>generateReceiptPDF(data);
+ document.getElementById('ok').style.display='block';
+ document.getElementById('rec').style.display='block';
+ document.getElementById('rec').innerHTML=`<strong>Txn:</strong> ${data.txnId}<br><strong>Mobile:</strong> ${mob.value}<br><strong>Operator:</strong> ${op.value}<br><strong>Amount:</strong> ₹${amt.value}`;
+ const btn=document.getElementById('pdfBtn'); btn.style.display='inline-block'; btn.onclick=()=>generateReceiptPDF(data);
 });
 </script>
 
@@ -56,14 +60,17 @@ document.getElementById('mobForm').addEventListener('submit', function(e){
     <div class="row g-4">
       <div class="col-md-4"><h5>SmartPay</h5><p>Unified platform for recharges, bills & services. Partner-ready.</p></div>
       <div class="col-md-4"><h6>Quick Links</h6><ul class="list-unstyled">
-        <li><a href="services.html">All Services</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li><li><a href="help.html">Help</a></li>
+        <li><a href="services.html">All Services</a></li><li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li><li><a href="help.html">Help</a></li>
       </ul></div>
-      <div class="col-md-4"><h6>Support</h6><p><a href="mailto:xpxaxn@gmail.com">xpxaxn@gmail.com</a><br><a href="https://wa.me/917002805576" target="_blank">+91 70028 05576</a></p></div>
+      <div class="col-md-4"><h6>Support</h6>
+        <p><a href="mailto:xpxaxn@gmail.com">xpxaxn@gmail.com</a><br><a target="_blank" href="https://wa.me/917002805576">+91 70028 05576</a></p>
+      </div>
     </div>
-    <div class="text-center mt-3" style="opacity:.75;">© 2025 SmartPay — For demo/testing only</div>
+    <div class="text-center mt-3" style="opacity:.75;">© 2025 SmartPay — For testing only</div>
   </div>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="assets/js/app.js"></script>
-<a class="btn btn-success wh-fixed" href="https://wa.me/917002805576" target="_blank">Chat on WhatsApp</a>
+<a class="btn btn-success wh-fixed" href="https://wa.me/917002805576" target="_blank"><i class="bi bi-whatsapp"></i> Chat</a>
 </body></html>
