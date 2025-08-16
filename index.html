@@ -1,21 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>MyService Hub - Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyService Hub - Your One-Stop Service Platform</title>
     <style>
-        /* Yahan par aapka naya CSS code paste karein */
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Yahan baki sab CSS code bhi rahega */
         body {
             font-family: Arial, sans-serif;
-            ...
+            margin: 0;
+            background-color: #f0f2f5;
+        }
+        .header {
+            background-color: #ffffff;
+            color: #333;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .nav a {
+            color: #555;
+            text-decoration: none;
+            padding: 10px 15px;
+            font-weight: 500;
+        }
+        .main-content {
+            padding: 40px;
+            max-width: 1200px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        .hero-section {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .hero-section h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+        .hero-section p {
+            font-size: 18px;
+        }
+        .cta-button {
+            background-color: #f39c12;
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 20px;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+        .cta-button:hover {
+            background-color: #e67e22;
+        }
+        .footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+        .footer p {
+            margin: 0;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
-    <div class="header">...</div>
-    ...
+
+<div class="header">
+    <div class="logo">MyService Hub</div>
+    <div class="nav">
+        <a href="insurance.html">Insurance</a>
+        <a href="recharge.html">Recharge & Bills</a>
+        <a href="services.html">Services</a>
+    </div>
+</div>
+
+<div class="main-content">
+    <div class="hero-section">
+        <h1>Your One-Stop Service Platform</h1>
+        <p>Join us for Insurance, Banking, Recharge, and Government Services</p>
+        <a href="services.html" class="cta-button">Explore All Services</a>
+    </div>
+</div>
+
+<div class="footer">
+    <p>&copy; 2025 MyService Hub. All rights reserved.</p>
+</div>
+
 </body>
+</html>

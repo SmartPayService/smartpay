@@ -47,8 +47,26 @@
             color: #333;
             margin-bottom: 25px;
         }
-        .banking-form {
+        .service-type-buttons {
             display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .service-type-buttons button {
+            padding: 12px 25px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .service-type-buttons button:hover, .service-type-buttons button.active {
+            background-color: #e74c3c;
+            color: white;
+        }
+        .banking-form {
+            display: none; /* Hide forms by default */
             flex-direction: column;
             gap: 20px;
             max-width: 400px;
@@ -75,6 +93,26 @@
         .banking-form button:hover {
             background-color: #c0392b;
         }
+        .success-message {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 8px;
+            display: none;
+        }
+        .footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+        .footer p {
+            margin: 0;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
@@ -92,14 +130,56 @@
 <div class="main-content">
     <div class="form-container">
         <h2>Banking Services</h2>
-        <form class="banking-form">
+        <div class="service-type-buttons">
+            <button onclick="showBankingForm('account')">New Account</button>
+            <button onclick="showBankingForm('loan')">Loan Application</button>
+        </div>
+        
+        <form class="banking-form" id="account-form">
             <input type="text" placeholder="Full Name" required>
-            <input type="tel" placeholder="Account Number" required>
-            <input type="text" placeholder="Service Required (e.g., Loan Application)" required>
-            <button type="submit">Submit Request</button>
+            <input type="tel" placeholder="Mobile Number" required>
+            <input type="email" placeholder="Email Address" required>
+            <button type="submit">Open New Account</button>
         </form>
+
+        <form class="banking-form" id="loan-form">
+            <input type="text" placeholder="Full Name" required>
+            <input type="tel" placeholder="Mobile Number" required>
+            <input type="number" placeholder="Loan Amount" min="10000" required>
+            <button type="submit">Apply for Loan</button>
+        </form>
+        
+        <div class="success-message" id="success-msg">
+            <h3>Thank You!</h3>
+            <p>Your banking request has been submitted. Our team will contact you shortly.</p>
+        </div>
     </div>
 </div>
 
+<div class="footer">
+    <p>&copy; 2025 MyService Hub. All rights reserved.</p>
+</div>
+
+<script>
+    function showBankingForm(service) {
+        document.querySelectorAll('.banking-form').forEach(form => form.style.display = 'none');
+        document.getElementById(`${service}-form`).style.display = 'flex';
+        document.getElementById('success-msg').style.display = 'none';
+
+        document.querySelectorAll('.service-type-buttons button').forEach(btn => btn.classList.remove('active'));
+        document.querySelector(`button[onclick="showBankingForm('${service}')"]`).classList.add('active');
+    }
+
+    document.querySelectorAll('.banking-form').forEach(form => {
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            this.style.display = 'none';
+            document.getElementById('success-msg').style.display = 'block';
+        });
+    });
+
+    // Show New Account form by default
+    window.onload = () => showBankingForm('account');
+</script>
 </body>
 </html>
