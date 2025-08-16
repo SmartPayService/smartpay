@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services - MyService Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f0f2f5;
+        }
+        .header {
+            background-color: #ffffff;
+            color: #333;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .nav a {
+            color: #555;
+            text-decoration: none;
+            padding: 10px 15px;
+            font-weight: 500;
+        }
+        .main-content {
+            padding: 40px;
+            max-width: 1200px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        .service-type-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .service-type-buttons button {
+            padding: 12px 25px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 16px;
+        }
+        .service-type-buttons button.active {
+            background-color: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+        .service-type-buttons button:hover {
+            background-color: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+        .service-form {
+            display: none;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 500px;
+            margin: auto;
+            text-align: left;
+        }
+        .service-form h3 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .service-form input, .service-form select {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        .service-form button {
+            padding: 15px;
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .service-form button:hover {
+            background-color: #27ae60;
+        }
+        .success-message {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 8px;
+            display: none;
+            text-align: center;
+        }
+        .footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+        .footer p {
+            margin: 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div class="logo">MyService Hub</div>
+    <div class="nav">
+        <a href="index.html">Home</a>
+        <a href="insurance.html">Insurance</a>
+        <a href="recharge.html">Recharge & Bills</a>
+        <a href="services.html">Services</a>
+    </div>
+</div>
+
+<div class="main-content">
+    <h2>Explore All Services</h2>
+    <div class="service-type-buttons">
+        <button onclick="showForm('pan')"><i class="fas fa-id-card"></i> PAN Card</button>
+        <button onclick="showForm('passport')"><i class="fas fa-passport"></i> Passport</button>
+        <button onclick="showForm('aeps')"><i class="fas fa-fingerprint"></i> AEPS</button>
+        <button onclick="showForm('micro-atm')"><i class="fas fa-cash-register"></i> Micro ATM</button>
+        <button onclick="showForm('dmt')"><i class="fas fa-exchange-alt"></i> DMT</button>
+    </div>
+
+    <form class="service-form" id="pan-form">
+        <h3>PAN Card Service</h3>
+        <input type="text" placeholder="Applicant Full Name" required>
+        <input type="date" placeholder="Date of Birth" required>
+        <input type="tel" placeholder="Mobile Number" required>
+        <input type="email" placeholder="Email Address" required>
+        <select required>
+            <option value="">Select Service Type</option>
+            <option value="new">New PAN Application</option>
+            <option value="correction">Correction/Update</option>
+        </select>
+        <button type="submit">Submit Application</button>
+    </form>
+
+    <form class="service-form" id="passport-form">
+        <h3>Passport Service</h3>
+        <input type="text" placeholder="Applicant Full Name" required>
+        <input type="tel" placeholder="Mobile Number" required>
+        <input type="email" placeholder="Email Address" required>
+        <select required>
+            <option value="">Select Service Type</option>
+            <option value="new">New Passport</option>
+            <option value="renewal">Passport Renewal</option>
+        </select>
+        <button type="submit">Submit Request</button>
+    </form>
+
+    <form class="service-form" id="aeps-form">
+        <h3>AEPS Service</h3>
+        <input type="tel" placeholder="Aadhaar Number" required>
+        <input type="tel" placeholder="Mobile Number" required>
+        <select required>
+            <option value="">Select Transaction Type</option>
+            <option value="balance">Balance Enquiry</option>
+            <option value="withdrawal">Cash Withdrawal</option>
+            <option value="deposit">Cash Deposit</option>
+        </select>
+        <input type="number" placeholder="Amount (for Withdrawal/Deposit)" min="1">
+        <button type="submit">Proceed</button>
+    </form>
+    
+    <form class="service-form" id="micro-atm-form">
+        <h3>Micro ATM Service</h3>
+        <input type="tel" placeholder="Mobile Number" required>
+        <input type="number" placeholder="Amount" min="100" required>
+        <button type="submit">Process Transaction</button>
+    </form>
+
+    <form class="service-form" id="dmt-form">
+        <h3>DMT (Domestic Money Transfer)</h3>
+        <input type="tel" placeholder="Sender Mobile Number" required>
+        <input type="text" placeholder="Beneficiary Account Number" required>
+        <input type="text" placeholder="IFSC Code" required>
+        <input type="number" placeholder="Amount to Transfer" min="100" required>
+        <button type="submit">Transfer Money</button>
+    </form>
+    
+    <div class="success-message" id="success-msg">
+        <h3>Request Submitted Successfully!</h3>
+        <p>Your request has been received. Our team will process it shortly.</p>
+    </div>
+</div>
+
+<div class="footer">
+    <p>&copy; 2025 MyService Hub. All rights reserved.</p>
+</div>
+
+<script>
+    function showForm(service) {
+        document.querySelectorAll('.service-form').forEach(form => form.style.display = 'none');
+        document.getElementById(`${service}-form`).style.display = 'flex';
+        document.getElementById('success-msg').style.display = 'none';
+        
+        document.querySelectorAll('.service-type-buttons button').forEach(btn => btn.classList.remove('active'));
+        document.querySelector(`button[onclick="showForm('${service}')"]`).classList.add('active');
+    }
+
+    document.querySelectorAll('.service-form').forEach(form => {
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            this.style.display = 'none';
+            document.getElementById('success-msg').style.display = 'block';
+        });
+    });
+
+    // Show PAN Card form by default on page load
+    window.onload = () => showForm('pan');
+</script>
+</body>
+</html>
