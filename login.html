@@ -3,86 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - MyService Hub</title>
+    <title>Login - Smartpay</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            background-color: #f0f2f5;
+            background-color: #f4f7f6;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            margin: 0;
         }
         .login-container {
-            background-color: #ffffff;
+            background-color: #fff;
             padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
             text-align: center;
-            max-width: 400px;
-            width: 100%;
+            width: 350px;
         }
         .login-container h2 {
             margin-bottom: 25px;
             color: #333;
         }
-        .login-form input {
+        .login-container input {
             width: 100%;
             padding: 12px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
+            margin: 10px 0;
+            border: 1px solid #ccc;
             border-radius: 5px;
-            font-size: 16px;
+            box-sizing: border-box;
         }
-        .login-form button {
+        .login-container button {
             width: 100%;
             padding: 12px;
-            background-color: #3498db;
-            color: white;
+            background-color: #007bff;
+            color: #fff;
             border: none;
             border-radius: 5px;
             font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
-        .login-form button:hover {
-            background-color: #2980b9;
-        }
-        .login-container p {
-            margin-top: 20px;
-            font-size: 14px;
-        }
-        .login-container a {
-            color: #3498db;
-            text-decoration: none;
-        }
-        .login-container a:hover {
-            text-decoration: underline;
+        .login-container button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
+    <div class="login-container">
+        <h2>लॉग-इन करें</h2>
+        <form onsubmit="redirectToDashboard(event)">
+            <input type="text" placeholder="यूजर आईडी" required>
+            <input type="password" placeholder="पासवर्ड" required>
+            <button type="submit">लॉग-इन करें</button>
+        </form>
+        <p style="margin-top: 15px; font-size: 14px; color: #666;">कोई भी ID और पासवर्ड डालें और लॉग-इन बटन पर क्लिक करें।</p>
+    </div>
 
-<div class="login-container">
-    <h2>Login to MyService Hub</h2>
-    <form class="login-form" id="login-form">
-        <input type="email" id="login-email" placeholder="Email Address" required>
-        <input type="password" id="login-password" placeholder="Password" required>
-        <button type="submit">Login</button>
-    </form>
-    <p>Don't have an account? <a href="register.html">Register here</a></p>
-</div>
-
-<script>
-    document.getElementById('login-form').addEventListener('submit', function(event) {
-        event.preventDefault();
-        // Here, you would typically validate credentials with a backend server
-        // Since we are using static HTML, we will just simulate a successful login
-        alert('Login Successful! Redirecting to Home Page.');
-        window.location.href = 'index.html';
-    });
-</script>
-
+    <script>
+        function redirectToDashboard(event) {
+            event.preventDefault(); // फॉर्म को सबमिट होने से रोकें
+            window.location.href = "dashboard.html"; // डमी डैशबोर्ड पर भेजें
+        }
+    </script>
 </body>
 </html>
