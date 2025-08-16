@@ -1,135 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Insurance Services - MyService Hub</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background-color: #f0f2f5;
-        }
-        .header {
-            background-color: #ffffff;
-            color: #333;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #2c3e50;
-        }
-        .nav a {
-            color: #555;
-            text-decoration: none;
-            padding: 10px 15px;
-            font-weight: 500;
-        }
-        .main-content {
-            padding: 40px;
-            max-width: 800px;
-            margin: 20px auto;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            text-align: center;
-        }
-        .form-container {
-            margin-top: 40px;
-        }
-        .form-container h2 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 25px;
-        }
-        .insurance-form {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            max-width: 400px;
-            margin: auto;
-        }
-        .insurance-form input, .insurance-form select {
-            width: 100%;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 16px;
-        }
-        .insurance-form button {
-            padding: 15px;
-            background-color: #3498db;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .insurance-form button:hover {
-            background-color: #2980b9;
-        }
-        .success-message {
-            margin-top: 30px;
-            padding: 20px;
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-            border-radius: 8px;
-            display: none;
-        }
-    </style>
-</head>
-<body>
-
-<div class="header">
-    <div class="logo">MyService Hub</div>
-    <div class="nav">
-        <a href="index.html">Home</a>
-        <a href="insurance.html">Insurance</a>
-        <a href="recharge.html">Recharge & Bills</a>
-        <a href="services.html">Services</a>
-    </div>
-</div>
-
-<div class="main-content">
-    <div class="form-container">
-        <h2>Insurance Services</h2>
-        <form class="insurance-form">
-            <input type="text" placeholder="Full Name" required>
-            <input type="email" placeholder="Email" required>
-            <select required>
-                <option value="" disabled selected>Select Insurance Type</option>
-                <option value="life">Life Insurance</option>
-                <option value="health">Health Insurance</option>
-                <option value="car">Car Insurance</option>
-            </select>
-            <input type="tel" placeholder="Mobile Number" required>
-            <button type="submit">Submit Request</button>
-        </form>
-        <div class="success-message" id="success-msg">
-            <h3>Thank You!</h3>
-            <p>Your insurance request has been submitted successfully. Our agent will contact you shortly.</p>
-        </div>
-    </div>
-</div>
-
-<script>
-    const insuranceForm = document.querySelector('.insurance-form');
-    const successMsg = document.getElementById('success-msg');
+rechargeForm.addEventListener('submit', function(event) {
+    event.preventDefault();
     
-    insuranceForm.addEventListener('submit', function(event) {
-        event.preventDefault();
-        insuranceForm.style.display = 'none';
-        successMsg.style.display = 'block';
-    });
-</script>
-
-</body>
-</html>
+    const mobileNumber = document.getElementById('mobile-number').value;
+    const amount = document.getElementById('recharge-amount').value;
+    
+    // Yahan valid mobile number aur amount check karte hain
+    if (mobileNumber.length !== 10 || isNaN(mobileNumber)) {
+        alert("Please enter a valid 10-digit mobile number.");
+        return; // Form ko submit hone se rokta hai
+    }
+    
+    if (amount < 10) {
+        alert("Amount must be at least ₹10.");
+        return;
+    }
+    
+    // Agar sab kuch sahi hai, to aage badho
+    receiptMobile.textContent = mobileNumber;
+    receiptAmount.textContent = `₹${amount}`;
+    receiptBox.style.display = 'block';
+    rechargeForm.style.display = 'none';
+});
