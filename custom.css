@@ -1,0 +1,27 @@
+
+:root{
+  --sp-primary:#00b4ff;
+  --sp-secondary:#6bdcff;
+}
+body.bg-gradient-hero{
+  background: radial-gradient(1200px 600px at 10% 10%, rgba(0,180,255,.25), transparent),
+              radial-gradient(900px 500px at 90% 20%, rgba(0,224,255,.18), transparent),
+              #05080d;
+  min-height:100vh;
+  padding-top:72px;
+}
+body.bg-deep{ background:#05080d; min-height:100vh; padding-top:72px; }
+.glassy{ backdrop-filter: blur(10px); background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.08); }
+.glassy-soft{ backdrop-filter: blur(6px); background: rgba(255,255,255,.12); }
+.text-light-strong{ color: rgba(255,255,255,.85); }
+.gradient-text{ background: linear-gradient(90deg, #00b4ff, #6bdcff); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.hero{ min-height: 72vh; }
+.device-card .action-tile, .service-tile, .feature{ transition: transform .25s ease, box-shadow .25s ease; border:1px solid rgba(255,255,255,.06); }
+.device-card .action-tile:hover, .service-tile:hover, .feature:hover{ transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,.35); }
+.progress{ background: rgba(255,255,255,.08); }
+.progress-bar{ background: linear-gradient(90deg, #00b4ff, #6bdcff); }
+footer{ background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0)); }
+.badge.bg-primary-subtle{ background-color: rgba(107,220,255,.15)!important; }
+.navbar.glassy{ background: rgba(5,8,13,.6)!important; border-bottom:1px solid rgba(255,255,255,.08); }
+.rounded-5{ border-radius: 1.5rem!important; }
+.pt-6{ padding-top: 6rem!important; }

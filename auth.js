@@ -1,32 +1,24 @@
 
-function register() {
-    const email = document.getElementById("regEmail").value;
-    const pass = document.getElementById("regPassword").value;
-    if (!email || !pass) { alert("Please fill all fields"); return; }
-    localStorage.setItem("spUser", JSON.stringify({email: email.toLowerCase(), pass}));
-    localStorage.setItem("spLoggedIn", "true");
-    window.location.href = "dashboard.html";
-}
-
-function login() {
-    const email = document.getElementById("loginEmail").value;
-    const pass = document.getElementById("loginPassword").value;
-    const user = JSON.parse(localStorage.getItem("spUser"));
-    if (!user || email.toLowerCase() !== user.email || pass !== user.pass) {
-        alert("Invalid credentials");
-        return;
-    }
-    localStorage.setItem("spLoggedIn", "true");
-    window.location.href = "dashboard.html";
-}
-
-function requireAuth() {
-    if (localStorage.getItem("spLoggedIn") !== "true") {
-        window.location.href = "login.html";
-    }
-}
-
-function logout() {
-    localStorage.removeItem("spLoggedIn");
-    window.location.href = "index.html";
-}
+// Populate navbar buttons based on login state
+(function(){
+  const area = document.getElementById('authArea');
+  if(!area) return;
+  const raw = localStorage.getItem('sp_user');
+  if(!raw){
+    area.innerHTML = `
+      <a href="register.html" class="btn btn-light rounded-4"><i class="bi bi-person-plus me-2"></i>Register</a>
+      <a href="login.html" class="btn btn-outline-light rounded-4"><i class="bi bi-box-arrow-in-right me-2"></i>Login</a>
+    `;
+  } else {
+    const user = JSON.parse(raw);
+    area.innerHTML = `
+      <a href="dashboard.html" class="btn btn-light rounded-4"><i class="bi bi-wallet2 me-2"></i>Wallet</a>
+      <a href="dashboard.html" class="btn btn-outline-light rounded-4"><i class="bi bi-grid me-2"></i>Services</a>
+      <button id="logoutBtn" class="btn btn-outline-light rounded-4"><i class="bi bi-box-arrow-right me-2"></i>Logout</button>
+    `;
+    document.getElementById('logoutBtn').addEventListener('click', function(){
+      localStorage.removeItem('sp_user');
+      window.location.href = 'index.html';
+    });
+  }
+})();
