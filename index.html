@@ -24,6 +24,16 @@
       border-radius: 50px;
       padding: 10px 25px;
     }
+    #loginForm, #registerForm {
+      display: none;
+      max-width: 350px;
+      margin: 20px auto;
+      background: white;
+      color: black;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    }
   </style>
 </head>
 <body class="text-center">
@@ -33,8 +43,24 @@
     <p>Recharge, Bill Payment, AEPS, DMT & more — सब कुछ एक ही जगह।</p>
 
     <div class="d-flex justify-content-center gap-3 my-4">
-      <button class="btn btn-light btn-custom" onclick="register()">Register</button>
-      <button class="btn btn-info btn-custom" onclick="login()">Login</button>
+      <button class="btn btn-light btn-custom" onclick="showRegister()">Register</button>
+      <button class="btn btn-info btn-custom" onclick="showLogin()">Login</button>
+    </div>
+
+    <!-- Login Form -->
+    <div id="loginForm">
+      <h4>Login</h4>
+      <input type="text" id="loginUser" class="form-control my-2" placeholder="Username">
+      <input type="password" id="loginPass" class="form-control my-2" placeholder="Password">
+      <button class="btn btn-primary btn-custom mt-2" onclick="login()">Login</button>
+    </div>
+
+    <!-- Register Form -->
+    <div id="registerForm">
+      <h4>Register</h4>
+      <input type="text" id="regUser" class="form-control my-2" placeholder="Choose Username">
+      <input type="password" id="regPass" class="form-control my-2" placeholder="Choose Password">
+      <button class="btn btn-success btn-custom mt-2" onclick="register()">Register</button>
     </div>
 
     <!-- Wallet Section (Hidden by Default) -->
@@ -44,40 +70,73 @@
         <h2>₹ <span id="walletBalance">0</span>.00</h2>
         <p>Instant, Secure, 24x7 Support</p>
         <button class="btn btn-success btn-custom mt-2" onclick="addBalance()">Add Balance</button>
+        <button class="btn btn-danger btn-custom mt-2" onclick="logout()">Logout</button>
       </div>
     </div>
   </div>
 
   <script>
     let loggedIn = false;
-    let walletBalance = 4250;  // Default dummy balance
+    let walletBalance = 4250;
+    let users = {}; // store usernames and passwords (dummy, frontend only)
 
-    function login() {
-        loggedIn = true;
-        document.getElementById("walletSection").style.display = "block";
-        document.getElementById("walletBalance").innerText = walletBalance;
-        alert("Login Successful!");
+    function showLogin() {
+      document.getElementById("loginForm").style.display = "block";
+      document.getElementById("registerForm").style.display = "none";
+    }
+
+    function showRegister() {
+      document.getElementById("registerForm").style.display = "block";
+      document.getElementById("loginForm").style.display = "none";
     }
 
     function register() {
+      let user = document.getElementById("regUser").value;
+      let pass = document.getElementById("regPass").value;
+
+      if(user && pass) {
+        users[user] = pass;
+        alert("Registration Successful! Now login.");
+        document.getElementById("registerForm").style.display = "none";
+        document.getElementById("loginForm").style.display = "block";
+      } else {
+        alert("Please enter username and password");
+      }
+    }
+
+    function login() {
+      let user = document.getElementById("loginUser").value;
+      let pass = document.getElementById("loginPass").value;
+
+      if(users[user] && users[user] === pass) {
         loggedIn = true;
-        walletBalance = 0; // New user wallet starts empty
         document.getElementById("walletSection").style.display = "block";
         document.getElementById("walletBalance").innerText = walletBalance;
-        alert("Registration Successful!");
+        document.getElementById("loginForm").style.display = "none";
+        alert("Login Successful!");
+      } else {
+        alert("Invalid credentials! Please register first.");
+      }
+    }
+
+    function logout() {
+      loggedIn = false;
+      document.getElementById("walletSection").style.display = "none";
+      document.getElementById("loginForm").style.display = "block";
+      alert("You have been logged out!");
     }
 
     function addBalance() {
-        if (loggedIn) {
-            let amount = prompt("Enter amount to add:");
-            if (amount && !isNaN(amount)) {
-                walletBalance += parseInt(amount);
-                document.getElementById("walletBalance").innerText = walletBalance;
-                alert("₹" + amount + " added successfully!");
-            }
-        } else {
-            alert("Please login first!");
+      if (loggedIn) {
+        let amount = prompt("Enter amount to add:");
+        if (amount && !isNaN(amount)) {
+          walletBalance += parseInt(amount);
+          document.getElementById("walletBalance").innerText = walletBalance;
+          alert("₹" + amount + " added successfully!");
         }
+      } else {
+        alert("Please login first!");
+      }
     }
   </script>
 </body>
