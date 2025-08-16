@@ -36,6 +36,10 @@
             color: #007bff;
             text-decoration: none;
         }
+        .navbar .logo-img {
+            height: 40px; 
+            width: auto;
+        }
         .navbar a {
             color: #333;
             text-decoration: none;
@@ -132,25 +136,28 @@
 <body>
 
     <header class="navbar">
-        <a href="dashboard.html" class="logo">Smartpay</a>
+        <a href="dashboard.html" class="logo">
+            <img src="assets/images/smartpay-logo.png" alt="Smartpay Logo" class="logo-img">
+        </a>
         <div>
             <a href="#">My Dashboard</a>
+            <a href="services.html">Services</a>
         </div>
         <a href="home.html" class="logout-btn">Logout</a>
     </header>
 
     <section class="dashboard-section">
         <div class="container">
-            <h1>वेलकम!</h1>
+            <h1>Welcome!</h1>
             
             <section class="dummy-wallet-section">
-                <h2>आपका वॉलेट</h2>
+                <h2>Your Wallet</h2>
                 <div class="wallet-info">
                     <div class="wallet-balance-display">
-                        <p>मौजूदा बैलेंस:</p>
+                        <p>Current Balance:</p>
                         <h3 id="wallet-balance">₹ 0</h3>
                     </div>
-                    <button id="topup-button" class="topup-btn">वॉलेट टॉप-अप करें</button>
+                    <button id="topup-button" class="topup-btn">Top-up Wallet</button>
                 </div>
             </section>
         </div>
@@ -163,18 +170,28 @@
     </footer>
     
     <script>
-        // यह डमी वॉलेट बैलेंस है जो पेज रीफ़्रेश करने पर रीसेट हो जाएगा।
+        // This is a dummy wallet balance that resets on page refresh.
         let walletBalance = 0;
     
-        // HTML elements को ढूँढना
+        // Find HTML elements
         const walletBalanceElement = document.getElementById('wallet-balance');
         const topupButton = document.getElementById('topup-button');
     
-        // वॉलेट बैलेंस को अपडेट करने का फंक्शन
+        // Function to update the wallet balance display
         function updateWalletDisplay() {
             walletBalanceElement.innerText = `₹ ${walletBalance}`;
         }
     
-        // टॉप-अप बटन पर क्लिक करने पर क्या हो
+        // What happens when the top-up button is clicked
         topupButton.addEventListener('click', function() {
-            const topupAmount = 5
+            const topupAmount = 500; // Adds ₹500 each time
+            walletBalance += topupAmount;
+            updateWalletDisplay();
+            alert(`₹${topupAmount} has been added to your wallet!`);
+        });
+    
+        // Show the initial balance when the page loads
+        updateWalletDisplay();
+    </script>
+</body>
+</html>

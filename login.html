@@ -52,19 +52,19 @@
 </head>
 <body>
     <div class="login-container">
-        <h2>लॉग-इन करें</h2>
+        <h2>Login</h2>
         <form onsubmit="redirectToDashboard(event)">
-            <input type="text" placeholder="यूजर आईडी" required>
-            <input type="password" placeholder="पासवर्ड" required>
-            <button type="submit">लॉग-इन करें</button>
+            <input type="text" placeholder="User ID" required>
+            <input type="password" placeholder="Password" required>
+            <button type="submit">Login</button>
         </form>
-        <p style="margin-top: 15px; font-size: 14px; color: #666;">कोई भी ID और पासवर्ड डालें और लॉग-इन बटन पर क्लिक करें।</p>
+        <p style="margin-top: 15px; font-size: 14px; color: #666;">Enter any ID and password and click the Login button.</p>
     </div>
 
     <script>
         function redirectToDashboard(event) {
-            event.preventDefault(); // फॉर्म को सबमिट होने से रोकें
-            window.location.href = "dashboard.html"; // डमी डैशबोर्ड पर भेजें
+            event.preventDefault(); 
+            window.location.href = "dashboard.html"; 
         }
     </script>
 </body>
