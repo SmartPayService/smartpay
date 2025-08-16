@@ -30,14 +30,8 @@
             background-color: #fff;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-        .navbar .logo {
-            font-size: 24px;
-            font-weight: 700;
-            color: #007bff;
-            text-decoration: none;
-        }
         .navbar .logo-img {
-            height: 40px; 
+            height: 40px;
             width: auto;
         }
         .navbar a {
@@ -61,35 +55,26 @@
         .navbar .logout-btn:hover {
             background-color: #c82333;
         }
-
-        /* Dashboard and Wallet Section */
-        .dashboard-section {
+        /* Dashboard Header */
+        .dashboard-header {
+            text-align: center;
             padding: 50px 20px;
-            text-align: center;
-        }
-        .dashboard-section h1 {
-            font-size: 48px;
-            margin-bottom: 30px;
-            color: #007bff;
-        }
-
-        .dummy-wallet-section {
-            padding: 40px 20px;
             background-color: #e9f0f5;
-            text-align: center;
             border-radius: 10px;
+            margin-top: 20px;
             margin-bottom: 30px;
         }
-        .dummy-wallet-section h2 {
-            font-size: 30px;
-            margin-bottom: 20px;
-            color: #333;
+        .dashboard-header h1 {
+            font-size: 42px;
+            color: #007bff;
+            margin-bottom: 10px;
         }
         .wallet-info {
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            gap: 20px;
+            gap: 30px;
+            margin-top: 20px;
         }
         .wallet-balance-display {
             background-color: #fff;
@@ -122,7 +107,86 @@
         .topup-btn:hover {
             background-color: #0056b3;
         }
-
+        /* Dashboard Content Sections */
+        .dashboard-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        @media (max-width: 768px) {
+            .dashboard-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        .section-card {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .section-card h2 {
+            margin-top: 0;
+            font-size: 24px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 15px;
+        }
+        /* Quick Actions Grid */
+        .quick-actions-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            text-align: center;
+        }
+        .action-item a {
+            display: block;
+            text-decoration: none;
+            color: #333;
+        }
+        .action-item i {
+            font-size: 40px;
+            color: #007bff;
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+        }
+        .action-item a:hover i {
+            color: #0056b3;
+        }
+        /* Recent Transactions List */
+        .transactions-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .transactions-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .transactions-list li:last-child {
+            border-bottom: none;
+        }
+        .transaction-details span {
+            display: block;
+        }
+        .transaction-details .desc {
+            font-weight: 500;
+        }
+        .transaction-details .date {
+            font-size: 14px;
+            color: #777;
+        }
+        .transaction-amount {
+            font-weight: 700;
+            font-size: 18px;
+        }
+        .transaction-amount.debit {
+            color: #dc3545;
+        }
+        .transaction-amount.credit {
+            color: #28a745;
+        }
         /* Footer */
         .footer {
             text-align: center;
@@ -130,6 +194,7 @@
             background-color: #333;
             color: #f0f0f0;
             font-size: 14px;
+            margin-top: 30px;
         }
     </style>
 </head>
@@ -146,22 +211,96 @@
         <a href="home.html" class="logout-btn">Logout</a>
     </header>
 
-    <section class="dashboard-section">
-        <div class="container">
-            <h1>Welcome!</h1>
-            
-            <section class="dummy-wallet-section">
-                <h2>Your Wallet</h2>
-                <div class="wallet-info">
-                    <div class="wallet-balance-display">
-                        <p>Current Balance:</p>
-                        <h3 id="wallet-balance">₹ 0</h3>
+    <main class="container">
+        <header class="dashboard-header">
+            <h1>Welcome, User!</h1>
+            <div class="wallet-info">
+                <div class="wallet-balance-display">
+                    <p>Current Balance:</p>
+                    <h3 id="wallet-balance">₹ 0</h3>
+                </div>
+                <button id="topup-button" class="topup-btn">Top-up Wallet</button>
+            </div>
+        </header>
+
+        <div class="dashboard-content">
+            <section class="section-card">
+                <h2>Quick Actions</h2>
+                <div class="quick-actions-grid">
+                    <div class="action-item">
+                        <a href="#" onclick="alert('Dummy Mobile Recharge is loading...')">
+                            <i class="fas fa-mobile-alt"></i>
+                            <p>Mobile Recharge</p>
+                        </a>
                     </div>
-                    <button id="topup-button" class="topup-btn">Top-up Wallet</button>
+                    <div class="action-item">
+                        <a href="#" onclick="alert('Dummy Bill Payments is loading...')">
+                            <i class="fas fa-bolt"></i>
+                            <p>Bill Payments</p>
+                        </a>
+                    </div>
+                    <div class="action-item">
+                        <a href="#" onclick="alert('Dummy Digital Payments is loading...')">
+                            <i class="fas fa-money-check-alt"></i>
+                            <p>Digital Payments</p>
+                        </a>
+                    </div>
+                    <div class="action-item">
+                        <a href="#" onclick="alert('Dummy DTH Recharge is loading...')">
+                            <i class="fas fa-tv"></i>
+                            <p>DTH Recharge</p>
+                        </a>
+                    </div>
+                    <div class="action-item">
+                        <a href="#" onclick="alert('Dummy Shopping is loading...')">
+                            <i class="fas fa-shopping-bag"></i>
+                            <p>Shopping</p>
+                        </a>
+                    </div>
+                    <div class="action-item">
+                        <a href="#" onclick="alert('Dummy Ticket Booking is loading...')">
+                            <i class="fas fa-ticket-alt"></i>
+                            <p>Ticket Booking</p>
+                        </a>
+                    </div>
                 </div>
             </section>
+
+            <section class="section-card">
+                <h2>Recent Transactions</h2>
+                <ul class="transactions-list">
+                    <li>
+                        <div class="transaction-details">
+                            <span class="desc">Mobile Recharge</span>
+                            <span class="date">15-08-2025</span>
+                        </div>
+                        <div class="transaction-amount debit">- ₹199</div>
+                    </li>
+                    <li>
+                        <div class="transaction-details">
+                            <span class="desc">Wallet Top-up</span>
+                            <span class="date">14-08-2025</span>
+                        </div>
+                        <div class="transaction-amount credit">+ ₹500</div>
+                    </li>
+                    <li>
+                        <div class="transaction-details">
+                            <span class="desc">Electricity Bill</span>
+                            <span class="date">13-08-2025</span>
+                        </div>
+                        <div class="transaction-amount debit">- ₹850</div>
+                    </li>
+                    <li>
+                        <div class="transaction-details">
+                            <span class="desc">DTH Recharge</span>
+                            <span class="date">12-08-2025</span>
+                        </div>
+                        <div class="transaction-amount debit">- ₹300</div>
+                    </li>
+                </ul>
+            </section>
         </div>
-    </section>
+    </main>
 
     <footer class="footer">
         <div class="container">
@@ -170,9 +309,9 @@
     </footer>
     
     <script>
-        // This is a dummy wallet balance that resets on page refresh.
-        let walletBalance = 0;
-    
+        // Dummy wallet balance (resets on page refresh)
+        let walletBalance = 500; 
+        
         // Find HTML elements
         const walletBalanceElement = document.getElementById('wallet-balance');
         const topupButton = document.getElementById('topup-button');
@@ -184,7 +323,7 @@
     
         // What happens when the top-up button is clicked
         topupButton.addEventListener('click', function() {
-            const topupAmount = 500; // Adds ₹500 each time
+            const topupAmount = 500;
             walletBalance += topupAmount;
             updateWalletDisplay();
             alert(`₹${topupAmount} has been added to your wallet!`);
