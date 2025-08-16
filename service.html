@@ -3,235 +3,287 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Services - MyService Hub</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Our Services - Smartpay</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
-            background-color: #f0f2f5;
-        }
-        .header {
-            background-color: #ffffff;
+            padding: 0;
+            background-color: #f4f7f6;
             color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
             padding: 20px;
+        }
+        /* Navbar (Same as other pages) */
+        .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 15px 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #2c3e50;
+        .navbar .logo-img {
+            height: 40px;
+            width: auto;
         }
-        .nav a {
-            color: #555;
+        .navbar a {
+            color: #333;
             text-decoration: none;
-            padding: 10px 15px;
-            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
         }
-        .main-content {
-            padding: 40px;
-            max-width: 1200px;
-            margin: 20px auto;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        .navbar a:hover {
+            background-color: #f0f0f0;
+        }
+        .navbar .logout-btn {
+            background-color: #dc3545;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .navbar .logout-btn:hover {
+            background-color: #c82333;
+        }
+        
+        /* General Services Section (from Home page) */
+        .services-page-heading {
             text-align: center;
-        }
-        .service-type-buttons {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
+            font-size: 40px;
+            color: #007bff;
+            margin-top: 30px;
             margin-bottom: 30px;
         }
-        .service-type-buttons button {
-            padding: 12px 25px;
-            border: 1px solid #ccc;
-            background-color: #f9f9f9;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            font-size: 16px;
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            justify-content: center;
+            margin-bottom: 50px;
         }
-        .service-type-buttons button.active {
-            background-color: #3498db;
-            color: white;
-            border-color: #3498db;
-        }
-        .service-type-buttons button:hover {
-            background-color: #3498db;
-            color: white;
-            border-color: #3498db;
-        }
-        .service-form {
-            display: none;
-            flex-direction: column;
-            gap: 20px;
-            max-width: 500px;
-            margin: auto;
-            text-align: left;
-        }
-        .service-form h3 {
+        .service-card {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             text-align: center;
+        }
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        .service-card .icon {
+            font-size: 40px;
+            color: #007bff;
+            margin-bottom: 15px;
+            transition: color 0.3s ease;
+        }
+        .service-card:hover .icon {
+            color: #0056b3;
+        }
+        .service-card h3 {
+            margin-top: 0;
+            font-size: 22px;
             color: #333;
-            margin-bottom: 10px;
         }
-        .service-form input, .service-form select {
-            width: 100%;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+        .service-card p {
             font-size: 16px;
+            color: #666;
         }
-        .service-form button {
-            padding: 15px;
-            background-color: #2ecc71;
-            color: white;
-            border: none;
+        
+        /* Dummy Services Section (from previous code) */
+        .service-section {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        .service-section h2 {
+            color: #0056b3;
+            margin-top: 0;
+            font-size: 28px;
+        }
+        .service-section h3 {
+            color: #555;
+            font-size: 20px;
+            margin-top: 20px;
+        }
+        .service-section ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .service-section ul li {
+            background-color: #f0f3f5;
+            padding: 10px 15px;
+            margin-bottom: 8px;
+            border-radius: 5px;
+        }
+        .dummy-form {
+            background-color: #f9f9f9;
+            padding: 20px;
             border-radius: 8px;
-            font-size: 18px;
+            border: 1px dashed #ccc;
+        }
+        .dummy-form label {
+            display: block;
+            margin-bottom: 5px;
             font-weight: bold;
+        }
+        .dummy-form input, .dummy-form button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .dummy-form button {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s;
         }
-        .service-form button:hover {
-            background-color: #27ae60;
+        .dummy-form button:hover {
+            background-color: #218838;
         }
-        .success-message {
-            margin-top: 30px;
-            padding: 20px;
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-            border-radius: 8px;
-            display: none;
-            text-align: center;
-        }
-        .footer {
-            background-color: #2c3e50;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            margin-top: 50px;
-        }
-        .footer p {
-            margin: 0;
-            font-size: 14px;
+        .warning-text {
+            color: #dc3545;
+            font-weight: bold;
+            margin-top: 15px;
         }
     </style>
 </head>
 <body>
 
-<div class="header">
-    <div class="logo">MyService Hub</div>
-    <div class="nav">
-        <a href="index.html">Home</a>
-        <a href="insurance.html">Insurance</a>
-        <a href="recharge.html">Recharge & Bills</a>
-        <a href="services.html">Services</a>
-    </div>
-</div>
+    <header class="navbar">
+        <a href="dashboard.html" class="logo">
+            <img src="assets/images/smartpay-logo.png" alt="Smartpay Logo" class="logo-img">
+        </a>
+        <div>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="services.html">Services</a>
+        </div>
+        <a href="home.html" class="logout-btn">Logout</a>
+    </header>
 
-<div class="main-content">
-    <h2>Explore All Services</h2>
-    <div class="service-type-buttons">
-        <button onclick="showForm('pan')"><i class="fas fa-id-card"></i> PAN Card</button>
-        <button onclick="showForm('passport')"><i class="fas fa-passport"></i> Passport</button>
-        <button onclick="showForm('aeps')"><i class="fas fa-fingerprint"></i> AEPS</button>
-        <button onclick="showForm('micro-atm')"><i class="fas fa-cash-register"></i> Micro ATM</button>
-        <button onclick="showForm('dmt')"><i class="fas fa-exchange-alt"></i> DMT</button>
-    </div>
-
-    <form class="service-form" id="pan-form">
-        <h3>PAN Card Service</h3>
-        <input type="text" placeholder="Applicant Full Name" required>
-        <input type="date" placeholder="Date of Birth" required>
-        <input type="tel" placeholder="Mobile Number" required>
-        <input type="email" placeholder="Email Address" required>
-        <select required>
-            <option value="">Select Service Type</option>
-            <option value="new">New PAN Application</option>
-            <option value="correction">Correction/Update</option>
-        </select>
-        <button type="submit">Submit Application</button>
-    </form>
-
-    <form class="service-form" id="passport-form">
-        <h3>Passport Service</h3>
-        <input type="text" placeholder="Applicant Full Name" required>
-        <input type="tel" placeholder="Mobile Number" required>
-        <input type="email" placeholder="Email Address" required>
-        <select required>
-            <option value="">Select Service Type</option>
-            <option value="new">New Passport</option>
-            <option value="renewal">Passport Renewal</option>
-        </select>
-        <button type="submit">Submit Request</button>
-    </form>
-
-    <form class="service-form" id="aeps-form">
-        <h3>AEPS Service</h3>
-        <input type="tel" placeholder="Aadhaar Number" required>
-        <input type="tel" placeholder="Mobile Number" required>
-        <select required>
-            <option value="">Select Transaction Type</option>
-            <option value="balance">Balance Enquiry</option>
-            <option value="withdrawal">Cash Withdrawal</option>
-            <option value="deposit">Cash Deposit</option>
-        </select>
-        <input type="number" placeholder="Amount (for Withdrawal/Deposit)" min="1">
-        <button type="submit">Proceed</button>
-    </form>
-    
-    <form class="service-form" id="micro-atm-form">
-        <h3>Micro ATM Service</h3>
-        <input type="tel" placeholder="Mobile Number" required>
-        <input type="number" placeholder="Amount" min="100" required>
-        <button type="submit">Process Transaction</button>
-    </form>
-
-    <form class="service-form" id="dmt-form">
-        <h3>DMT (Domestic Money Transfer)</h3>
-        <input type="tel" placeholder="Sender Mobile Number" required>
-        <input type="text" placeholder="Beneficiary Account Number" required>
-        <input type="text" placeholder="IFSC Code" required>
-        <input type="number" placeholder="Amount to Transfer" min="100" required>
-        <button type="submit">Transfer Money</button>
-    </form>
-    
-    <div class="success-message" id="success-msg">
-        <h3>Request Submitted Successfully!</h3>
-        <p>Your request has been received. Our team will process it shortly.</p>
-    </div>
-</div>
-
-<div class="footer">
-    <p>&copy; 2025 MyService Hub. All rights reserved.</p>
-</div>
-
-<script>
-    function showForm(service) {
-        document.querySelectorAll('.service-form').forEach(form => form.style.display = 'none');
-        document.getElementById(`${service}-form`).style.display = 'flex';
-        document.getElementById('success-msg').style.display = 'none';
+    <div class="container">
+        <h1 class="services-page-heading">All Services</h1>
         
-        document.querySelectorAll('.service-type-buttons button').forEach(btn => btn.classList.remove('active'));
-        document.querySelector(`button[onclick="showForm('${service}')"]`).classList.add('active');
-    }
+        <section id="general-services" class="services-grid">
+            <div class="service-card">
+                <div class="icon"><i class="fas fa-mobile-alt"></i></div>
+                <h3>Mobile Recharge</h3>
+                <p>Recharge for all mobile operators instantly.</p>
+            </div>
+            <div class="service-card">
+                <div class="icon"><i class="fas fa-bolt"></i></div>
+                <h3>Bill Payments</h3>
+                <p>Pay utility bills like electricity, water, and gas easily.</p>
+            </div>
+            <div class="service-card">
+                <div class="icon"><i class="fas fa-money-check-alt"></i></div>
+                <h3>Digital Payments</h3>
+                <p>Make payments via UPI, QR code, and bank transfers.</p>
+            </div>
+            <div class="service-card">
+                <div class="icon"><i class="fas fa-tv"></i></div>
+                <h3>DTH Recharge</h3>
+                <p>Instantly recharge for all DTH services.</p>
+            </div>
+            <div class="service-card">
+                <div class="icon"><i class="fas fa-shopping-bag"></i></div>
+                <h3>Shopping</h3>
+                <p>Pay on your favorite e-commerce sites.</p>
+            </div>
+            <div class="service-card">
+                <div class="icon"><i class="fas fa-ticket-alt"></i></div>
+                <h3>Ticket Booking</h3>
+                <p>Book bus, train, and flight tickets.</p>
+            </div>
+        </section>
 
-    document.querySelectorAll('.service-form').forEach(form => {
-        form.addEventListener('submit', function(event) {
-            event.preventDefault();
-            this.style.display = 'none';
-            document.getElementById('success-msg').style.display = 'block';
-        });
-    });
+        <section class="service-section">
+            <h2><i class="fas fa-fingerprint"></i> AEPS (Aadhaar Enabled Payment System)</h2>
+            <h3>Sub-services:</h3>
+            <ul>
+                <li>Cash Withdrawal</li>
+                <li>Balance Enquiry</li>
+                <li>Mini Statement</li>
+                <li>Aadhaar Pay</li>
+            </ul>
+            <h3>Requirements:</h3>
+            <ul>
+                <li>Bank account linked with Aadhaar</li>
+                <li>Aadhaar number</li>
+                <li>Fingerprint authentication</li>
+            </ul>
+            <div class="dummy-form">
+                <h4>AEPS Form</h4>
+                <form onsubmit="alert('This form is for demonstration only and does not process any data.'); return false;">
+                    <label for="aeps-aadhaar">Aadhaar Number:</label>
+                    <input type="text" id="aeps-aadhaar" placeholder="Enter Aadhaar Number" required>
+                    <button type="submit">Proceed with Biometrics</button>
+                </form>
+                <p class="warning-text">This form is for demonstration only. A real AEPS service requires a secure system and biometric device.</p>
+            </div>
+        </section>
 
-    // Show PAN Card form by default on page load
-    window.onload = () => showForm('pan');
-</script>
-</body>
-</html>
+        <section class="service-section">
+            <h2><i class="fas fa-id-card"></i> PAN Card</h2>
+            <h3>Sub-services:</h3>
+            <ul>
+                <li>New PAN Card Application (Individual)</li>
+                <li>PAN Card Correction</li>
+                <li>PAN Card Reprint</li>
+            </ul>
+            <h3>Requirements:</h3>
+            <ul>
+                <li>Identity Proof (Aadhaar, Voter ID)</li>
+                <li>Address Proof</li>
+                <li>Passport size photos</li>
+            </ul>
+            <div class="dummy-form">
+                <h4>PAN Card Application Form</h4>
+                <form onsubmit="alert('This form is for demonstration only and does not submit any data.'); return false;">
+                    <label for="pan-name">Full Name:</label>
+                    <input type="text" id="pan-name" placeholder="Enter Full Name" required>
+                    <label for="pan-dob">Date of Birth:</label>
+                    <input type="date" id="pan-dob" required>
+                    <button type="submit">Submit Application</button>
+                </form>
+                <p class="warning-text">This form is for demonstration only. A real PAN service requires a secure system to handle personal data.</p>
+            </div>
+        </section>
+
+        <section class="service-section">
+            <h2><i class="fas fa-passport"></i> Passport</h2>
+            <h3>Sub-services:</h3>
+            <ul>
+                <li>New Passport Application</li>
+                <li>Passport Renewal</li>
+                <li>Re-issue of Passport</li>
+            </ul>
+            <h3>Requirements:</h3>
+            <ul>
+                <li>Proof of Address</li>
+                <li>Proof of Date of Birth</li>
+                <li>Passport size photos</li>
+            </ul>
+            <div class="dummy-form">
+                <h4>Passport Application Form</h4>
+                <form onsubmit="alert('This form is for demonstration only and does not submit any data.'); return false;">
+                    <label for="passport-name">Full Name:</label>
+                    <input type="text" id="passport-name" placeholder="Enter Full Name" required>
+                    <label
