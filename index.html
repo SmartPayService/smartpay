@@ -1,65 +1,84 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SmartPay Premium</title>
+  <title>SmartPay - Premium Payments</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body {
-      margin: 0;
+      background: linear-gradient(to right, #007bff, #00c6ff);
+      color: white;
       font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #0d47a1, #1976d2, #42a5f5);
-      color: white;
-      text-align: center;
     }
-    .hero {
-      padding: 100px 20px;
-    }
-    .hero h1 {
-      font-size: 3rem;
-      margin-bottom: 10px;
-    }
-    .hero p {
-      font-size: 1.3rem;
-    }
-    .wallet {
-      background: rgba(255,255,255,0.1);
-      backdrop-filter: blur(10px);
-      border-radius: 20px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-      width: 350px;
-      margin: 40px auto;
+    .wallet-card {
+      background: white;
+      color: black;
+      border-radius: 15px;
       padding: 20px;
-      color: #fff;
+      max-width: 350px;
+      margin: 20px auto;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
     }
-    .btn {
-      display: inline-block;
-      margin: 10px;
-      padding: 12px 24px;
-      border-radius: 30px;
-      background: linear-gradient(90deg,#2196f3,#21cbf3);
-      color: white;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-    .btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+    .btn-custom {
+      border-radius: 50px;
+      padding: 10px 25px;
     }
   </style>
 </head>
-<body>
-  <div class="hero">
-    <h1>Payments that feel Premium</h1>
-    <p>Recharge, Bill Payment, AEPS, DMT & more — sab kuch ek hi jagah.</p>
-    <a href="#" class="btn">Register</a>
-    <a href="#" class="btn">Login</a>
+<body class="text-center">
+
+  <div class="container py-5">
+    <h1 class="mb-3">Payments that feel <b>Premium</b></h1>
+    <p>Recharge, Bill Payment, AEPS, DMT & more — सब कुछ एक ही जगह।</p>
+
+    <div class="d-flex justify-content-center gap-3 my-4">
+      <button class="btn btn-light btn-custom" onclick="register()">Register</button>
+      <button class="btn btn-info btn-custom" onclick="login()">Login</button>
+    </div>
+
+    <!-- Wallet Section (Hidden by Default) -->
+    <div id="walletSection" style="display:none;">
+      <div class="wallet-card">
+        <h4>SmartPay Wallet</h4>
+        <h2>₹ <span id="walletBalance">0</span>.00</h2>
+        <p>Instant, Secure, 24x7 Support</p>
+        <button class="btn btn-success btn-custom mt-2" onclick="addBalance()">Add Balance</button>
+      </div>
+    </div>
   </div>
-  <div class="wallet">
-    <h2>SmartPay Wallet</h2>
-    <h1>₹ 4,250.00</h1>
-    <p>Instant, Secure, 24x7 Support</p>
-  </div>
+
+  <script>
+    let loggedIn = false;
+    let walletBalance = 4250;  // Default dummy balance
+
+    function login() {
+        loggedIn = true;
+        document.getElementById("walletSection").style.display = "block";
+        document.getElementById("walletBalance").innerText = walletBalance;
+        alert("Login Successful!");
+    }
+
+    function register() {
+        loggedIn = true;
+        walletBalance = 0; // New user wallet starts empty
+        document.getElementById("walletSection").style.display = "block";
+        document.getElementById("walletBalance").innerText = walletBalance;
+        alert("Registration Successful!");
+    }
+
+    function addBalance() {
+        if (loggedIn) {
+            let amount = prompt("Enter amount to add:");
+            if (amount && !isNaN(amount)) {
+                walletBalance += parseInt(amount);
+                document.getElementById("walletBalance").innerText = walletBalance;
+                alert("₹" + amount + " added successfully!");
+            }
+        } else {
+            alert("Please login first!");
+        }
+    }
+  </script>
 </body>
 </html>
