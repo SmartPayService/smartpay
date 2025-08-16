@@ -1,58 +1,195 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SmartPay — Fast & Secure Services</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css">
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insurance Services - MyService Hub</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f0f2f5;
+        }
+        .header {
+            background-color: #ffffff;
+            color: #333;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .nav a {
+            color: #555;
+            text-decoration: none;
+            padding: 10px 15px;
+            font-weight: 500;
+        }
+        .main-content {
+            padding: 40px;
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        .form-container {
+            margin-top: 40px;
+        }
+        .form-container h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 25px;
+        }
+        .insurance-type-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap; /* Wrap buttons on smaller screens */
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .insurance-type-buttons button {
+            padding: 12px 25px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .insurance-type-buttons button:hover, .insurance-type-buttons button.active {
+            background-color: #3498db;
+            color: white;
+        }
+        .insurance-form {
+            display: none; /* Hide forms by default */
+            flex-direction: column;
+            gap: 20px;
+            max-width: 400px;
+            margin: auto;
+        }
+        .insurance-form input, .insurance-form select {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        .insurance-form button {
+            padding: 15px;
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .insurance-form button:hover {
+            background-color: #27ae60;
+        }
+        .success-message {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 8px;
+            display: none;
+        }
+        .footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+        .footer p {
+            margin: 0;
+            font-size: 14px;
+        }
+    </style>
 </head>
 <body>
-<div id="sp-header"></div>
-<section class="py-5"><div class="container">
-  <div class="d-flex justify-content-between align-items-center mb-3">
-    <h2 class="fw-bold">Insurance</h2>
-    <a href="dashboard.html" class="btn btn-outline-secondary btn-sm">Back</a>
-  </div>
-  <form id="f7" class="needs-validation" novalidate>
-    <div class="row g-3">
-      <div class="col-md-4">
-        <label class="form-label">Name</label>
-        <input type="text" class="form-control" minlength="3" required>
-        <div class="invalid-feedback">Enter name</div>
-      </div>
-      <div class="col-md-4">
-        <label class="form-label">Mobile</label>
-        <input type="tel" class="form-control" pattern="\d{10}" required>
-        <div class="invalid-feedback">10-digit</div>
-      </div>
-      <div class="col-md-4">
-        <label class="form-label">Amount (₹)</label>
-        <input type="number" class="form-control" min="10" required>
-        <div class="invalid-feedback">Min 10</div>
-      </div>
-    </div>
-    <button class="btn btn-primary mt-3" type="submit">Submit & Download Receipt</button>
-  </form>
-  <div id="s7" class="mt-4 d-none">
-    <div class="p-4 border rounded-4" style="background:#f8fafc">
-      <h5 class="fw-bold mb-2">Insurance Receipt</h5>
-      <div><strong>Transaction ID:</strong> <span id="tx7"></span></div>
-      <div><strong>Date:</strong> <span>{new Date().toLocaleString()}</span></div>
-    </div>
-  </div>
-</div></section>
-<script>spAuth.requireAuth(); spApp.attach('f7','s7','tx7','INS','Insurance');</script>
 
-<div id="sp-footer"></div>
-<script src="assets/js/layout.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="assets/js/auth.js"></script>
-<script src="assets/js/app.js"></script>
+<div class="header">
+    <div class="logo">MyService Hub</div>
+    <div class="nav">
+        <a href="index.html">Home</a>
+        <a href="insurance.html">Insurance</a>
+        <a href="recharge.html">Recharge & Bills</a>
+        <a href="services.html">Services</a>
+    </div>
+</div>
+
+<div class="main-content">
+    <div class="form-container">
+        <h2>Insurance Services</h2>
+        <div class="insurance-type-buttons">
+            <button onclick="showInsuranceForm('two-wheeler')">Two Wheeler</button>
+            <button onclick="showInsuranceForm('car')">Car</button>
+            <button onclick="showInsuranceForm('commercial')">Commercial Vehicle</button>
+        </div>
+
+        <form class="insurance-form" id="two-wheeler-form">
+            <input type="text" placeholder="Full Name" required>
+            <input type="tel" placeholder="Mobile Number" required>
+            <input type="text" placeholder="Vehicle Registration Number" required>
+            <button type="submit">Get Quote</button>
+        </form>
+
+        <form class="insurance-form" id="car-form">
+            <input type="text" placeholder="Full Name" required>
+            <input type="tel" placeholder="Mobile Number" required>
+            <input type="text" placeholder="Vehicle Registration Number" required>
+            <button type="submit">Get Quote</button>
+        </form>
+
+        <form class="insurance-form" id="commercial-form">
+            <input type="text" placeholder="Full Name" required>
+            <input type="tel" placeholder="Mobile Number" required>
+            <input type="text" placeholder="Vehicle Registration Number" required>
+            <input type="text" placeholder="Type of Commercial Use" required>
+            <button type="submit">Get Quote</button>
+        </form>
+
+        <div class="success-message" id="success-msg">
+            <h3>Thank You!</h3>
+            <p>Your insurance request has been submitted successfully. Our agent will contact you shortly.</p>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <p>&copy; 2025 MyService Hub. All rights reserved.</p>
+</div>
+
+<script>
+    function showInsuranceForm(service) {
+        document.querySelectorAll('.insurance-form').forEach(form => form.style.display = 'none');
+        document.getElementById(`${service}-form`).style.display = 'flex';
+        document.getElementById('success-msg').style.display = 'none';
+
+        document.querySelectorAll('.insurance-type-buttons button').forEach(btn => btn.classList.remove('active'));
+        document.querySelector(`button[onclick="showInsuranceForm('${service}')"]`).classList.add('active');
+    }
+
+    document.querySelectorAll('.insurance-form').forEach(form => {
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            this.style.display = 'none';
+            document.getElementById('success-msg').style.display = 'block';
+        });
+    });
+
+    // Show Two Wheeler form by default on page load
+    window.onload = () => showInsuranceForm('two-wheeler');
+</script>
 </body>
 </html>
