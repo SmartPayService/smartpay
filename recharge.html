@@ -160,24 +160,46 @@
 
         <form class="recharge-form" id="mobile-form">
             <input type="tel" id="mobile-number" placeholder="Enter Mobile Number" required pattern="[0-9]{10}" title="Please enter a 10-digit mobile number">
+            <select id="mobile-operator" required>
+                <option value="">Select Operator</option>
+                <option value="Jio">Jio</option>
+                <option value="Airtel">Airtel</option>
+                <option value="VI">Vi (Vodafone Idea)</option>
+                <option value="BSNL">BSNL</option>
+            </select>
             <input type="number" id="recharge-amount" placeholder="Enter Amount" required min="10">
             <button type="submit">Proceed to Recharge</button>
         </form>
 
         <form class="recharge-form" id="dth-form">
             <input type="tel" id="dth-number" placeholder="Enter DTH Number" required>
+            <select id="dth-operator" required>
+                <option value="">Select Operator</option>
+                <option value="TataPlay">Tata Play</option>
+                <option value="AirtelDigitalTV">Airtel Digital TV</option>
+                <option value="DishTV">Dish TV</option>
+                <option value="SunDirect">Sun Direct</option>
+            </select>
             <input type="number" id="dth-amount" placeholder="Enter Amount" required min="10">
             <button type="submit">Proceed to DTH Recharge</button>
         </form>
 
         <form class="recharge-form" id="electricity-form">
-            <input type="text" id="bill-number" placeholder="Enter Customer ID / Bill Number" required>
             <select id="bill-state" required>
                 <option value="">Select State</option>
-                <option value="UP">Uttar Pradesh</option>
-                <option value="MH">Maharashtra</option>
-                <option value="DL">Delhi</option>
+                <option value="Assam">Assam</option>
+                <option value="UttarPradesh">Uttar Pradesh</option>
+                <option value="Maharashtra">Maharashtra</option>
+                <option value="Delhi">Delhi</option>
             </select>
+            <select id="bill-biller" required>
+                <option value="">Select Biller</option>
+                <option value="AssamAPDCLElectronicPrepaid">Assam APDCL Electronic Prepaid</option>
+                <option value="UPPCL">UPPCL</option>
+                <option value="Mahavitaran">Mahavitaran</option>
+                <option value="BSES">BSES</option>
+            </select>
+            <input type="text" id="bill-number" placeholder="Enter Customer ID / Bill Number" required>
             <button type="submit">Fetch Bill & Pay</button>
         </form>
 
@@ -210,10 +232,11 @@
         form.addEventListener('submit', function(event) {
             event.preventDefault();
             const serviceName = this.id.replace('-form', '');
-            const amount = this.querySelector('input[type="number"], input[type="text"]').value;
+            const amountInput = this.querySelector('input[type="number"]');
+            const amount = amountInput ? amountInput.value : "Not Applicable"; // Handle cases where amount isn't needed (like bill pay)
 
             document.getElementById('receipt-service').textContent = serviceName.charAt(0).toUpperCase() + serviceName.slice(1);
-            document.getElementById('receipt-amount').textContent = `₹${amount}`;
+            document.getElementById('receipt-amount').textContent = amount;
 
             document.getElementById('receipt-box').style.display = 'block';
             this.style.display = 'none';
