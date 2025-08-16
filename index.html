@@ -3,57 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyService Hub - Welcome</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background-color: #f0f2f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .welcome-container {
-            background-color: #ffffff;
-            padding: 50px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            max-width: 600px;
-            width: 100%;
-        }
-        .welcome-container h1 {
-            font-size: 42px;
-            color: #2c3e50;
-        }
-        .welcome-container p {
-            font-size: 18px;
-            color: #555;
-            margin-bottom: 30px;
-        }
-        .login-btn {
-            padding: 15px 30px;
-            background-color: #3498db;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 18px;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-        }
-        .login-btn:hover {
-            background-color: #2980b9;
-        }
-    </style>
+    <title>Smartpay - Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
-<div class="welcome-container">
-    <h1>Welcome to MyService Hub</h1>
-    <p>Your one-stop destination for all digital services. Please login or register to continue.</p>
-    <a href="home.html" class="login-btn">Login & Access Services</a>
-</div>
+    <header class="navbar">
+        <a href="index.html" class="logo">
+            <img src="assets/images/smartpay-logo.png" alt="Smartpay Logo" class="logo-img">
+        </a>
+        <div>
+            <a href="index.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <div>
+            <a href="login.html" class="login-btn cta-btn">Login</a>
+            <a href="login.html" class="login-btn cta-btn">Register</a>
+        </div>
+    </header>
 
+    <section class="hero">
+        <div class="container">
+            <h1>The Easiest Way to Pay</h1>
+            <p>With Smartpay, make all your payments easily and securely.</p>
+            <a href="login.html" class="cta-btn">Get Started</a>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="section-card">
+            <h2>Our Services</h2>
+            <div class="services-grid">
+                <div class="service-item">
+                    <i class="fas fa-mobile-alt"></i>
+                    <p>Mobile Recharge</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-bolt"></i>
+                    <p>Bill Payments</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-money-check-alt"></i>
+                    <p>Digital Payments</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-tv"></i>
+                    <p>DTH Recharge</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-fingerprint"></i>
+                    <p>AEPS</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-id-card"></i>
+                    <p>PAN Card</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Smartpay. All Rights Reserved.</p>
+        </div>
+    </footer>
 </body>
 </html>

@@ -3,225 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Services - Smartpay</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>All Services</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f7f6;
-            color: #333;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        /* Navbar (Same as other pages) */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 20px;
-            background-color: #fff;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        .navbar .logo-img {
-            height: 40px;
-            width: auto;
-        }
-        .navbar a {
-            color: #333;
-            text-decoration: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-        .navbar a:hover {
-            background-color: #f0f0f0;
-        }
-        .navbar .logout-btn {
-            background-color: #dc3545;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: background-color 0.3s ease;
-        }
-        .navbar .logout-btn:hover {
-            background-color: #c82333;
-        }
-        
-        .services-page-heading {
-            text-align: center;
-            font-size: 40px;
-            color: #007bff;
-            margin-top: 30px;
-            margin-bottom: 30px;
-        }
-        
-        /* Dummy Services Section (from previous code) */
-        .service-section {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-        }
-        .service-section h2 {
-            color: #0056b3;
-            margin-top: 0;
-            font-size: 28px;
-        }
-        .service-section h3 {
-            color: #555;
-            font-size: 20px;
-            margin-top: 20px;
-        }
-        .service-section ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        .service-section ul li {
-            background-color: #f0f3f5;
-            padding: 10px 15px;
-            margin-bottom: 8px;
-            border-radius: 5px;
-        }
-        .dummy-form {
-            background-color: #f9f9f9;
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px dashed #ccc;
-        }
-        .dummy-form label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        .dummy-form input, .dummy-form button {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        .dummy-form button {
-            background-color: #28a745;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .dummy-form button:hover {
-            background-color: #218838;
-        }
-        .warning-text {
-            color: #dc3545;
-            font-weight: bold;
-            margin-top: 15px;
-        }
-    </style>
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
+<body id="services-page">
 
     <header class="navbar">
-        <a href="dashboard.html" class="logo">
+        <a href="index.html" class="logo">
             <img src="assets/images/smartpay-logo.png" alt="Smartpay Logo" class="logo-img">
         </a>
         <div>
             <a href="dashboard.html">Dashboard</a>
-            <a href="services.html">Services</a>
+            <a href="services.html">All Services</a>
+            <a href="contact.html">Contact</a>
         </div>
-        <a href="home.html" class="logout-btn">Logout</a>
+        <a href="index.html" class="logout-btn">Logout</a>
     </header>
 
-    <div class="container">
-        <h1 class="services-page-heading">Specialized Services</h1>
-        
-        <section class="service-section" id="aeps">
-            <h2><i class="fas fa-fingerprint"></i> AEPS (Aadhaar Enabled Payment System)</h2>
-            <h3>Sub-services:</h3>
-            <ul>
-                <li>Cash Withdrawal</li>
-                <li>Balance Enquiry</li>
-                <li>Mini Statement</li>
-                <li>Aadhaar Pay</li>
-            </ul>
-            <h3>Requirements:</h3>
-            <ul>
-                <li>Bank account linked with Aadhaar</li>
-                <li>Aadhaar number</li>
-                <li>Fingerprint authentication</li>
-            </ul>
-            <div class="dummy-form">
-                <h4>AEPS Form</h4>
-                <form onsubmit="alert('This form is for demonstration only and does not process any data.'); return false;">
-                    <label for="aeps-aadhaar">Aadhaar Number:</label>
-                    <input type="text" id="aeps-aadhaar" placeholder="Enter Aadhaar Number" required>
-                    <button type="submit">Proceed with Biometrics</button>
-                </form>
-                <p class="warning-text">This form is for demonstration only. A real AEPS service requires a secure system and biometric device.</p>
-            </div>
-        </section>
+    <main class="container">
+        <div class="section-card">
+            <div id="service-form-container">
+                </div>
+        </div>
+    </main>
 
-        <section class="service-section" id="pan-card">
-            <h2><i class="fas fa-id-card"></i> PAN Card</h2>
-            <h3>Sub-services:</h3>
-            <ul>
-                <li>New PAN Card Application (Individual)</li>
-                <li>PAN Card Correction</li>
-                <li>PAN Card Reprint</li>
-            </ul>
-            <h3>Requirements:</h3>
-            <ul>
-                <li>Identity Proof (Aadhaar, Voter ID)</li>
-                <li>Address Proof</li>
-                <li>Passport size photos</li>
-            </ul>
-            <div class="dummy-form">
-                <h4>PAN Card Application Form</h4>
-                <form onsubmit="alert('This form is for demonstration only and does not submit any data.'); return false;">
-                    <label for="pan-name">Full Name:</label>
-                    <input type="text" id="pan-name" placeholder="Enter Full Name" required>
-                    <label for="pan-dob">Date of Birth:</label>
-                    <input type="date" id="pan-dob" required>
-                    <button type="submit">Submit Application</button>
-                </form>
-                <p class="warning-text">This form is for demonstration only. A real PAN service requires a secure system to handle personal data.</p>
-            </div>
-        </section>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Smartpay. All Rights Reserved.</p>
+        </div>
+    </footer>
 
-        <section class="service-section" id="passport">
-            <h2><i class="fas fa-passport"></i> Passport</h2>
-            <h3>Sub-services:</h3>
-            <ul>
-                <li>New Passport Application</li>
-                <li>Passport Renewal</li>
-                <li>Re-issue of Passport</li>
-            </ul>
-            <h3>Requirements:</h3>
-            <ul>
-                <li>Proof of Address</li>
-                <li>Proof of Date of Birth</li>
-                <li>Passport size photos</li>
-            </ul>
-            <div class="dummy-form">
-                <h4>Passport Application Form</h4>
-                <form onsubmit="alert('This form is for demonstration only and does not submit any data.'); return false;">
-                    <label for="passport-name">Full Name:</label>
-                    <input type="text" id="passport-name" placeholder="Enter Full Name" required>
-                    <label for="passport-address">Address:</label>
-                    <input type="text" id="passport-address" placeholder="Enter Address" required>
-                    <button type="submit">Submit Application</button>
-                </form>
-                <p class="warning-text">This form is for demonstration only. A real Passport service requires a secure system and integration with government portals.</p>
-            </div>
-        </section>
-    </div>
+    <script src="assets/js/script.js"></script>
 </body>
 </html>

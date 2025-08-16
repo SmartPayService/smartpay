@@ -3,202 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Smartpay</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f7f6;
-            color: #333;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        /* Navbar */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 20px;
-            background-color: #fff;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        .navbar .logo-img {
-            height: 40px;
-            width: auto;
-        }
-        .navbar a {
-            color: #333;
-            text-decoration: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-        .navbar a:hover {
-            background-color: #f0f0f0;
-        }
-        .navbar .logout-btn {
-            background-color: #dc3545;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: background-color 0.3s ease;
-        }
-        .navbar .logout-btn:hover {
-            background-color: #c82333;
-        }
-        /* Dashboard Header */
-        .dashboard-header {
-            text-align: center;
-            padding: 50px 20px;
-            background-color: #e9f0f5;
-            border-radius: 10px;
-            margin-top: 20px;
-            margin-bottom: 30px;
-        }
-        .dashboard-header h1 {
-            font-size: 42px;
-            color: #007bff;
-            margin-bottom: 10px;
-        }
-        .wallet-info {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 30px;
-            margin-top: 20px;
-        }
-        .wallet-balance-display {
-            background-color: #fff;
-            padding: 20px 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        .wallet-balance-display p {
-            margin: 0;
-            font-size: 16px;
-            color: #666;
-        }
-        .wallet-balance-display h3 {
-            margin: 5px 0 0;
-            font-size: 36px;
-            color: #28a745;
-            font-weight: 700;
-        }
-        .topup-btn {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 5px;
-            font-size: 16px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .topup-btn:hover {
-            background-color: #0056b3;
-        }
-        /* Dashboard Content Sections */
-        .dashboard-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-        }
-        @media (max-width: 768px) {
-            .dashboard-content {
-                grid-template-columns: 1fr;
-            }
-        }
-        .section-card {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-        .section-card h2 {
-            margin-top: 0;
-            font-size: 24px;
-            border-bottom: 2px solid #f0f0f0;
-            padding-bottom: 15px;
-        }
-        /* Quick Actions Grid */
-        .quick-actions-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            text-align: center;
-        }
-        .action-item a {
-            display: block;
-            text-decoration: none;
-            color: #333;
-        }
-        .action-item i {
-            font-size: 40px;
-            color: #007bff;
-            margin-bottom: 10px;
-            transition: color 0.3s ease;
-        }
-        .action-item a:hover i {
-            color: #0056b3;
-        }
-        /* Recent Transactions List */
-        .transactions-list {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-        .transactions-list li {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-            border-bottom: 1px solid #eee;
-        }
-        .transactions-list li:last-child {
-            border-bottom: none;
-        }
-        .transaction-details span {
-            display: block;
-        }
-        .transaction-details .desc {
-            font-weight: 500;
-        }
-        .transaction-details .date {
-            font-size: 14px;
-            color: #777;
-        }
-        .transaction-amount {
-            font-weight: 700;
-            font-size: 18px;
-        }
-        .transaction-amount.debit {
-            color: #dc3545;
-        }
-        .transaction-amount.credit {
-            color: #28a745;
-        }
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #333;
-            color: #f0f0f0;
-            font-size: 14px;
-            margin-top: 30px;
-        }
-    </style>
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
+<body id="dashboard-page">
 
     <header class="navbar">
         <a href="dashboard.html" class="logo">
@@ -206,99 +15,52 @@
         </a>
         <div>
             <a href="#">My Dashboard</a>
-            <a href="services.html">Services</a>
+            <a href="services.html">All Services</a>
+            <a href="contact.html">Contact</a>
         </div>
-        <a href="home.html" class="logout-btn">Logout</a>
+        <a href="index.html" class="logout-btn">Logout</a>
     </header>
 
-    <main class="container">
-        <header class="dashboard-header">
+    <header class="dashboard-header">
+        <div class="container">
             <h1>Welcome, User!</h1>
-            <div class="wallet-info">
-                <div class="wallet-balance-display">
-                    <p>Current Balance:</p>
-                    <h3 id="wallet-balance">₹ 0</h3>
-                </div>
-                <button id="topup-button" class="topup-btn">Top-up Wallet</button>
+            <div class="wallet-balance-display">
+                <p>Current Balance:</p>
+                <h3 id="wallet-balance">₹ 0</h3>
             </div>
-        </header>
-
-        <div class="dashboard-content">
-            <section class="section-card">
-                <h2>Quick Actions</h2>
-                <div class="quick-actions-grid">
-                    <div class="action-item">
-                        <a href="#" onclick="alert('Dummy Mobile Recharge is loading...')">
-                            <i class="fas fa-mobile-alt"></i>
-                            <p>Mobile Recharge</p>
-                        </a>
-                    </div>
-                    <div class="action-item">
-                        <a href="#" onclick="alert('Dummy Bill Payments is loading...')">
-                            <i class="fas fa-bolt"></i>
-                            <p>Bill Payments</p>
-                        </a>
-                    </div>
-                    <div class="action-item">
-                        <a href="#" onclick="alert('Dummy Digital Payments is loading...')">
-                            <i class="fas fa-money-check-alt"></i>
-                            <p>Digital Payments</p>
-                        </a>
-                    </div>
-                    <div class="action-item">
-                        <a href="#" onclick="alert('Dummy DTH Recharge is loading...')">
-                            <i class="fas fa-tv"></i>
-                            <p>DTH Recharge</p>
-                        </a>
-                    </div>
-                    <div class="action-item">
-                        <a href="#" onclick="alert('Dummy Shopping is loading...')">
-                            <i class="fas fa-shopping-bag"></i>
-                            <p>Shopping</p>
-                        </a>
-                    </div>
-                    <div class="action-item">
-                        <a href="#" onclick="alert('Dummy Ticket Booking is loading...')">
-                            <i class="fas fa-ticket-alt"></i>
-                            <p>Ticket Booking</p>
-                        </a>
-                    </div>
-                </div>
-            </section>
-
-            <section class="section-card">
-                <h2>Recent Transactions</h2>
-                <ul class="transactions-list">
-                    <li>
-                        <div class="transaction-details">
-                            <span class="desc">Mobile Recharge</span>
-                            <span class="date">15-08-2025</span>
-                        </div>
-                        <div class="transaction-amount debit">- ₹199</div>
-                    </li>
-                    <li>
-                        <div class="transaction-details">
-                            <span class="desc">Wallet Top-up</span>
-                            <span class="date">14-08-2025</span>
-                        </div>
-                        <div class="transaction-amount credit">+ ₹500</div>
-                    </li>
-                    <li>
-                        <div class="transaction-details">
-                            <span class="desc">Electricity Bill</span>
-                            <span class="date">13-08-2025</span>
-                        </div>
-                        <div class="transaction-amount debit">- ₹850</div>
-                    </li>
-                    <li>
-                        <div class="transaction-details">
-                            <span class="desc">DTH Recharge</span>
-                            <span class="date">12-08-2025</span>
-                        </div>
-                        <div class="transaction-amount debit">- ₹300</div>
-                    </li>
-                </ul>
-            </section>
+            <button id="topup-button" class="cta-btn" style="margin-top: 20px;">Top-up Wallet</button>
+        </div>
+    </header>
+    
+    <main class="container">
+        <div class="section-card">
+            <h2>Quick Actions</h2>
+            <div class="services-grid">
+                <a href="services.html?service=recharge" class="service-item">
+                    <i class="fas fa-mobile-alt"></i>
+                    <p>Mobile Recharge</p>
+                </a>
+                <a href="services.html?service=billpay" class="service-item">
+                    <i class="fas fa-bolt"></i>
+                    <p>Bill Payments</p>
+                </a>
+                <a href="services.html?service=dth" class="service-item">
+                    <i class="fas fa-tv"></i>
+                    <p>DTH Recharge</p>
+                </a>
+                <a href="services.html?service=aeps" class="service-item">
+                    <i class="fas fa-fingerprint"></i>
+                    <p>AEPS</p>
+                </a>
+                <a href="services.html?service=pancard" class="service-item">
+                    <i class="fas fa-id-card"></i>
+                    <p>PAN Card</p>
+                </a>
+                <a href="services.html?service=passport" class="service-item">
+                    <i class="fas fa-passport"></i>
+                    <p>Passport</p>
+                </a>
+            </div>
         </div>
     </main>
 
@@ -308,29 +70,6 @@
         </div>
     </footer>
     
-    <script>
-        // Dummy wallet balance (resets on page refresh)
-        let walletBalance = 500; 
-        
-        // Find HTML elements
-        const walletBalanceElement = document.getElementById('wallet-balance');
-        const topupButton = document.getElementById('topup-button');
-    
-        // Function to update the wallet balance display
-        function updateWalletDisplay() {
-            walletBalanceElement.innerText = `₹ ${walletBalance}`;
-        }
-    
-        // What happens when the top-up button is clicked
-        topupButton.addEventListener('click', function() {
-            const topupAmount = 500;
-            walletBalance += topupAmount;
-            updateWalletDisplay();
-            alert(`₹${topupAmount} has been added to your wallet!`);
-        });
-    
-        // Show the initial balance when the page loads
-        updateWalletDisplay();
-    </script>
+    <script src="assets/js/script.js"></script>
 </body>
 </html>
