@@ -1,21 +1,73 @@
-<!doctype html><html><head><meta charset='utf-8'/><meta name='viewport' content='width=device-width,initial-scale=1'/><title>Banking Services - SmartPay</title><link rel='stylesheet' href='styles.css'></head><body>
-<div class="topbar">
-  <div class="wrap">
-    <div class="brand">SmartPay</div>
-    <div class="nav">
-      <a href="index.html">Home</a>
-      <a href="services.html">Services</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-      <a href="#help">Help</a>
-      &nbsp;&nbsp;
-      <a href="https://wa.me/917002805576" target="_blank" style="color:#fff;text-decoration:none;font-weight:700">WhatsApp</a>
-      <a href="mailto:xpxaxn@gmail.com" style="color:#fff;text-decoration:none;font-weight:700;margin-left:10px">Email</a>
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Banking Services • SmartPay</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="assets/css/styles.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head><body>
+<nav class="navbar navbar-expand-lg bg-white border-bottom sticky-top">
+  <div class="container">
+    <a class="navbar-brand text-primary fw-bold" href="index.html"><i class="bi bi-lightning-charge"></i>SmartPay</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbars"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navbars">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="help.html">Help</a></li>
+      </ul>
+      <div class="d-flex gap-2">
+        <a class="btn btn-outline-success btn-sm" href="https://wa.me/917002805576" target="_blank"><i class="bi bi-whatsapp"></i> WhatsApp</a>
+        <a class="btn btn-outline-primary btn-sm" href="mailto:xpxaxn@gmail.com"><i class="bi bi-envelope"></i> Email</a>
+        <a class="btn btn-dark btn-sm" href="login.html"><i class="bi bi-box-arrow-in-right"></i> Login</a>
+      </div>
     </div>
   </div>
+</nav>
+<div class="container py-4">
+
+<script>requireLogin()</script>
+<div class="form-wrap card p-4">
+  <h4 class="mb-3"><i class="bi bi-bank"></i> Banking Services</h4>
+  <form id="bankForm">
+    <div class="mb-3"><label class="form-label">Service</label><select class="form-select" id="bsvc" required><option value="">Select</option><option>AEPS Cash Withdrawal</option><option>AEPS Balance Enquiry</option><option>DMT Money Transfer</option></select></div>
+    <div class="mb-3"><label class="form-label">Customer Mobile</label><input class="form-control" id="bmob" pattern="[6-9][0-9]{9}" required></div>
+    <div class="mb-3"><label class="form-label">Amount (₹)</label><input type="number" class="form-control" id="bamt" min="1" required></div>
+    <button class="btn btn-primary" type="submit">Submit</button>
+    <button class="btn btn-outline-secondary ms-2" type="button" onclick="doLogout()">Logout</button>
+  </form>
+  <div id="bank_ok" class="alert alert-success mt-3" style="display:none;">Submitted.</div>
+  <button class="btn btn-success mt-2" id="bank_pdf" style="display:none;">Download Receipt</button>
 </div>
-<div class='hero'><div class='container'><h1>Banking Services</h1><p>Select a banking operation</p></div></div><div class='container'><div class='grid'><a class="card-link" href="form_aeps_withdraw.html" style="text-decoration:none;color:inherit;"><div class="card"><div class="icon icon-yellow"><i class="fas fa-university"></i></div><h3>AEPS - Cash Withdraw</h3><p class="small">Open form</p></div></a><a class="card-link" href="form_dmt.html" style="text-decoration:none;color:inherit;"><div class="card"><div class="icon icon-yellow"><i class="fas fa-university"></i></div><h3>DMT - Money Transfer</h3><p class="small">Open form</p></div></a><a class="card-link" href="form_microatm.html" style="text-decoration:none;color:inherit;"><div class="card"><div class="icon icon-yellow"><i class="fas fa-university"></i></div><h3>Micro ATM - Cash Withdrawal</h3><p class="small">Open form</p></div></a></div></div>
-<div class="footer">
-  <small>© 2025 SmartPay. All Rights Reserved. &nbsp; | &nbsp; Contact: <a href="https://wa.me/917002805576" style="color:#fff;text-decoration:underline">WhatsApp</a> &nbsp; | &nbsp; <a href="mailto:xpxaxn@gmail.com" style="color:#fff;text-decoration:underline">Email</a></small>
+<script>
+document.getElementById('bankForm').addEventListener('submit', function(e){
+ e.preventDefault();
+ const bsvc=document.getElementById('bsvc'), bmob=document.getElementById('bmob'), bamt=document.getElementById('bamt');
+ const data={txnId:makeTxnId(),lines:{'Service':'Banking','Type':bsvc.value,'Mobile':bmob.value},total:bamt.value,file:'SmartPay_Banking.pdf'};
+ document.getElementById('bank_ok').style.display='block';
+ const btn=document.getElementById('bank_pdf'); btn.style.display='inline-block'; btn.onclick=()=>generateReceiptPDF(data);
+});
+</script>
+
 </div>
-<script src='app.js'></script></body></html>
+<footer class="mt-5 py-4">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-4"><h5>SmartPay</h5><p>Unified platform for recharges, bills & services. Partner-ready.</p></div>
+      <div class="col-md-4"><h6>Quick Links</h6><ul class="list-unstyled">
+        <li><a href="services.html">All Services</a></li><li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li><li><a href="help.html">Help</a></li>
+      </ul></div>
+      <div class="col-md-4"><h6>Support</h6>
+        <p><a href="mailto:xpxaxn@gmail.com">xpxaxn@gmail.com</a><br><a target="_blank" href="https://wa.me/917002805576">+91 70028 05576</a></p>
+      </div>
+    </div>
+    <div class="text-center mt-3" style="opacity:.75;">© 2025 SmartPay — For testing only</div>
+  </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/app.js"></script>
+<a class="btn btn-success wh-fixed" href="https://wa.me/917002805576" target="_blank"><i class="bi bi-whatsapp"></i> Chat</a>
+</body></html>
