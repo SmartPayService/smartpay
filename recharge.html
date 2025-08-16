@@ -142,7 +142,7 @@
 <div class="header">
     <div class="logo">MyService Hub</div>
     <div class="nav">
-        <a href="index.html">Home</a>
+        <a href="home.html">Home</a>
         <a href="insurance.html">Insurance</a>
         <a href="recharge.html">Recharge & Bills</a>
         <a href="services.html">Services</a>
@@ -233,8 +233,8 @@
             event.preventDefault();
             const serviceName = this.id.replace('-form', '');
             const amountInput = this.querySelector('input[type="number"]');
-            const amount = amountInput ? amountInput.value : "Not Applicable"; // Handle cases where amount isn't needed (like bill pay)
-
+            const amount = amountInput ? amountInput.value : "Not Applicable";
+            
             document.getElementById('receipt-service').textContent = serviceName.charAt(0).toUpperCase() + serviceName.slice(1);
             document.getElementById('receipt-amount').textContent = amount;
 
@@ -248,7 +248,6 @@
         html2pdf().from(receiptContent).save('recharge_receipt.pdf');
     });
 
-    // Show Mobile form by default on page load
     window.onload = () => showForm('mobile');
 </script>
 </body>

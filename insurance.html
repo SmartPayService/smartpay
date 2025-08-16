@@ -50,7 +50,7 @@
         .insurance-type-buttons {
             display: flex;
             justify-content: center;
-            flex-wrap: wrap; /* Wrap buttons on smaller screens */
+            flex-wrap: wrap;
             gap: 15px;
             margin-bottom: 30px;
         }
@@ -67,7 +67,7 @@
             color: white;
         }
         .insurance-form {
-            display: none; /* Hide forms by default */
+            display: none;
             flex-direction: column;
             gap: 20px;
             max-width: 400px;
@@ -121,7 +121,7 @@
 <div class="header">
     <div class="logo">MyService Hub</div>
     <div class="nav">
-        <a href="index.html">Home</a>
+        <a href="home.html">Home</a>
         <a href="insurance.html">Insurance</a>
         <a href="recharge.html">Recharge & Bills</a>
         <a href="services.html">Services</a>
@@ -139,57 +139,3 @@
 
         <form class="insurance-form" id="two-wheeler-form">
             <input type="text" placeholder="Full Name" required>
-            <input type="tel" placeholder="Mobile Number" required>
-            <input type="text" placeholder="Vehicle Registration Number" required>
-            <button type="submit">Get Quote</button>
-        </form>
-
-        <form class="insurance-form" id="car-form">
-            <input type="text" placeholder="Full Name" required>
-            <input type="tel" placeholder="Mobile Number" required>
-            <input type="text" placeholder="Vehicle Registration Number" required>
-            <button type="submit">Get Quote</button>
-        </form>
-
-        <form class="insurance-form" id="commercial-form">
-            <input type="text" placeholder="Full Name" required>
-            <input type="tel" placeholder="Mobile Number" required>
-            <input type="text" placeholder="Vehicle Registration Number" required>
-            <input type="text" placeholder="Type of Commercial Use" required>
-            <button type="submit">Get Quote</button>
-        </form>
-
-        <div class="success-message" id="success-msg">
-            <h3>Thank You!</h3>
-            <p>Your insurance request has been submitted successfully. Our agent will contact you shortly.</p>
-        </div>
-    </div>
-</div>
-
-<div class="footer">
-    <p>&copy; 2025 MyService Hub. All rights reserved.</p>
-</div>
-
-<script>
-    function showInsuranceForm(service) {
-        document.querySelectorAll('.insurance-form').forEach(form => form.style.display = 'none');
-        document.getElementById(`${service}-form`).style.display = 'flex';
-        document.getElementById('success-msg').style.display = 'none';
-
-        document.querySelectorAll('.insurance-type-buttons button').forEach(btn => btn.classList.remove('active'));
-        document.querySelector(`button[onclick="showInsuranceForm('${service}')"]`).classList.add('active');
-    }
-
-    document.querySelectorAll('.insurance-form').forEach(form => {
-        form.addEventListener('submit', function(event) {
-            event.preventDefault();
-            this.style.display = 'none';
-            document.getElementById('success-msg').style.display = 'block';
-        });
-    });
-
-    // Show Two Wheeler form by default on page load
-    window.onload = () => showInsuranceForm('two-wheeler');
-</script>
-</body>
-</html>
