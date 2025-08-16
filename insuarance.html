@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Banking Services - MyService Hub</title>
+    <title>Insurance Services - MyService Hub</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -47,23 +47,23 @@
             color: #333;
             margin-bottom: 25px;
         }
-        .banking-form {
+        .insurance-form {
             display: flex;
             flex-direction: column;
             gap: 20px;
             max-width: 400px;
             margin: auto;
         }
-        .banking-form input {
+        .insurance-form input, .insurance-form select {
             width: 100%;
             padding: 15px;
             border: 1px solid #ddd;
             border-radius: 8px;
             font-size: 16px;
         }
-        .banking-form button {
+        .insurance-form button {
             padding: 15px;
-            background-color: #e74c3c;
+            background-color: #3498db;
             color: white;
             border: none;
             border-radius: 8px;
@@ -72,8 +72,17 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
-        .banking-form button:hover {
-            background-color: #c0392b;
+        .insurance-form button:hover {
+            background-color: #2980b9;
+        }
+        .success-message {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 8px;
+            display: none;
         }
     </style>
 </head>
@@ -91,15 +100,36 @@
 
 <div class="main-content">
     <div class="form-container">
-        <h2>Banking Services</h2>
-        <form class="banking-form">
+        <h2>Insurance Services</h2>
+        <form class="insurance-form">
             <input type="text" placeholder="Full Name" required>
-            <input type="tel" placeholder="Account Number" required>
-            <input type="text" placeholder="Service Required (e.g., Loan Application)" required>
+            <input type="email" placeholder="Email" required>
+            <select required>
+                <option value="" disabled selected>Select Insurance Type</option>
+                <option value="life">Life Insurance</option>
+                <option value="health">Health Insurance</option>
+                <option value="car">Car Insurance</option>
+            </select>
+            <input type="tel" placeholder="Mobile Number" required>
             <button type="submit">Submit Request</button>
         </form>
+        <div class="success-message" id="success-msg">
+            <h3>Thank You!</h3>
+            <p>Your insurance request has been submitted successfully. Our agent will contact you shortly.</p>
+        </div>
     </div>
 </div>
+
+<script>
+    const insuranceForm = document.querySelector('.insurance-form');
+    const successMsg = document.getElementById('success-msg');
+    
+    insuranceForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        insuranceForm.style.display = 'none';
+        successMsg.style.display = 'block';
+    });
+</script>
 
 </body>
 </html>
