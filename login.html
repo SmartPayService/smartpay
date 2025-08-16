@@ -6,7 +6,7 @@
     <title>Login / Register</title>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
+<body id="login-page">
 
     <header class="navbar">
         <a href="index.html" class="logo">
@@ -21,12 +21,12 @@
 
     <section class="form-container">
         <h2 id="form-heading">Login</h2>
-        <form action="dashboard.html">
-            <input type="text" id="auth-username" placeholder="User ID" required>
+        <form>
+            <input type="text" id="auth-username" placeholder="Full Name" required>
             <input type="password" id="auth-password" placeholder="Password" required>
             <button type="submit">Submit</button>
         </form>
-        <p style="margin-top: 15px; font-size: 14px; color: var(--light-text-color);">Enter any ID and password to log in.</p>
+        <p style="margin-top: 15px; font-size: 14px; color: var(--light-text-color);">Enter any name and password to log in.</p>
         <p style="margin-top: 15px;">Don't have an account? <a href="#" onclick="document.getElementById('form-heading').innerText='Register';">Register</a></p>
     </section>
 
@@ -35,6 +35,7 @@
             <p>&copy; 2025 Smartpay. All Rights Reserved.</p>
         </div>
     </footer>
+    <script src="assets/js/script.js"></script>
 
 </body>
 </html>

@@ -22,13 +22,12 @@
     </header>
 
     <header class="dashboard-header">
-        <div class="container">
-            <h1>Welcome, User!</h1>
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center; padding: 0;">
+            <h1 id="welcome-user-name">Welcome, User!</h1>
             <div class="wallet-balance-display">
                 <p>Current Balance:</p>
                 <h3 id="wallet-balance">₹ 0</h3>
             </div>
-            <button id="topup-button" class="cta-btn" style="margin-top: 20px;">Top-up Wallet</button>
         </div>
     </header>
     
@@ -62,6 +61,7 @@
                 </a>
             </div>
         </div>
+        <button id="topup-button" class="cta-btn" style="width: 100%; margin-top: 20px;">Top-up Wallet</button>
     </main>
 
     <footer class="footer">
