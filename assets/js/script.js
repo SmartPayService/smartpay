@@ -98,13 +98,17 @@ function loadServiceForm() {
         formContainer.innerHTML = `
             <h2>All Services</h2>
             <div class="services-grid">
-                <a href="services.html?service=recharge" class="service-item">
+                <a href="services.html?service=recharge&subservice=mobile" class="service-item">
                     <i class="fas fa-mobile-alt"></i>
-                    <p>Recharge</p>
+                    <p>Mobile Recharge</p>
                 </a>
                 <a href="services.html?service=billpay" class="service-item">
                     <i class="fas fa-bolt"></i>
                     <p>Bill Payments</p>
+                </a>
+                <a href="services.html?service=recharge&subservice=dth" class="service-item">
+                    <i class="fas fa-tv"></i>
+                    <p>DTH Recharge</p>
                 </a>
                 <a href="services.html?service=aeps" class="service-item">
                     <i class="fas fa-fingerprint"></i>
@@ -207,8 +211,8 @@ function loadServiceForm() {
                         <button type="submit">Withdraw Cash</button>
                     </form>`;
             } else if (subServiceType === 'balance-inquiry') {
-                 formTitle = 'Balance Inquiry';
-                 formContent = `
+                formTitle = 'Balance Inquiry';
+                formContent = `
                     <form onsubmit="handleDummyFormSubmit(event, 'AEPS Balance Inquiry', null, {'Aadhaar No.': this.aadhaar_no.value, 'Bank': this.bank_name.value})">
                         <label>Aadhaar Number:</label>
                         <input type="text" name="aadhaar_no" placeholder="Enter Aadhaar Number" required>
@@ -217,8 +221,8 @@ function loadServiceForm() {
                         <button type="submit">Check Balance</button>
                     </form>`;
             } else if (subServiceType === 'deposit') {
-                 formTitle = 'Cash Deposit';
-                 formContent = `
+                formTitle = 'Cash Deposit';
+                formContent = `
                     <form onsubmit="handleDummyFormSubmit(event, 'AEPS Cash Deposit', this.amount.value, {'Aadhaar No.': this.aadhaar_no.value, 'Bank': this.bank_name.value})">
                         <label>Aadhaar Number:</label>
                         <input type="text" name="aadhaar_no" placeholder="Enter Aadhaar Number" required>
@@ -272,7 +276,7 @@ function loadServiceForm() {
                         <button type="submit">Submit Correction</button>
                     </form>`;
             } else {
-                 formContent = `
+                formContent = `
                     <div class="sub-service-buttons">
                         <a href="services.html?service=pancard&subservice=new-pan" class="sub-service-btn">New PAN Card</a>
                         <a href="services.html?service=pancard&subservice=correction-pan" class="sub-service-btn">Correction PAN</a>
@@ -283,8 +287,8 @@ function loadServiceForm() {
         case 'passport':
             formTitle = 'Passport Service';
             if (subServiceType === 'new-passport') {
-                 formTitle = 'New Passport';
-                 formContent = `
+                formTitle = 'New Passport';
+                formContent = `
                     <form onsubmit="handleDummyFormSubmit(event, 'New Passport', null)">
                         <label>Full Name:</label>
                         <input type="text" placeholder="Enter Full Name" required>
@@ -293,8 +297,8 @@ function loadServiceForm() {
                         <button type="submit">Submit Application</button>
                     </form>`;
             } else if (subServiceType === 'renewal') {
-                 formTitle = 'Passport Renewal';
-                 formContent = `
+                formTitle = 'Passport Renewal';
+                formContent = `
                     <form onsubmit="handleDummyFormSubmit(event, 'Passport Renewal', null)">
                         <label>Current Passport No.:</label>
                         <input type="text" placeholder="Enter current Passport No." required>
@@ -303,7 +307,7 @@ function loadServiceForm() {
                         <button type="submit">Submit Renewal</button>
                     </form>`;
             } else {
-                 formContent = `
+                formContent = `
                     <div class="sub-service-buttons">
                         <a href="services.html?service=passport&subservice=new-passport" class="sub-service-btn">New Passport</a>
                         <a href="services.html?service=passport&subservice=renewal" class="sub-service-btn">Renewal</a>
@@ -314,8 +318,8 @@ function loadServiceForm() {
         case 'insurance':
             formTitle = 'Insurance Service';
             if (subServiceType === 'bike') {
-                 formTitle = 'Bike Insurance';
-                 formContent = `
+                formTitle = 'Bike Insurance';
+                formContent = `
                     <form onsubmit="handleDummyFormSubmit(event, 'Bike Insurance', null)">
                         <label>Vehicle Number:</label>
                         <input type="text" placeholder="Enter bike number" required>
@@ -328,8 +332,8 @@ function loadServiceForm() {
                         <button type="submit">Get a Quote</button>
                     </form>`;
             } else if (subServiceType === 'car') {
-                 formTitle = 'Car Insurance';
-                 formContent = `
+                formTitle = 'Car Insurance';
+                formContent = `
                     <form onsubmit="handleDummyFormSubmit(event, 'Car Insurance', null)">
                         <label>Vehicle Number:</label>
                         <input type="text" placeholder="Enter car number" required>
@@ -342,8 +346,8 @@ function loadServiceForm() {
                         <button type="submit">Get a Quote</button>
                     </form>`;
             } else if (subServiceType === 'commercial-vehicle') {
-                 formTitle = 'Commercial Vehicle Insurance';
-                 formContent = `
+                formTitle = 'Commercial Vehicle Insurance';
+                formContent = `
                     <form onsubmit="handleDummyFormSubmit(event, 'Commercial Vehicle Insurance', null)">
                         <label>Vehicle Number:</label>
                         <input type="text" placeholder="Enter vehicle number" required>
@@ -352,7 +356,7 @@ function loadServiceForm() {
                         <button type="submit">Get a Quote</button>
                     </form>`;
             } else {
-                 formContent = `
+                formContent = `
                     <div class="sub-service-buttons">
                         <a href="services.html?service=insurance&subservice=bike" class="sub-service-btn">Bike</a>
                         <a href="services.html?service=insurance&subservice=car" class="sub-service-btn">Car</a>
@@ -384,7 +388,7 @@ function loadServiceForm() {
                         <button type="submit">Open Account</button>
                     </form>`;
             } else {
-                 formContent = `
+                formContent = `
                     <div class="sub-service-buttons">
                         <a href="services.html?service=account-opening&subservice=savings" class="sub-service-btn">Savings Account</a>
                         <a href="services.html?service=account-opening&subservice=current" class="sub-service-btn">Current Account</a>
