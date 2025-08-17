@@ -13,7 +13,7 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: &#39;Segoe UI&#39;, Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
     background-color: var(--background-color);
@@ -411,7 +411,7 @@ body {
     margin-top: 20px;
 }
 
-/* Receipt & Success Message */
+/* Receipt &amp; Success Message */
 .success-message-container {
     text-align: center;
     padding: 30px;
