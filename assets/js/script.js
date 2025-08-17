@@ -49,6 +49,7 @@ function handleDummyFormSubmit(event, serviceType, amount) {
 function loadServiceForm() {
     const params = new URLSearchParams(window.location.search);
     const serviceType = params.get('service');
+    const subServiceType = params.get('subservice'); // Get sub-service type from URL
     const formContainer = document.getElementById('service-form-container');
     
     if (!serviceType || !formContainer) {
@@ -102,6 +103,42 @@ function loadServiceForm() {
                     <button type="submit">Proceed with Biometrics</button>
                 </form>
                 <p class="warning-text">This is a dummy service. A real AEPS service requires a secure system and biometric device.</p>`;
+            break;
+        case 'banking':
+            formTitle = 'Banking Services';
+            if (subServiceType === 'newaccount') {
+                formContent = `
+                    <h3>New Account</h3>
+                    <form onsubmit="handleDummyFormSubmit(event, 'New Account')">
+                        <label>Full Name:</label>
+                        <input type="text" placeholder="Enter Full Name" required>
+                        <label>Mobile Number:</label>
+                        <input type="tel" placeholder="Enter Mobile Number" required>
+                        <label>Email Address:</label>
+                        <input type="email" placeholder="Enter Email" required>
+                        <button type="submit">Open New Account</button>
+                    </form>
+                `;
+            } else if (subServiceType === 'loan') {
+                formContent = `
+                    <h3>Loan Application</h3>
+                    <form onsubmit="handleDummyFormSubmit(event, 'Loan Application')">
+                        <label>Loan Amount:</label>
+                        <input type="number" placeholder="Enter Desired Loan Amount" required>
+                        <label>Purpose:</label>
+                        <input type="text" placeholder="Loan Purpose" required>
+                        <button type="submit">Apply for Loan</button>
+                    </form>
+                `;
+            } else {
+                // Default view for Banking Services, showing sub-service buttons
+                formContent = `
+                    <div class="sub-service-buttons">
+                        <a href="services.html?service=banking&subservice=newaccount" class="sub-service-btn">New Account</a>
+                        <a href="services.html?service=banking&subservice=loan" class="sub-service-btn">Loan Application</a>
+                    </div>
+                `;
+            }
             break;
         case 'pancard':
             formTitle = 'PAN Card Application';
