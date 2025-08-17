@@ -99,10 +99,28 @@ function handleDummyFormSubmit(event, serviceType, amount, fields = {}) {
     event.preventDefault();
     
     const amountNum = parseFloat(amount);
+
+    // Check if the service is a Cash Withdrawal.
+    const isCashWithdrawal = serviceType === 'AEPS Cash Withdrawal';
     
-    if (amountNum && walletBalance >= amountNum) {
-        walletBalance -= amountNum;
+    if (amountNum) {
+        if (isCashWithdrawal) {
+            // For Cash Withdrawal, money is added to the wallet.
+            // (Assuming you have enough cash to give the customer)
+            walletBalance += amountNum;
+            alert(`Rs.${amountNum} has been added to your wallet (via Cash Withdrawal).`);
+        } else if (walletBalance >= amountNum) {
+            // For all other transactions (like recharge, bill payment), money is deducted.
+            walletBalance -= amountNum;
+        } else {
+            // If it's a normal transaction and balance is insufficient.
+            alert("Insufficient balance. Please top up your wallet.");
+            return; // Stop the function here
+        }
+
         updateWalletDisplay();
+        saveWalletData(); // Save the updated balance
+        
         const transactionDetails = {
             id: Math.floor(Math.random() * 1000000),
             serviceType,
@@ -111,8 +129,7 @@ function handleDummyFormSubmit(event, serviceType, amount, fields = {}) {
         };
         addTransactionToHistory(transactionDetails);
         showSuccessMessageAndReceipt(transactionDetails);
-    } else if (amountNum && walletBalance < amountNum) {
-        alert("Insufficient balance. Please top up your wallet.");
+
     } else {
         // For services with no amount (like balance inquiry)
         const transactionDetails = {
