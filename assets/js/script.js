@@ -1,6 +1,9 @@
 // Dummy wallet balance
 let walletBalance = 500;
 
+// Dummy transaction history array
+let transactionHistory = [];
+
 // Dummy data for dropdowns (as if fetched from a database)
 const mobileOperators = ['Jio', 'Airtel', 'Vi', 'BSNL'];
 const dthOperators = ['Tata Play', 'Airtel Digital TV', 'Dish TV', 'Sun Direct'];
@@ -12,7 +15,7 @@ const states = ['Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhatt
 function updateWalletDisplay() {
     const balanceEl = document.getElementById('wallet-balance');
     if (balanceEl) {
-        balanceEl.innerText = `₹ ${walletBalance}`;
+        balanceEl.innerText = `₹ ${walletBalance.toFixed(2)}`;
     }
 }
 
@@ -30,6 +33,20 @@ function handleLogin() {
     }
 }
 
+// Function to add a transaction to the history
+function addTransactionToHistory(details) {
+    transactionHistory.push({
+        id: Math.floor(Math.random() * 1000000),
+        date: new Date().toLocaleDateString('en-IN'),
+        service: details.serviceType,
+        amount: details.amount || 'N/A',
+        status: 'Successful',
+        fields: details.fields || {}
+    });
+    // For now, we'll store in a global variable. For a real app, you'd use local storage or a backend.
+    console.log("Transaction Added:", transactionHistory);
+}
+
 // Function to show a success message and receipt
 function showSuccessMessageAndReceipt(details) {
     const formContainer = document.getElementById('service-form-container');
@@ -37,7 +54,7 @@ function showSuccessMessageAndReceipt(details) {
     const receiptContent = `
         <div class="receipt-print-area">
             <h3>Receipt</h3>
-            <p><strong>Transaction ID:</strong> ${Math.floor(Math.random() * 1000000)}</p>
+            <p><strong>Transaction ID:</strong> ${details.id}</p>
             <p><strong>Date:</strong> ${today}</p>
             <p><strong>Service:</strong> ${details.serviceType}</p>
             <p><strong>Amount:</strong> ₹ ${details.amount || 'N/A'}</p>
@@ -63,16 +80,31 @@ function showSuccessMessageAndReceipt(details) {
 function handleDummyFormSubmit(event, serviceType, amount, fields = {}) {
     event.preventDefault();
     
-    if (amount) {
-        if (walletBalance >= amount) {
-            walletBalance -= amount;
-            updateWalletDisplay();
-            showSuccessMessageAndReceipt({serviceType, amount, fields});
-        } else {
-            alert("Insufficient balance. Please top up your wallet.");
-        }
+    const amountNum = parseFloat(amount);
+    
+    if (amountNum && walletBalance >= amountNum) {
+        walletBalance -= amountNum;
+        updateWalletDisplay();
+        const transactionDetails = {
+            id: Math.floor(Math.random() * 1000000),
+            serviceType,
+            amount: amountNum,
+            fields
+        };
+        addTransactionToHistory(transactionDetails);
+        showSuccessMessageAndReceipt(transactionDetails);
+    } else if (amountNum && walletBalance < amountNum) {
+        alert("Insufficient balance. Please top up your wallet.");
     } else {
-        showSuccessMessageAndReceipt({serviceType, amount: 'N/A', fields});
+        // For services with no amount (like balance inquiry)
+        const transactionDetails = {
+            id: Math.floor(Math.random() * 1000000),
+            serviceType,
+            amount: 'N/A',
+            fields
+        };
+        addTransactionToHistory(transactionDetails);
+        showSuccessMessageAndReceipt(transactionDetails);
     }
 }
 
@@ -416,6 +448,31 @@ function loadServiceForm() {
     updateWalletDisplay();
 }
 
+// Function to load transaction history on dashboard
+function loadTransactionHistory() {
+    const historyContainer = document.getElementById('transaction-history-list');
+    if (!historyContainer) return;
+
+    if (transactionHistory.length === 0) {
+        historyContainer.innerHTML = '<p>No transactions found.</p>';
+        return;
+    }
+
+    let historyHtml = '<ul>';
+    transactionHistory.forEach(transaction => {
+        historyHtml += `
+            <li>
+                <strong>Service:</strong> ${transaction.service} | 
+                <strong>Amount:</strong> ₹ ${transaction.amount} | 
+                <strong>Date:</strong> ${transaction.date} | 
+                <strong>ID:</strong> ${transaction.id}
+            </li>
+        `;
+    });
+    historyHtml += '</ul>';
+    historyContainer.innerHTML = historyHtml;
+}
+
 // Event listeners for different pages
 document.addEventListener('DOMContentLoaded', () => {
     if (document.body.id === 'login-page') {
@@ -435,13 +492,16 @@ document.addEventListener('DOMContentLoaded', () => {
         if (welcomeEl) {
             welcomeEl.innerText = `Welcome, ${username}!`;
         }
-
+        
+        // Load wallet balance and transaction history on dashboard page
         updateWalletDisplay();
+        loadTransactionHistory();
+
         const topupButton = document.getElementById('topup-button');
         if (topupButton) {
             topupButton.addEventListener('click', () => {
                 const topupAmount = prompt("Enter amount to top up:");
-                const amount = parseInt(topupAmount);
+                const amount = parseFloat(topupAmount);
                 if (!isNaN(amount) && amount > 0) {
                     walletBalance += amount;
                     updateWalletDisplay();
