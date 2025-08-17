@@ -267,3 +267,82 @@ body {
 .form-container p {
     text-align: center;
     margin-top: 20px;
+    font-size: 14px;
+}
+.form-container p a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Sub-service Buttons on services.html */
+.sub-service-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.sub-service-btn {
+    background-color: #f0f0f0;
+    color: var(--primary-color);
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    flex-grow: 1;
+    text-align: center;
+    min-width: 120px;
+}
+.sub-service-btn:hover {
+    background-color: #e0e0e0;
+}
+.form-content {
+    margin-top: 20px;
+}
+
+/* Receipt & Success Message */
+.success-message-container {
+    text-align: center;
+    padding: 30px;
+    background-color: #e8f5e9;
+    border: 2px solid #4caf50;
+    border-radius: 10px;
+}
+.success-message-container h3 {
+    color: #4caf50;
+}
+.receipt {
+    margin-top: 20px;
+    border: 1px dashed #ccc;
+    padding: 15px;
+    text-align: left;
+}
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    .receipt-print-area, .receipt-print-area * {
+        visibility: visible;
+    }
+    .receipt-print-area {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+}
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
