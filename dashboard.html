@@ -18,25 +18,56 @@
             <a href="services.html">All Services</a>
             <a href="contact.html">Contact</a>
         </div>
-        <a href="index.html" class="logout-btn">Logout</a>
-    </header>
-
-    <header class="dashboard-header">
-        <div class="container" style="display: flex; justify-content: space-between; align-items: center; padding: 0;">
-            <h1 id="welcome-user-name">Welcome, User!</h1>
+        <div class="wallet-nav-section">
             <div class="wallet-balance-display">
-                <p>Current Balance:</p>
+                <p>Balance:</p>
                 <h3 id="wallet-balance">₹ 0</h3>
             </div>
+            <a href="#" id="topup-button" class="topup-btn">Top-up</a>
+            <a href="index.html" class="logout-btn">Logout</a>
         </div>
     </header>
-    
+
     <main class="container">
         <div class="section-card">
-            <h2>Your Dashboard</h2>
+            <h1 id="welcome-user-name" style="text-align: center;">Welcome, User!</h1>
             <p>Welcome to your personal space. Here you can manage your account, view your balance, and perform quick actions.</p>
         </div>
-        <button id="topup-button" class="cta-btn" style="width: 100%; margin-top: 20px;">Top-up Wallet</button>
+        
+        <div class="services-grid">
+            <a href="services.html?service=recharge&subservice=mobile" class="service-item">
+                <i class="fas fa-mobile-alt"></i>
+                <p>Mobile Recharge</p>
+            </a>
+            <a href="services.html?service=billpay" class="service-item">
+                <i class="fas fa-bolt"></i>
+                <p>Bill Payments</p>
+            </a>
+            <a href="services.html?service=recharge&subservice=dth" class="service-item">
+                <i class="fas fa-tv"></i>
+                <p>DTH Recharge</p>
+            </a>
+            <a href="services.html?service=aeps" class="service-item">
+                <i class="fas fa-fingerprint"></i>
+                <p>AEPS</p>
+            </a>
+            <a href="services.html?service=pancard" class="service-item">
+                <i class="fas fa-id-card"></i>
+                <p>PAN Card</p>
+            </a>
+            <a href="services.html?service=passport" class="service-item">
+                <i class="fas fa-passport"></i>
+                <p>Passport</p>
+            </a>
+            <a href="services.html?service=insurance" class="service-item">
+                <i class="fas fa-car-crash"></i>
+                <p>Insurance</p>
+            </a>
+            <a href="services.html?service=account-opening" class="service-item">
+                <i class="fas fa-user-plus"></i>
+                <p>Account Opening</p>
+            </a>
+        </div>
     </main>
 
     <footer class="footer">
