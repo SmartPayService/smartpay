@@ -6,6 +6,7 @@ const mobileOperators = ['Jio', 'Airtel', 'Vi', 'BSNL'];
 const dthOperators = ['Tata Play', 'Airtel Digital TV', 'Dish TV', 'Sun Direct'];
 const billerCategories = ['Electricity', 'Water', 'Gas', 'Broadband'];
 const bankNames = ['State Bank of India', 'HDFC Bank', 'ICICI Bank', 'Axis Bank'];
+const states = ['Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh', 'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jharkhand', 'Karnataka', 'Kerala', 'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland', 'Odisha', 'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu', 'Telangana', 'Tripura', 'Uttar Pradesh', 'Uttarakhand', 'West Bengal'];
 
 // Function to update the wallet balance display
 function updateWalletDisplay() {
@@ -105,9 +106,9 @@ function loadServiceForm() {
                     <i class="fas fa-bolt"></i>
                     <p>Bill Payments</p>
                 </a>
-                <a href="services.html?service=banking" class="service-item">
-                    <i class="fas fa-university"></i>
-                    <p>Banking</p>
+                <a href="services.html?service=aeps" class="service-item">
+                    <i class="fas fa-fingerprint"></i>
+                    <p>AEPS</p>
                 </a>
                 <a href="services.html?service=pancard" class="service-item">
                     <i class="fas fa-id-card"></i>
@@ -116,6 +117,14 @@ function loadServiceForm() {
                 <a href="services.html?service=passport" class="service-item">
                     <i class="fas fa-passport"></i>
                     <p>Passport</p>
+                </a>
+                <a href="services.html?service=insurance" class="service-item">
+                    <i class="fas fa-car-crash"></i>
+                    <p>Insurance</p>
+                </a>
+                <a href="services.html?service=account-opening" class="service-item">
+                    <i class="fas fa-user-plus"></i>
+                    <p>Account Opening</p>
                 </a>
             </div>
         `;
@@ -166,9 +175,11 @@ function loadServiceForm() {
             if (subServiceType) {
                 formTitle = `${subServiceType} Bill Payment`;
                 formContent = `
-                    <form onsubmit="handleDummyFormSubmit(event, '${subServiceType} Bill Payment', 850, {'Customer ID': this.customer_id.value, 'Biller Type': '${subServiceType}'})">
+                    <form onsubmit="handleDummyFormSubmit(event, '${subServiceType} Bill Payment', 850, {'Customer ID': this.customer_id.value, 'State': this.state.value, 'Biller Type': '${subServiceType}'})">
                         <label>Customer ID:</label>
                         <input type="text" name="customer_id" placeholder="Enter Customer/Bill ID" required>
+                        <label>State:</label>
+                        ${createDropdown('state', states)}
                         <label>Amount:</label>
                         <input type="number" name="amount" value="850" readonly>
                         <button type="submit">Pay ₹850</button>
@@ -181,47 +192,67 @@ function loadServiceForm() {
                 `;
             }
             break;
-        case 'banking':
-            formTitle = 'Banking Services';
-            if (subServiceType === 'newaccount') {
-                formTitle = 'New Account Application';
+        case 'aeps':
+            formTitle = 'AEPS (Aadhaar Enabled Payment System)';
+            if (subServiceType === 'cash-withdrawal') {
+                formTitle = 'Cash Withdrawal';
                 formContent = `
-                    <form onsubmit="handleDummyFormSubmit(event, 'New Account', null, {'Full Name': this.full_name.value, 'Mobile No.': this.mobile_no.value})">
-                        <label>Full Name:</label>
-                        <input type="text" name="full_name" placeholder="Enter Full Name" required>
-                        <label>Mobile Number:</label>
-                        <input type="tel" name="mobile_no" placeholder="Enter Mobile Number" required>
-                        <label>Email Address:</label>
-                        <input type="email" placeholder="Enter Email" required>
-                        <button type="submit">Open New Account</button>
-                    </form>
-                `;
+                    <form onsubmit="handleDummyFormSubmit(event, 'AEPS Cash Withdrawal', this.amount.value, {'Aadhaar No.': this.aadhaar_no.value, 'Bank': this.bank_name.value})">
+                        <label>Aadhaar Number:</label>
+                        <input type="text" name="aadhaar_no" placeholder="Enter Aadhaar Number" required>
+                        <label>Bank Name:</label>
+                        ${createDropdown('bank_name', bankNames)}
+                        <label>Amount:</label>
+                        <input type="number" name="amount" placeholder="Enter amount to withdraw" required>
+                        <button type="submit">Withdraw Cash</button>
+                    </form>`;
+            } else if (subServiceType === 'balance-inquiry') {
+                 formTitle = 'Balance Inquiry';
+                 formContent = `
+                    <form onsubmit="handleDummyFormSubmit(event, 'AEPS Balance Inquiry', null, {'Aadhaar No.': this.aadhaar_no.value, 'Bank': this.bank_name.value})">
+                        <label>Aadhaar Number:</label>
+                        <input type="text" name="aadhaar_no" placeholder="Enter Aadhaar Number" required>
+                        <label>Bank Name:</label>
+                        ${createDropdown('bank_name', bankNames)}
+                        <button type="submit">Check Balance</button>
+                    </form>`;
+            } else if (subServiceType === 'deposit') {
+                 formTitle = 'Cash Deposit';
+                 formContent = `
+                    <form onsubmit="handleDummyFormSubmit(event, 'AEPS Cash Deposit', this.amount.value, {'Aadhaar No.': this.aadhaar_no.value, 'Bank': this.bank_name.value})">
+                        <label>Aadhaar Number:</label>
+                        <input type="text" name="aadhaar_no" placeholder="Enter Aadhaar Number" required>
+                        <label>Bank Name:</label>
+                        ${createDropdown('bank_name', bankNames)}
+                        <label>Amount:</label>
+                        <input type="number" name="amount" placeholder="Enter amount to deposit" required>
+                        <button type="submit">Deposit Cash</button>
+                    </form>`;
             } else if (subServiceType === 'ministatement') {
                 formTitle = 'Mini Statement';
                 formContent = `
-                    <form onsubmit="handleDummyFormSubmit(event, 'Mini Statement', null, {'Aadhaar Number': this.aadhaar_no.value, 'Bank': this.bank_name.value})">
+                    <form onsubmit="handleDummyFormSubmit(event, 'AEPS Mini Statement', null, {'Aadhaar No.': this.aadhaar_no.value, 'Bank': this.bank_name.value})">
                         <label>Aadhaar Number:</label>
                         <input type="text" name="aadhaar_no" placeholder="Enter Aadhaar Number" required>
                         <label>Bank Name:</label>
                         ${createDropdown('bank_name', bankNames)}
                         <button type="submit">Get Mini Statement</button>
-                    </form>
-                `;
+                    </form>`;
             } else {
                 formContent = `
                     <div class="sub-service-buttons">
-                        <a href="services.html?service=banking&subservice=newaccount" class="sub-service-btn">New Account</a>
-                        <a href="services.html?service=banking&subservice=ministatement" class="sub-service-btn">Mini Statement</a>
-                        <a href="services.html?service=banking&subservice=deposit" class="sub-service-btn">Cash Deposit</a>
-                        <a href="services.html?service=banking&subservice=withdrawal" class="sub-service-btn">Cash Withdrawal</a>
+                        <a href="services.html?service=aeps&subservice=cash-withdrawal" class="sub-service-btn">Cash Withdrawal</a>
+                        <a href="services.html?service=aeps&subservice=balance-inquiry" class="sub-service-btn">Balance Inquiry</a>
+                        <a href="services.html?service=aeps&subservice=deposit" class="sub-service-btn">Cash Deposit</a>
+                        <a href="services.html?service=aeps&subservice=ministatement" class="sub-service-btn">Mini Statement</a>
                     </div>
                 `;
             }
             break;
         case 'pancard':
-            formTitle = 'PAN Card Application';
-            if (subServiceType === 'newpan') {
-                formTitle = 'New PAN Card';
+            formTitle = 'PAN Card Service';
+            if (subServiceType === 'new-pan') {
+                formTitle = 'New PAN Card Application';
                 formContent = `
                     <form onsubmit="handleDummyFormSubmit(event, 'New PAN Card', null)">
                         <label>Full Name:</label>
@@ -230,7 +261,7 @@ function loadServiceForm() {
                         <input type="date" required>
                         <button type="submit">Submit Application</button>
                     </form>`;
-            } else if (subServiceType === 'correction') {
+            } else if (subServiceType === 'correction-pan') {
                 formTitle = 'PAN Card Correction';
                 formContent = `
                     <form onsubmit="handleDummyFormSubmit(event, 'PAN Card Correction', null)">
@@ -243,15 +274,15 @@ function loadServiceForm() {
             } else {
                  formContent = `
                     <div class="sub-service-buttons">
-                        <a href="services.html?service=pancard&subservice=newpan" class="sub-service-btn">New PAN Card</a>
-                        <a href="services.html?service=pancard&subservice=correction" class="sub-service-btn">Correction</a>
+                        <a href="services.html?service=pancard&subservice=new-pan" class="sub-service-btn">New PAN Card</a>
+                        <a href="services.html?service=pancard&subservice=correction-pan" class="sub-service-btn">Correction PAN</a>
                     </div>
                 `;
             }
             break;
         case 'passport':
-            formTitle = 'Passport Application';
-            if (subServiceType === 'newpassport') {
+            formTitle = 'Passport Service';
+            if (subServiceType === 'new-passport') {
                  formTitle = 'New Passport';
                  formContent = `
                     <form onsubmit="handleDummyFormSubmit(event, 'New Passport', null)">
@@ -274,60 +305,73 @@ function loadServiceForm() {
             } else {
                  formContent = `
                     <div class="sub-service-buttons">
-                        <a href="services.html?service=passport&subservice=newpassport" class="sub-service-btn">New Passport</a>
+                        <a href="services.html?service=passport&subservice=new-passport" class="sub-service-btn">New Passport</a>
                         <a href="services.html?service=passport&subservice=renewal" class="sub-service-btn">Renewal</a>
                     </div>
                 `;
             }
             break;
-        default:
-            formTitle = 'Select a Service';
-            formContent = '<p>Please select a service from the list to view its details and form.</p>';
-    }
-
-    formContainer.innerHTML = `
-        <h2>${formTitle}</h2>
-        <div class="form-content">${formContent}</div>
-    `;
-    updateWalletDisplay();
-}
-
-// Event listeners for different pages
-document.addEventListener('DOMContentLoaded', () => {
-    if (document.body.id === 'login-page') {
-        document.querySelector('.form-container form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            handleLogin();
-        });
-    }
-
-    if (document.body.id === 'dashboard-page') {
-        const username = localStorage.getItem('loggedInUser') || 'User';
-        const welcomeEl = document.getElementById('welcome-user-name');
-        if (welcomeEl) {
-            welcomeEl.innerText = `Welcome, ${username}!`;
-        }
-
-        updateWalletDisplay();
-        const topupButton = document.getElementById('topup-button');
-        if (topupButton) {
-            topupButton.addEventListener('click', () => {
-                const topupAmount = prompt("Enter amount to top up:");
-                const amount = parseInt(topupAmount);
-                if (!isNaN(amount) && amount > 0) {
-                    walletBalance += amount;
-                    updateWalletDisplay();
-                    alert(`₹${amount} has been added to your wallet!`);
-                } else if (amount <= 0) {
-                    alert("Please enter a valid amount greater than 0.");
-                } else {
-                    alert("Top-up cancelled.");
-                }
-            });
-        }
-    }
-    
-    if (document.body.id === 'services-page') {
-        loadServiceForm();
-    }
-});
+        case 'insurance':
+            formTitle = 'Insurance Service';
+            if (subServiceType === 'bike') {
+                 formTitle = 'Bike Insurance';
+                 formContent = `
+                    <form onsubmit="handleDummyFormSubmit(event, 'Bike Insurance', null)">
+                        <label>Vehicle Number:</label>
+                        <input type="text" placeholder="Enter bike number" required>
+                        <label>Policy Type:</label>
+                        <select required>
+                            <option value="">Select Type</option>
+                            <option value="Third-Party">Third-Party</option>
+                            <option value="Comprehensive">Comprehensive</option>
+                        </select>
+                        <button type="submit">Get a Quote</button>
+                    </form>`;
+            } else if (subServiceType === 'car') {
+                 formTitle = 'Car Insurance';
+                 formContent = `
+                    <form onsubmit="handleDummyFormSubmit(event, 'Car Insurance', null)">
+                        <label>Vehicle Number:</label>
+                        <input type="text" placeholder="Enter car number" required>
+                        <label>Policy Type:</label>
+                        <select required>
+                            <option value="">Select Type</option>
+                            <option value="Third-Party">Third-Party</option>
+                            <option value="Comprehensive">Comprehensive</option>
+                        </select>
+                        <button type="submit">Get a Quote</button>
+                    </form>`;
+            } else if (subServiceType === 'commercial-vehicle') {
+                 formTitle = 'Commercial Vehicle Insurance';
+                 formContent = `
+                    <form onsubmit="handleDummyFormSubmit(event, 'Commercial Vehicle Insurance', null)">
+                        <label>Vehicle Number:</label>
+                        <input type="text" placeholder="Enter vehicle number" required>
+                        <label>Vehicle Type:</label>
+                        <input type="text" placeholder="e.g., Truck, Bus" required>
+                        <button type="submit">Get a Quote</button>
+                    </form>`;
+            } else {
+                 formContent = `
+                    <div class="sub-service-buttons">
+                        <a href="services.html?service=insurance&subservice=bike" class="sub-service-btn">Bike</a>
+                        <a href="services.html?service=insurance&subservice=car" class="sub-service-btn">Car</a>
+                        <a href="services.html?service=insurance&subservice=commercial-vehicle" class="sub-service-btn">Commercial Vehicle</a>
+                    </div>
+                `;
+            }
+            break;
+        case 'account-opening':
+            formTitle = 'Account Opening Service';
+            if (subServiceType === 'savings') {
+                formTitle = 'Savings Account';
+                formContent = `
+                    <form onsubmit="handleDummyFormSubmit(event, 'Savings Account Opening', null)">
+                        <label>Full Name:</label>
+                        <input type="text" placeholder="Enter your full name" required>
+                        <label>Mobile Number:</label>
+                        <input type="tel" placeholder="Enter mobile number" required>
+                        <button type="submit">Open Account</button>
+                    </form>`;
+            } else if (subServiceType === 'current') {
+                formTitle = '
