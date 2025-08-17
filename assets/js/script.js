@@ -374,4 +374,72 @@ function loadServiceForm() {
                         <button type="submit">Open Account</button>
                     </form>`;
             } else if (subServiceType === 'current') {
-                formTitle = '
+                formTitle = 'Current Account';
+                formContent = `
+                    <form onsubmit="handleDummyFormSubmit(event, 'Current Account Opening', null)">
+                        <label>Business Name:</label>
+                        <input type="text" placeholder="Enter business name" required>
+                        <label>Contact Person:</label>
+                        <input type="text" placeholder="Enter your name" required>
+                        <button type="submit">Open Account</button>
+                    </form>`;
+            } else {
+                 formContent = `
+                    <div class="sub-service-buttons">
+                        <a href="services.html?service=account-opening&subservice=savings" class="sub-service-btn">Savings Account</a>
+                        <a href="services.html?service=account-opening&subservice=current" class="sub-service-btn">Current Account</a>
+                    </div>
+                `;
+            }
+            break;
+        default:
+            formTitle = 'Select a Service';
+            formContent = '<p>Please select a service from the list to view its details and form.</p>';
+    }
+
+    formContainer.innerHTML = `
+        <h2>${formTitle}</h2>
+        <div class="form-content">${formContent}</div>
+    `;
+    updateWalletDisplay();
+}
+
+// Event listeners for different pages
+document.addEventListener('DOMContentLoaded', () => {
+    if (document.body.id === 'login-page') {
+        document.querySelector('.form-container form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            handleLogin();
+        });
+    }
+
+    if (document.body.id === 'dashboard-page') {
+        const username = localStorage.getItem('loggedInUser') || 'User';
+        const welcomeEl = document.getElementById('welcome-user-name');
+        if (welcomeEl) {
+            welcomeEl.innerText = `Welcome, ${username}!`;
+        }
+
+        updateWalletDisplay();
+        const topupButton = document.getElementById('topup-button');
+        if (topupButton) {
+            topupButton.addEventListener('click', () => {
+                const topupAmount = prompt("Enter amount to top up:");
+                const amount = parseInt(topupAmount);
+                if (!isNaN(amount) && amount > 0) {
+                    walletBalance += amount;
+                    updateWalletDisplay();
+                    alert(`₹${amount} has been added to your wallet!`);
+                } else if (amount <= 0) {
+                    alert("Please enter a valid amount greater than 0.");
+                } else {
+                    alert("Top-up cancelled.");
+                }
+            });
+        }
+    }
+    
+    if (document.body.id === 'services-page') {
+        loadServiceForm();
+    }
+});
