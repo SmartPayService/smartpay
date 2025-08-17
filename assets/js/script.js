@@ -23,33 +23,57 @@ function handleLogin() {
     }
 }
 
+// Function to show a success message and receipt
+function showSuccessMessageAndReceipt(details) {
+    const formContainer = document.getElementById('service-form-container');
+    const today = new Date().toLocaleDateString('en-IN');
+    const receiptContent = `
+        <div class="receipt-print-area">
+            <h3>Receipt</h3>
+            <p><strong>Transaction ID:</strong> ${Math.floor(Math.random() * 1000000)}</p>
+            <p><strong>Date:</strong> ${today}</p>
+            <p><strong>Service:</strong> ${details.serviceType}</p>
+            <p><strong>Amount:</strong> ₹ ${details.amount || 'N/A'}</p>
+            <p><strong>Status:</strong> Successful</p>
+            ${details.fields ? Object.keys(details.fields).map(key => `<p><strong>${key}:</strong> ${details.fields[key]}</p>`).join('') : ''}
+        </div>
+    `;
+
+    formContainer.innerHTML = `
+        <div class="success-message-container">
+            <h3>Transaction Successful!</h3>
+            <p>Your request has been processed successfully.</p>
+            <div class="receipt">
+                ${receiptContent}
+            </div>
+            <button onclick="window.print()" class="cta-btn" style="margin-top: 20px;">Print Receipt</button>
+            <a href="dashboard.html" class="cta-btn" style="margin-top: 20px;">Go to Dashboard</a>
+        </div>
+    `;
+}
+
 // Function to handle dummy form submissions
-function handleDummyFormSubmit(event, serviceType, amount) {
+function handleDummyFormSubmit(event, serviceType, amount, fields = {}) {
     event.preventDefault();
     
     if (amount) {
         if (walletBalance >= amount) {
             walletBalance -= amount;
             updateWalletDisplay();
-            alert(`Payment of ₹${amount} for ${serviceType} was successful! Your new balance is ₹${walletBalance}.`);
+            showSuccessMessageAndReceipt({serviceType, amount, fields});
         } else {
             alert("Insufficient balance. Please top up your wallet.");
         }
     } else {
-        alert(`Dummy submission for ${serviceType} successful! We will process your request shortly.`);
+        showSuccessMessageAndReceipt({serviceType, amount: 'N/A', fields});
     }
-    
-    // Redirect to dashboard after a successful transaction
-    setTimeout(() => {
-        window.location.href = "dashboard.html";
-    }, 1000);
 }
 
 // Function to update the service form on the services page
 function loadServiceForm() {
     const params = new URLSearchParams(window.location.search);
     const serviceType = params.get('service');
-    const subServiceType = params.get('subservice'); // Get sub-service type from URL
+    const subServiceType = params.get('subservice');
     const formContainer = document.getElementById('service-form-container');
     
     if (!serviceType || !formContainer) {
@@ -61,15 +85,51 @@ function loadServiceForm() {
 
     switch(serviceType) {
         case 'recharge':
-            formTitle = 'Mobile Recharge';
-            formContent = `
-                <form onsubmit="handleDummyFormSubmit(event, 'Mobile Recharge', 199)">
-                    <label>Mobile Number:</label>
-                    <input type="tel" placeholder="Enter 10-digit mobile number" required>
-                    <label>Amount:</label>
-                    <input type="number" value="199" readonly>
-                    <button type="submit">Pay ₹199</button>
-                </form>`;
+            formTitle = 'Recharge Services';
+            if (subServiceType === 'mobile') {
+                formTitle = 'Mobile Recharge';
+                formContent = `
+                    <form onsubmit="handleDummyFormSubmit(event, 'Mobile Recharge', 199, {'Mobile No.': this.mobile_no.value, 'Operator': this.operator.value})">
+                        <label>Mobile Number:</label>
+                        <input type="tel" name="mobile_no" placeholder="Enter 10-digit mobile number" required>
+                        <label>Operator:</label>
+                        <select name="operator" required>
+                            <option value="">Select Operator</option>
+                            <option value="Jio">Jio</option>
+                            <option value="Airtel">Airtel</option>
+                            <option value="Vi">Vi</option>
+                        </select>
+                        <label>Amount:</label>
+                        <input type="number" name="amount" value="199" readonly>
+                        <button type="submit">Pay ₹199</button>
+                    </form>`;
+            } else if (subServiceType === 'dth') {
+                formTitle = 'DTH Recharge';
+                formContent = `
+                    <form onsubmit="handleDummyFormSubmit(event, 'DTH Recharge', 300, {'Operator ID': this.dth_id.value, 'Mobile No.': this.mobile_no.value})">
+                        <label>Operator ID:</label>
+                        <input type="text" name="dth_id" placeholder="Enter Operator ID" required>
+                        <label>Mobile Number:</label>
+                        <input type="tel" name="mobile_no" placeholder="Enter Mobile Number" required>
+                        <label>Operator:</label>
+                        <select name="operator" required>
+                            <option value="">Select Operator</option>
+                            <option value="Tata Play">Tata Play</option>
+                            <option value="Airtel Digital TV">Airtel Digital TV</option>
+                            <option value="Dish TV">Dish TV</option>
+                        </select>
+                        <label>Amount:</label>
+                        <input type="number" name="amount" value="300" readonly>
+                        <button type="submit">Pay ₹300</button>
+                    </form>`;
+            } else {
+                formContent = `
+                    <div class="sub-service-buttons">
+                        <a href="services.html?service=recharge&subservice=mobile" class="sub-service-btn">Mobile</a>
+                        <a href="services.html?service=recharge&subservice=dth" class="sub-service-btn">DTH</a>
+                    </div>
+                `;
+            }
             break;
         case 'billpay':
             formTitle = 'Bill Payments';
@@ -107,6 +167,7 @@ function loadServiceForm() {
         case 'banking':
             formTitle = 'Banking Services';
             if (subServiceType === 'newaccount') {
+                formTitle = 'New Account';
                 formContent = `
                     <h3>New Account</h3>
                     <form onsubmit="handleDummyFormSubmit(event, 'New Account')">
@@ -120,6 +181,7 @@ function loadServiceForm() {
                     </form>
                 `;
             } else if (subServiceType === 'loan') {
+                formTitle = 'Loan Application';
                 formContent = `
                     <h3>Loan Application</h3>
                     <form onsubmit="handleDummyFormSubmit(event, 'Loan Application')">
@@ -131,7 +193,6 @@ function loadServiceForm() {
                     </form>
                 `;
             } else {
-                // Default view for Banking Services, showing sub-service buttons
                 formContent = `
                     <div class="sub-service-buttons">
                         <a href="services.html?service=banking&subservice=newaccount" class="sub-service-btn">New Account</a>
