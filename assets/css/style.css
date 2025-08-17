@@ -168,23 +168,43 @@ body {
 
 /* Dashboard Specific Styles */
 .dashboard-header {
-    text-align: center;
-    padding: 50px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 20px;
     background-color: #e9f0f5;
     border-radius: 10px;
     margin-top: 20px;
     margin-bottom: 30px;
     animation: slideInFromTop 0.8s ease-in-out;
 }
+.dashboard-header h1 {
+    font-size: 28px;
+    margin: 0;
+}
 .wallet-balance-display {
-    display: inline-block;
-    padding: 20px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 10px 15px;
     border-radius: 10px;
     background-color: var(--card-background);
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 .wallet-balance-display h3 {
     color: var(--secondary-color);
+    margin: 0;
+    font-size: 20px;
+}
+.wallet-balance-display p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--light-text-color);
+}
+#topup-button {
+    margin-top: 10px;
+    font-size: 14px;
+    padding: 8px 15px;
 }
 
 /* Footer */
