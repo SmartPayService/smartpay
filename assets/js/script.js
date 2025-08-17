@@ -1,8 +1,26 @@
-// Dummy wallet balance
-let walletBalance = 500;
+// Function to save wallet data to localStorage
+function saveWalletData() {
+    localStorage.setItem('walletBalance', JSON.stringify(walletBalance));
+    localStorage.setItem('transactionHistory', JSON.stringify(transactionHistory));
+}
 
-// Dummy transaction history array
-let transactionHistory = [];
+// Function to load wallet data from localStorage or set initial values
+function loadWalletData() {
+    const savedBalance = localStorage.getItem('walletBalance');
+    const savedHistory = localStorage.getItem('transactionHistory');
+
+    if (savedBalance !== null) {
+        walletBalance = JSON.parse(savedBalance);
+    } else {
+        walletBalance = 500; // Initial dummy balance
+    }
+
+    if (savedHistory !== null) {
+        transactionHistory = JSON.parse(savedHistory);
+    } else {
+        transactionHistory = []; // Initial empty history
+    }
+}
 
 // Dummy data for dropdowns (as if fetched from a database)
 const mobileOperators = ['Jio', 'Airtel', 'Vi', 'BSNL'];
@@ -43,7 +61,7 @@ function addTransactionToHistory(details) {
         status: 'Successful',
         fields: details.fields || {}
     });
-    // For now, we'll store in a global variable. For a real app, you'd use local storage or a backend.
+    saveWalletData(); // Save data after every transaction
     console.log("Transaction Added:", transactionHistory);
 }
 
@@ -112,8 +130,8 @@ function handleDummyFormSubmit(event, serviceType, amount, fields = {}) {
 function createDropdown(name, options) {
     let selectHtml = `<select name="${name}" required><option value="">Select ${name.replace('_', ' ')}</option>`;
     options.forEach(option => {
-        selectHtml += `<option value="${option}">${option}</option>`;
-    });
+            selectHtml += `<option value="${option}">${option}</option>`;
+        });
     selectHtml += `</select>`;
     return selectHtml;
 }
@@ -458,14 +476,13 @@ function loadTransactionHistory() {
         return;
     }
 
-    let historyHtml = '<ul>';
-    transactionHistory.forEach(transaction => {
+    let historyHtml = '<ul class="history-list">';
+    transactionHistory.slice().reverse().forEach(transaction => { // Show most recent first
         historyHtml += `
-            <li>
-                <strong>Service:</strong> ${transaction.service} | 
-                <strong>Amount:</strong> ₹ ${transaction.amount} | 
-                <strong>Date:</strong> ${transaction.date} | 
-                <strong>ID:</strong> ${transaction.id}
+            <li class="history-item">
+                <span class="history-service">${transaction.service}</span>
+                <span class="history-amount">₹ ${parseFloat(transaction.amount).toFixed(2) || 'N/A'}</span>
+                <span class="history-date">${transaction.date}</span>
             </li>
         `;
     });
@@ -475,6 +492,8 @@ function loadTransactionHistory() {
 
 // Event listeners for different pages
 document.addEventListener('DOMContentLoaded', () => {
+    loadWalletData(); // Load data from localStorage on every page load
+    
     if (document.body.id === 'login-page') {
         document.querySelector('.form-container form').addEventListener('submit', (e) => {
             e.preventDefault();
@@ -505,6 +524,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (!isNaN(amount) && amount > 0) {
                     walletBalance += amount;
                     updateWalletDisplay();
+                    saveWalletData(); // Save data after top-up
                     alert(`₹${amount} has been added to your wallet!`);
                 } else if (amount <= 0) {
                     alert("Please enter a valid amount greater than 0.");
