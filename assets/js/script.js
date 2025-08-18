@@ -114,7 +114,16 @@ async function handleDummyFormSubmit(event, serviceType, amount, fields = {}) {
         return;
     }
 
-    const amountNum = parseFloat(amount) || 0;
+    let amountNum = parseFloat(amount) || 0;
+    
+    // Override amount for forms where it's a user input
+    if (serviceType === 'AEPS Cash Withdrawal' || serviceType === 'AEPS Cash Deposit' || serviceType === 'Wallet Top-up') {
+        const form = event.target;
+        const inputAmount = form.querySelector('[name="amount"]');
+        if (inputAmount) {
+            amountNum = parseFloat(inputAmount.value) || 0;
+        }
+    }
     
     try {
         const response = await fetch(`${API_URL}/transaction`, {
@@ -146,6 +155,7 @@ async function handleDummyFormSubmit(event, serviceType, amount, fields = {}) {
     } catch (error) {
         console.error('Transaction error:', error);
         alert("Could not complete the transaction. Server error.");
+        loadWalletData();
     }
 }
 
@@ -291,7 +301,7 @@ function loadTransactionHistory() {
     let historyHtml = '<ul class="history-list">';
     transactionHistory.slice().reverse().forEach(transaction => {
         const amountDisplay = (transaction.amount === 'N/A') ? 'N/A' : `₹ ${parseFloat(transaction.amount).toFixed(2)}`;
-        const commissionDisplay = transaction.commission ? ` (+₹${parseFloat(transaction.commission).toFixed(2)} Commission)` : '';
+        const commissionDisplay = transaction.commission && parseFloat(transaction.commission) > 0 ? ` (+₹${parseFloat(transaction.commission).toFixed(2)} Commission)` : '';
         historyHtml += `
             <li class="history-item">
                 <span class="history-service">${transaction.service}</span>
