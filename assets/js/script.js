@@ -365,18 +365,15 @@ document.addEventListener('DOMContentLoaded', () => {
                         const result = await response.json();
 
                         if (response.ok) {
-                            walletBalance = result.newBalance;
-                            updateWalletDisplay();
-                            loadTransactionHistory();
                             alert(`₹${amount} has been added to your wallet!`);
+                            // Redirect to dashboard to force a full refresh and show correct balance
+                            window.location.href = "dashboard.html"; 
                         } else {
                             alert(result.message);
                         }
                     } catch (error) {
                         console.error('Top-up error:', error);
                         alert("Could not complete the top-up. Server error.");
-                        
-                        // Retry loading wallet data in case of error
                         loadWalletData();
                     }
                 } else if (amount <= 0) {
