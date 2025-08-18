@@ -20,10 +20,10 @@ async function handleLogin() {
             if (response.ok) {
                 const userData = await response.json();
                 localStorage.setItem('loggedInUser', username);
-                // The dashboard page will now load data from the API
                 window.location.href = "dashboard.html";
             } else {
-                alert("Login failed. Please try again.");
+                const errorData = await response.json();
+                alert(errorData.message);
             }
         } catch (error) {
             console.error('Login error:', error);
@@ -31,6 +31,32 @@ async function handleLogin() {
         }
     } else {
         alert("Please enter both a username and a password.");
+    }
+}
+
+// Function to handle registration
+async function handleRegistration() {
+    const username = document.getElementById('reg-username').value;
+    const password = document.getElementById('reg-password').value;
+
+    try {
+        const response = await fetch(`${API_URL}/register`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password })
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            alert(result.message);
+            window.location.href = "login.html"; // Redirect to login page
+        } else {
+            alert(result.message);
+        }
+    } catch (error) {
+        console.error('Registration error:', error);
+        alert("Could not connect to the server.");
     }
 }
 
@@ -105,12 +131,10 @@ async function handleDummyFormSubmit(event, serviceType, amount, fields = {}) {
         const result = await response.json();
 
         if (response.ok) {
-            // Update local balance and show success message
             walletBalance = result.newBalance;
-            loadWalletData(); // Reload all data to get updated history
+            loadWalletData();
             showSuccessMessageAndReceipt({ serviceType, amount: amountNum, fields, id: 'API_TXN_' + Math.floor(Math.random() * 100000) });
         } else {
-            // Show error message
             alert(result.message);
         }
     } catch (error) {
@@ -119,9 +143,8 @@ async function handleDummyFormSubmit(event, serviceType, amount, fields = {}) {
     }
 }
 
-// Helper function to show a success message and receipt (already in your code)
+// Helper function to show a success message and receipt
 function showSuccessMessageAndReceipt(details) {
-    // ... (This function remains the same as before)
     const formContainer = document.getElementById('service-form-container');
     const today = new Date().toLocaleDateString('en-IN');
     let receiptContent = `<div class="receipt-print-area"><h3>Receipt</h3><p><strong>Transaction ID:</strong> ${details.id}</p><p><strong>Date:</strong> ${today}</p><p><strong>Service:</strong> ${details.serviceType}</p><p><strong>Amount:</strong> ₹ ${details.amount !== 'N/A' ? parseFloat(details.amount).toFixed(2) : 'N/A'}</p><p><strong>Status:</strong> Successful</p>`;
@@ -134,7 +157,13 @@ function showSuccessMessageAndReceipt(details) {
     formContainer.innerHTML = `<div class="success-message-container"><h3>Transaction Successful!</h3><p>Your request has been processed successfully.</p><div class="receipt">${receiptContent}</div><button onclick="window.print()" class="cta-btn" style="margin-top: 20px;">Print Receipt</button><a href="dashboard.html" class="cta-btn" style="margin-top: 20px;">Go to Dashboard</a></div>`;
 }
 
-// Helper function to create a dropdown menu from an array (remains the same)
+// Helper function to create a dropdown menu from an array
+const mobileOperators = ['Jio', 'Airtel', 'Vi', 'BSNL'];
+const dthOperators = ['Tata Play', 'Airtel Digital TV', 'Dish TV', 'Sun Direct'];
+const billerCategories = ['Electricity', 'Water', 'Gas', 'Broadband'];
+const bankNames = ['State Bank of India', 'HDFC Bank', 'ICICI Bank', 'Axis Bank'];
+const states = ['Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh', 'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jharkhand', 'Karnataka', 'Kerala', 'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland', 'Odisha', 'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu', 'Telangana', 'Tripura', 'Uttar Pradesh', 'Uttarakhand', 'West Bengal'];
+
 function createDropdown(name, options) {
     let selectHtml = `<select name="${name}" required><option value="">Select ${name.replace('_', ' ')}</option>`;
     options.forEach(option => { selectHtml += `<option value="${option}">${option}</option>`; });
@@ -142,9 +171,8 @@ function createDropdown(name, options) {
     return selectHtml;
 }
 
-// Function to update the service form on the services page (remains the same)
+// Function to update the service form on the services page
 function loadServiceForm() {
-    // ... (Code for loading forms, remains the same)
     const params = new URLSearchParams(window.location.search);
     const serviceType = params.get('service');
     const subServiceType = params.get('subservice');
@@ -155,7 +183,7 @@ function loadServiceForm() {
         window.location.href = "login.html";
         return;
     }
-    // ... (switch case for different services)
+    
     let formContent = '';
     let formTitle = '';
 
@@ -244,30 +272,44 @@ function loadServiceForm() {
     updateWalletDisplay();
 }
 
-// Function to load transaction history on dashboard (remains the same)
+// Function to load transaction history on dashboard
 function loadTransactionHistory() {
     const historyContainer = document.getElementById('transaction-history-list');
     if (!historyContainer) return;
+
     if (transactionHistory.length === 0) {
         historyContainer.innerHTML = '<p>No transactions found.</p>';
         return;
     }
+
     let historyHtml = '<ul class="history-list">';
     transactionHistory.slice().reverse().forEach(transaction => {
         const amountDisplay = (transaction.amount === 'N/A') ? 'N/A' : `₹ ${parseFloat(transaction.amount).toFixed(2)}`;
-        historyHtml += `<li class="history-item"><span class="history-service">${transaction.service}</span><span class="history-amount">${amountDisplay}</span><span class="history-date">${transaction.date}</span></li>`;
+        historyHtml += `
+            <li class="history-item">
+                <span class="history-service">${transaction.service}</span>
+                <span class="history-amount">${amountDisplay}</span>
+                <span class="history-date">${transaction.date}</span>
+            </li>
+        `;
     });
     historyHtml += '</ul>';
     historyContainer.innerHTML = historyHtml;
 }
 
-// Event listeners for different pages (updated to use new functions)
+// Event listeners for different pages
 document.addEventListener('DOMContentLoaded', () => {
-    // We will call loadWalletData() from the dashboard page specifically
     if (document.body.id === 'login-page') {
         document.querySelector('.form-container form').addEventListener('submit', (e) => {
             e.preventDefault();
             handleLogin();
+        });
+    }
+
+    if (document.body.id === 'register-page') {
+        document.getElementById('register-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            handleRegistration();
         });
     }
 
@@ -282,7 +324,7 @@ document.addEventListener('DOMContentLoaded', () => {
             welcomeEl.innerText = `Welcome, ${username}!`;
         }
         
-        loadWalletData(); // Load data from the server on dashboard page
+        loadWalletData();
         
         const topupButton = document.getElementById('topup-button');
         if (topupButton) {
@@ -290,7 +332,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const topupAmount = prompt("Enter amount to top up:");
                 const amount = parseFloat(topupAmount);
                 if (!isNaN(amount) && amount > 0) {
-                    // This top-up is not handled by the API in this example, only by the client-side wallet.
                     walletBalance += amount;
                     updateWalletDisplay();
                     alert(`₹${amount} has been added to your wallet!`);
@@ -311,7 +352,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     if (document.body.id === 'services-page') {
-        loadWalletData(); // Load data on services page too
+        loadWalletData();
         loadServiceForm();
     }
 });
