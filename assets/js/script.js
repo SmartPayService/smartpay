@@ -76,15 +76,6 @@ async function loadWalletData() {
     }
 
     try {
-        // Fetch user data from the server.
-        // Since we don't need a password to get data once logged in,
-        // we'll create a new API endpoint later. For now, we'll
-        // temporarily bypass this by not sending a password in the GET request.
-        // We will improve this with a proper token-based system later.
-
-        // Note: For now, this `login` call is a workaround to fetch data. 
-        // A better approach would be to create a dedicated API endpoint like `/api/user-data`.
-        
         const response = await fetch(`${API_URL}/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -123,7 +114,7 @@ async function handleDummyFormSubmit(event, serviceType, amount, fields = {}) {
         return;
     }
 
-    const amountNum = parseFloat(amount);
+    const amountNum = parseFloat(amount) || 0;
     
     try {
         const response = await fetch(`${API_URL}/transaction`, {
@@ -142,7 +133,13 @@ async function handleDummyFormSubmit(event, serviceType, amount, fields = {}) {
         if (response.ok) {
             walletBalance = result.newBalance;
             loadWalletData();
-            showSuccessMessageAndReceipt({ serviceType, amount: amountNum, fields, id: 'API_TXN_' + Math.floor(Math.random() * 100000) });
+            showSuccessMessageAndReceipt({ 
+                serviceType, 
+                amount: amountNum, 
+                fields, 
+                id: 'API_TXN_' + Math.floor(Math.random() * 100000),
+                commission: result.commissionEarned
+            });
         } else {
             alert(result.message);
         }
@@ -156,7 +153,7 @@ async function handleDummyFormSubmit(event, serviceType, amount, fields = {}) {
 function showSuccessMessageAndReceipt(details) {
     const formContainer = document.getElementById('service-form-container');
     const today = new Date().toLocaleDateString('en-IN');
-    let receiptContent = `<div class="receipt-print-area"><h3>Receipt</h3><p><strong>Transaction ID:</strong> ${details.id}</p><p><strong>Date:</strong> ${today}</p><p><strong>Service:</strong> ${details.serviceType}</p><p><strong>Amount:</strong> ₹ ${details.amount !== 'N/A' ? parseFloat(details.amount).toFixed(2) : 'N/A'}</p><p><strong>Status:</strong> Successful</p>`;
+    let receiptContent = `<div class="receipt-print-area"><h3>Receipt</h3><p><strong>Transaction ID:</strong> ${details.id}</p><p><strong>Date:</strong> ${today}</p><p><strong>Service:</strong> ${details.serviceType}</p><p><strong>Amount:</strong> ₹ ${details.amount !== 'N/A' ? parseFloat(details.amount).toFixed(2) : 'N/A'}</p><p><strong>Commission Earned:</strong> ₹ ${details.commission || '0.00'}</p><p><strong>Status:</strong> Successful</p>`;
     for (const key in details.fields) {
         if (details.fields.hasOwnProperty(key)) {
             receiptContent += `<p><strong>${key}:</strong> ${details.fields[key]}</p>`;
@@ -294,10 +291,11 @@ function loadTransactionHistory() {
     let historyHtml = '<ul class="history-list">';
     transactionHistory.slice().reverse().forEach(transaction => {
         const amountDisplay = (transaction.amount === 'N/A') ? 'N/A' : `₹ ${parseFloat(transaction.amount).toFixed(2)}`;
+        const commissionDisplay = transaction.commission ? ` (+₹${parseFloat(transaction.commission).toFixed(2)} Commission)` : '';
         historyHtml += `
             <li class="history-item">
                 <span class="history-service">${transaction.service}</span>
-                <span class="history-amount">${amountDisplay}</span>
+                <span class="history-amount">${amountDisplay}${commissionDisplay}</span>
                 <span class="history-date">${transaction.date}</span>
             </li>
         `;
