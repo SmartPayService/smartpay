@@ -3,42 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login / Register</title>
+    <title>Login - Smartpay</title>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body id="login-page">
 
-    <header class="navbar">
-        <a href="index.html" class="logo">
-            <img src="assets/images/smartpay-logo.png" alt="Smartpay Logo" class="logo-img">
-        </a>
-        <div>
-            <a href="index.html">Home</a>
-            <a href="services.html">Services</a>
-            <a href="contact.html">Contact</a>
-        </div>
-        <a href="login.html" class="login-btn">Login</a>
-    </header>
-
-    <main class="container">
-        <div class="form-container">
-            <h2>Welcome to Smartpay</h2>
-            <form id="auth-form">
+    <main>
+        <section class="form-container">
+            <h2>Login to Smartpay</h2>
+            <form>
                 <label for="auth-username">Username:</label>
-                <input type="text" id="auth-username" required>
+                <input type="text" id="auth-username" name="username" placeholder="Enter your username" required>
+                
                 <label for="auth-password">Password:</label>
-                <input type="password" id="auth-password" required>
-                <button type="submit">Login / Register</button>
+                <input type="password" id="auth-password" name="password" placeholder="Enter your password" required>
+                
+                <button type="submit">Login</button>
             </form>
-        </div>
+            <p>Don't have an account? <a href="#">Register here</a></p>
+        </section>
     </main>
-
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 Smartpay. All Rights Reserved.</p>
-        </div>
-    </footer>
-
+    
     <script src="assets/js/script.js"></script>
 </body>
 </html>
