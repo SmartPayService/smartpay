@@ -1,33 +1,61 @@
 const express = require('express');
 const cors = require('cors');
+const fs = require('fs');
+const path = require('path');
+
 const app = express();
 const PORT = 3000;
+const usersFilePath = path.join(__dirname, 'users.json');
 
 app.use(cors());
 app.use(express.json());
 
-// A simple in-memory database to store user data
-const users = {};
+let users = {};
+
+// Function to load users from the JSON file
+function loadUsers() {
+    try {
+        if (fs.existsSync(usersFilePath)) {
+            const data = fs.readFileSync(usersFilePath, 'utf8');
+            users = JSON.parse(data);
+        }
+    } catch (error) {
+        console.error("Error loading users file:", error);
+        users = {};
+    }
+}
+
+// Function to save users to the JSON file
+function saveUsers() {
+    try {
+        fs.writeFileSync(usersFilePath, JSON.stringify(users, null, 2), 'utf8');
+    } catch (error) {
+        console.error("Error saving users file:", error);
+    }
+}
+
+// Load users when the server starts
+loadUsers();
 
 // Commission rates for different services
 const commissionRates = {
-    'Mobile Recharge': 0.02, // 2% commission
-    'DTH Recharge': 0.015,   // 1.5% commission
-    'Electricity Bill Payment': 0.005, // 0.5% commission
+    'Mobile Recharge': 0.02,
+    'DTH Recharge': 0.015,
+    'Electricity Bill Payment': 0.005,
     'Water Bill Payment': 0.005,
     'Gas Bill Payment': 0.005,
     'Broadband Bill Payment': 0.005,
-    'AEPS Cash Withdrawal': 0.01, // 1% commission on withdrawal amount
+    'AEPS Cash Withdrawal': 0.01,
     'AEPS Cash Deposit': 0.01,
-    'New PAN Card': 25,      // Fixed commission of ₹25
-    'Correction PAN': 15,    // Fixed commission of ₹15
-    'New Passport': 50,      // Fixed commission of ₹50
-    'Passport Renewal': 30,    // Fixed commission of ₹30
-    'Bike Insurance': 0.03, // 3% commission
-    'Car Insurance': 0.025,  // 2.5% commission
-    'Commercial Vehicle Insurance': 0.04, // 4% commission
-    'Savings Account Opening': 10,   // Fixed commission of ₹10
-    'Current Account Opening': 20    // Fixed commission of ₹20
+    'New PAN Card': 25,
+    'Correction PAN': 15,
+    'New Passport': 50,
+    'Passport Renewal': 30,
+    'Bike Insurance': 0.03,
+    'Car Insurance': 0.025,
+    'Commercial Vehicle Insurance': 0.04,
+    'Savings Account Opening': 10,
+    'Current Account Opening': 20
 };
 
 // API to handle registration of new users
@@ -44,10 +72,11 @@ app.post('/api/register', (req, res) => {
 
     users[username] = {
         password: password,
-        balance: 500, // Initial balance
+        balance: 500,
         history: []
     };
     
+    saveUsers(); // Save the new user data to the file
     res.status(201).json({ message: "Registration successful." });
 });
 
@@ -101,9 +130,8 @@ app.post('/api/transaction', (req, res) => {
     const isMiniStatement = service === 'AEPS Mini Statement';
 
     if (isBalanceInquiry || isMiniStatement) {
-        // These services have no cost or withdrawal from wallet
-        // They only generate commission
         users[username].balance = currentBalance + commissionEarned;
+        saveUsers();
         res.status(200).json({
             message: "Transaction successful.",
             newBalance: users[username].balance,
@@ -113,13 +141,11 @@ app.post('/api/transaction', (req, res) => {
     }
 
     if (!isAEPSWithdrawal) {
-        // For all other services (recharge, bill pay, etc.), check for sufficient balance
         if (currentBalance < transactionCost) {
             return res.status(402).json({ message: "Insufficient balance." });
         }
         users[username].balance = currentBalance - transactionCost + commissionEarned;
     } else {
-        // For cash withdrawal, the user's wallet balance increases
         users[username].balance = currentBalance + transactionCost + commissionEarned;
     }
 
@@ -133,6 +159,7 @@ app.post('/api/transaction', (req, res) => {
         fields: transactionDetails
     });
 
+    saveUsers(); // Save the updated user data to the file
     res.status(200).json({
         message: "Transaction successful.",
         newBalance: users[username].balance,
@@ -163,6 +190,7 @@ app.post('/api/topup', (req, res) => {
         fields: { 'Method': 'Online Payment' }
     });
 
+    saveUsers(); // Save the updated user data to the file
     res.status(200).json({
         message: "Top-up successful.",
         newBalance: users[username].balance
