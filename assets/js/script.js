@@ -76,10 +76,19 @@ async function loadWalletData() {
     }
 
     try {
+        // Fetch user data from the server.
+        // Since we don't need a password to get data once logged in,
+        // we'll create a new API endpoint later. For now, we'll
+        // temporarily bypass this by not sending a password in the GET request.
+        // We will improve this with a proper token-based system later.
+
+        // Note: For now, this `login` call is a workaround to fetch data. 
+        // A better approach would be to create a dedicated API endpoint like `/api/user-data`.
+        
         const response = await fetch(`${API_URL}/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username: currentUser, password: 'dummy_password' }) // Use a dummy password for this example
+            body: JSON.stringify({ username: currentUser, password: 'dummy_password' })
         });
         
         if (response.ok) {
