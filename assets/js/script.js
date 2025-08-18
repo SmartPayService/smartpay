@@ -50,7 +50,7 @@ async function handleRegistration() {
 
         if (response.ok) {
             alert(result.message);
-            window.location.href = "login.html"; // Redirect to login page
+            window.location.href = "login.html";
         } else {
             alert(result.message);
         }
@@ -131,8 +131,8 @@ async function handleDummyFormSubmit(event, serviceType, amount, fields = {}) {
         const result = await response.json();
 
         if (response.ok) {
-            walletBalance = result.newBalance;
-            loadWalletData();
+            walletBalance = result.newBalance; // Update balance from server response
+            loadWalletData(); // Reload all data to be sure
             showSuccessMessageAndReceipt({ 
                 serviceType, 
                 amount: amountNum, 
