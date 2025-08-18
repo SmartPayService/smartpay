@@ -46,7 +46,9 @@ const commissionRates = {
     'Gas Bill Payment': 0.005,
     'Broadband Bill Payment': 0.005,
     'AEPS Cash Withdrawal': 0.01,
-    'AEPS Cash Deposit': 0.01,
+    'AEPS Cash Deposit': 0.005, // Commission for deposits
+    'AEPS Balance Inquiry': 0.00, // No commission or cost
+    'AEPS Mini Statement': 0.00, // No commission or cost
     'New PAN Card': 25,
     'Correction PAN': 15,
     'New Passport': 50,
@@ -125,13 +127,15 @@ app.post('/api/transaction', (req, res) => {
         }
     }
 
+    // Special handling for AEPS services
     const isAEPSWithdrawal = service === 'AEPS Cash Withdrawal';
+    const isAEPSDeposit = service === 'AEPS Cash Deposit';
     const isBalanceInquiry = service === 'AEPS Balance Inquiry';
     const isMiniStatement = service === 'AEPS Mini Statement';
-
+    
+    // AEPS Balance Inquiry & Mini Statement have no cost
     if (isBalanceInquiry || isMiniStatement) {
-        // These services have no cost or withdrawal from wallet
-        // They only generate commission
+        // You only earn commission (if any)
         users[username].balance = currentBalance + commissionEarned;
         saveUsers();
         res.status(200).json({
@@ -141,16 +145,26 @@ app.post('/api/transaction', (req, res) => {
         });
         return;
     }
-
-    // Check for insufficient balance before proceeding
-    if (!isAEPSWithdrawal && currentBalance < transactionCost) {
-        return res.status(402).json({ message: "Insufficient balance." });
-    }
-
-    if (!isAEPSWithdrawal) {
-        users[username].balance = currentBalance - transactionCost + commissionEarned;
-    } else {
+    
+    // AEPS Cash Withdrawal from a user's bank account
+    if (isAEPSWithdrawal) {
+        // Your wallet balance should increase by the withdrawn amount (as cash is given to user)
+        // plus the commission
         users[username].balance = currentBalance + transactionCost + commissionEarned;
+    } else if (isAEPSDeposit) {
+        // Your wallet balance should decrease by the deposited amount
+        // plus the commission you earned.
+        if (currentBalance < transactionCost) {
+            return res.status(402).json({ message: "Insufficient balance." });
+        }
+        users[username].balance = currentBalance - transactionCost + commissionEarned;
+    }
+    else {
+        // For all other services (recharge, bill pay etc.), check for sufficient balance
+        if (currentBalance < transactionCost) {
+            return res.status(402).json({ message: "Insufficient balance." });
+        }
+        users[username].balance = currentBalance - transactionCost + commissionEarned;
     }
 
     users[username].history.push({
