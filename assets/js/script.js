@@ -131,8 +131,8 @@ async function handleDummyFormSubmit(event, serviceType, amount, fields = {}) {
         const result = await response.json();
 
         if (response.ok) {
-            walletBalance = result.newBalance; // Update balance from server response
-            loadWalletData(); // Reload all data to be sure
+            walletBalance = result.newBalance;
+            loadWalletData();
             showSuccessMessageAndReceipt({ 
                 serviceType, 
                 amount: amountNum, 
@@ -366,6 +366,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     } catch (error) {
                         console.error('Top-up error:', error);
                         alert("Could not complete the top-up. Server error.");
+                        
+                        // Retry loading wallet data in case of error
+                        loadWalletData();
                     }
                 } else if (amount <= 0) {
                     alert("Please enter a valid amount greater than 0.");
