@@ -1,28 +1,36 @@
 // Global variables to store wallet balance and transaction history
 let walletBalance;
 let transactionHistory;
+let currentUser; // New variable to store the current user's username
 
 // Function to save wallet data to localStorage
 function saveWalletData() {
-    localStorage.setItem('walletBalance', JSON.stringify(walletBalance));
-    localStorage.setItem('transactionHistory', JSON.stringify(transactionHistory));
+    if (!currentUser) return; // Don't save if no user is logged in
+    const userData = {
+        balance: walletBalance,
+        history: transactionHistory
+    };
+    localStorage.setItem(`userData_${currentUser}`, JSON.stringify(userData));
 }
 
 // Function to load wallet data from localStorage or set initial values
 function loadWalletData() {
-    const savedBalance = localStorage.getItem('walletBalance');
-    const savedHistory = localStorage.getItem('transactionHistory');
-
-    if (savedBalance !== null) {
-        walletBalance = JSON.parse(savedBalance);
-    } else {
-        walletBalance = 500; // Initial dummy balance
+    currentUser = localStorage.getItem('loggedInUser');
+    if (!currentUser) {
+        walletBalance = 0;
+        transactionHistory = [];
+        return;
     }
 
-    if (savedHistory !== null) {
-        transactionHistory = JSON.parse(savedHistory);
+    const savedData = localStorage.getItem(`userData_${currentUser}`);
+    if (savedData !== null) {
+        const userData = JSON.parse(savedData);
+        walletBalance = userData.balance;
+        transactionHistory = userData.history;
     } else {
-        transactionHistory = []; // Initial empty history
+        walletBalance = 500; // Initial dummy balance for new user
+        transactionHistory = []; // Initial empty history for new user
+        saveWalletData(); // Save the new user's initial data
     }
 }
 
@@ -53,6 +61,12 @@ function handleLogin() {
     } else {
         alert("Please enter both a username and a password.");
     }
+}
+
+// Function to handle logout
+function handleLogout() {
+    localStorage.removeItem('loggedInUser');
+    window.location.href = 'login.html';
 }
 
 // Function to add a transaction to the history
@@ -562,6 +576,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     alert("Top-up cancelled.");
                 }
+            });
+        }
+
+        const logoutButton = document.querySelector('.logout-btn');
+        if (logoutButton) {
+            logoutButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                handleLogout();
             });
         }
     }
