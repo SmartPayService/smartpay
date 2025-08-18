@@ -1,3 +1,7 @@
+// Global variables to store wallet balance and transaction history
+let walletBalance;
+let transactionHistory;
+
 // Function to save wallet data to localStorage
 function saveWalletData() {
     localStorage.setItem('walletBalance', JSON.stringify(walletBalance));
@@ -504,10 +508,11 @@ function loadTransactionHistory() {
 
     let historyHtml = '<ul class="history-list">';
     transactionHistory.slice().reverse().forEach(transaction => { // Show most recent first
+        const amountDisplay = (transaction.amount === 'N/A') ? 'N/A' : `₹ ${parseFloat(transaction.amount).toFixed(2)}`;
         historyHtml += `
             <li class="history-item">
                 <span class="history-service">${transaction.service}</span>
-                <span class="history-amount">₹ ${parseFloat(transaction.amount).toFixed(2) || 'N/A'}</span>
+                <span class="history-amount">${amountDisplay}</span>
                 <span class="history-date">${transaction.date}</span>
             </li>
         `;
