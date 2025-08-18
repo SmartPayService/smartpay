@@ -116,8 +116,7 @@ async function handleDummyFormSubmit(event, serviceType, amount, fields = {}) {
 
     let amountNum = parseFloat(amount) || 0;
     
-    // Override amount for forms where it's a user input
-    if (serviceType === 'AEPS Cash Withdrawal' || serviceType === 'AEPS Cash Deposit' || serviceType === 'Wallet Top-up') {
+    if (serviceType === 'AEPS Cash Withdrawal' || serviceType === 'AEPS Cash Deposit') {
         const form = event.target;
         const inputAmount = form.querySelector('[name="amount"]');
         if (inputAmount) {
