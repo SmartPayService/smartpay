@@ -76,7 +76,7 @@ app.post('/api/register', (req, res) => {
         history: []
     };
     
-    saveUsers(); // Save the new user data to the file
+    saveUsers();
     res.status(201).json({ message: "Registration successful." });
 });
 
@@ -130,6 +130,8 @@ app.post('/api/transaction', (req, res) => {
     const isMiniStatement = service === 'AEPS Mini Statement';
 
     if (isBalanceInquiry || isMiniStatement) {
+        // These services have no cost or withdrawal from wallet
+        // They only generate commission
         users[username].balance = currentBalance + commissionEarned;
         saveUsers();
         res.status(200).json({
@@ -140,10 +142,12 @@ app.post('/api/transaction', (req, res) => {
         return;
     }
 
+    // Check for insufficient balance before proceeding
+    if (!isAEPSWithdrawal && currentBalance < transactionCost) {
+        return res.status(402).json({ message: "Insufficient balance." });
+    }
+
     if (!isAEPSWithdrawal) {
-        if (currentBalance < transactionCost) {
-            return res.status(402).json({ message: "Insufficient balance." });
-        }
         users[username].balance = currentBalance - transactionCost + commissionEarned;
     } else {
         users[username].balance = currentBalance + transactionCost + commissionEarned;
@@ -159,7 +163,7 @@ app.post('/api/transaction', (req, res) => {
         fields: transactionDetails
     });
 
-    saveUsers(); // Save the updated user data to the file
+    saveUsers();
     res.status(200).json({
         message: "Transaction successful.",
         newBalance: users[username].balance,
@@ -190,7 +194,7 @@ app.post('/api/topup', (req, res) => {
         fields: { 'Method': 'Online Payment' }
     });
 
-    saveUsers(); // Save the updated user data to the file
+    saveUsers();
     res.status(200).json({
         message: "Top-up successful.",
         newBalance: users[username].balance
