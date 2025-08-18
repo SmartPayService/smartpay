@@ -29,6 +29,9 @@ body {
 
 /* Premium Navbar */
 .premium-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     background-color: var(--premium-dark);
     padding: 20px 30px;
     box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15);
@@ -43,6 +46,7 @@ body {
     padding: 10px 15px;
     border-radius: 0.25rem;
     transition: background-color 0.3s ease, color 0.3s ease;
+    text-decoration: none;
 }
 
 .premium-navbar a:hover {
@@ -69,7 +73,7 @@ body {
     background: linear-gradient(135deg, var(--premium-primary), var(--premium-secondary));
     color: var(--premium-light);
     text-align: center;
-    padding: 60px 20px; /* यहाँ ऊँचाई कम की गई है */
+    padding: 60px 20px;
 }
 
 .premium-hero h1 {
@@ -160,46 +164,7 @@ body {
     font-size: 0.9rem;
 }
 
-/* General Styles (keep these for other pages) */
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
-    background-color: var(--card-background);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-.navbar .logo-img {
-    height: 40px;
-    width: auto;
-    transition: transform 0.3s ease;
-}
-.navbar .logo-img:hover {
-    transform: scale(1.05);
-}
-.navbar a {
-    color: var(--text-color);
-    text-decoration: none;
-    padding: 8px 15px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-.navbar a:hover {
-    background-color: #f0f0f0;
-    color: var(--primary-color);
-}
-.navbar .cta-btn, .navbar .logout-btn {
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-}
-.navbar .login-btn { background-color: var(--primary-color); }
-.navbar .login-btn:hover { background-color: #0056b3; }
-.navbar .logout-btn { background-color: #dc3545; }
-.navbar .logout-btn:hover { background-color: #c82333; }
-
+/* Dashboard & Services General Styles */
 .section-card {
     background-color: var(--card-background);
     padding: 30px;
@@ -214,46 +179,6 @@ body {
     color: var(--primary-color);
     border-bottom: 2px solid #f0f0f0;
     padding-bottom: 15px;
-}
-.feature-item {
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-radius: 8px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    animation: fadeInUp 1s ease-in-out;
-}
-.feature-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-.feature-item i {
-    font-size: 40px;
-    color: var(--primary-color);
-    margin-bottom: 10px;
-}
-.feature-item h3 {
-    margin: 0;
-    font-size: 20px;
-    color: var(--text-color);
-}
-.feature-item p {
-    font-size: 16px;
-    color: var(--light-text-color);
-    margin-top: 10px;
-}
-
-.footer {
-    text-align: center;
-    padding: 20px;
-    background-color: var(--text-color);
-    color: #f0f0f0;
-    font-size: 14px;
-    margin-top: 30px;
-}
-
-/* Dashboard Specific Styles */
-#dashboard-page .section-card {
-    text-align: center;
 }
 .wallet-nav-section {
     display: flex;
@@ -289,6 +214,11 @@ body {
 .topup-btn:hover {
     background-color: #218838;
 }
+
+/* Dashboard Specific Styles */
+#dashboard-page .section-card {
+    text-align: center;
+}
 .services-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -321,6 +251,32 @@ body {
     margin: 0;
     font-size: 16px;
     font-weight: 500;
+}
+.history-list {
+    list-style-type: none;
+    padding: 0;
+}
+.history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+}
+.history-item:last-child {
+    border-bottom: none;
+}
+.history-service {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+.history-amount {
+    color: #dc3545;
+    font-weight: bold;
+}
+.history-date {
+    color: var(--light-text-color);
+    font-size: 0.9em;
 }
 
 /* Form Styles */
