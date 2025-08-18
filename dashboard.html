@@ -3,79 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Dashboard - Smartpay</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body id="dashboard-page">
 
-    <header class="navbar">
-        <a href="dashboard.html" class="logo">
+    <header class="navbar premium-navbar">
+        <a href="index.html" class="logo premium-logo">
             <img src="assets/images/smartpay-logo.png" alt="Smartpay Logo" class="logo-img">
         </a>
-        <div>
-            <a href="#">My Dashboard</a>
-            <a href="services.html">All Services</a>
-            <a href="contact.html">Contact</a>
-        </div>
         <div class="wallet-nav-section">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="services.html">Services</a>
             <div class="wallet-balance-display">
-                <p>Balance:</p>
-                <h3 id="wallet-balance">₹ 0</h3>
+                <p>Wallet Balance</p>
+                <h3 id="wallet-balance">₹ 0.00</h3>
             </div>
-            <a href="#" id="topup-button" class="topup-btn">Top-up</a>
-            <a href="index.html" class="logout-btn">Logout</a>
+            <a href="#" id="topup-button" class="topup-btn">Top-up Wallet</a>
+            <a href="login.html" class="logout-btn">Logout</a>
         </div>
     </header>
 
     <main class="container">
-        <div class="section-card">
-            <h1 id="welcome-user-name" style="text-align: center;">Welcome, User!</h1>
-            <p style="text-align: center;">Welcome to your personal space. Here you can manage your account, view your balance, and perform quick actions.</p>
-        </div>
-        
-        <div class="services-grid">
-            <a href="services.html?service=recharge&subservice=mobile" class="service-item">
-                <i class="fas fa-mobile-alt"></i>
-                <p>Mobile Recharge</p>
-            </a>
-            <a href="services.html?service=billpay" class="service-item">
-                <i class="fas fa-bolt"></i>
-                <p>Bill Payments</p>
-            </a>
-            <a href="services.html?service=recharge&subservice=dth" class="service-item">
-                <i class="fas fa-tv"></i>
-                <p>DTH Recharge</p>
-            </a>
-            <a href="services.html?service=aeps" class="service-item">
-                <i class="fas fa-fingerprint"></i>
-                <p>AEPS</p>
-            </a>
-            <a href="services.html?service=pancard" class="service-item">
-                <i class="fas fa-id-card"></i>
-                <p>PAN Card</p>
-            </a>
-            <a href="services.html?service=passport" class="service-item">
-                <i class="fas fa-passport"></i>
-                <p>Passport</p>
-            </a>
-            <a href="services.html?service=insurance" class="service-item">
-                <i class="fas fa-car-crash"></i>
-                <p>Insurance</p>
-            </a>
-            <a href="services.html?service=account-opening" class="service-item">
-                <i class="fas fa-user-plus"></i>
-                <p>Account Opening</p>
-            </a>
-        </div>
-    </main>
+        <section class="section-card">
+            <h2 id="welcome-user-name">Welcome!</h2>
+        </section>
 
-    <footer class="footer">
+        <section class="section-card">
+            <h2>Our Services</h2>
+            <div class="services-grid">
+                <a href="services.html?service=recharge&subservice=mobile" class="service-item">
+                    <i class="fas fa-mobile-alt"></i>
+                    <p>Mobile Recharge</p>
+                </a>
+                <a href="services.html?service=billpay" class="service-item">
+                    <i class="fas fa-bolt"></i>
+                    <p>Bill Payments</p>
+                </a>
+                <a href="services.html?service=recharge&subservice=dth" class="service-item">
+                    <i class="fas fa-tv"></i>
+                    <p>DTH Recharge</p>
+                </a>
+                <a href="services.html?service=aeps" class="service-item">
+                    <i class="fas fa-fingerprint"></i>
+                    <p>AEPS</p>
+                </a>
+                <a href="services.html?service=pancard" class="service-item">
+                    <i class="fas fa-id-card"></i>
+                    <p>PAN Card</p>
+                </a>
+                <a href="services.html?service=passport" class="service-item">
+                    <i class="fas fa-passport"></i>
+                    <p>Passport</p>
+                </a>
+                <a href="services.html?service=insurance" class="service-item">
+                    <i class="fas fa-car-crash"></i>
+                    <p>Insurance</p>
+                </a>
+                <a href="services.html?service=account-opening" class="service-item">
+                    <i class="fas fa-user-plus"></i>
+                    <p>Account Opening</p>
+                </a>
+            </div>
+        </section>
+        
+        <section class="section-card">
+            <h2>Transaction History</h2>
+            <div id="transaction-history-list">
+                </div>
+        </section>
+
+    </main>
+    
+    <footer class="premium-footer">
         <div class="container">
             <p>&copy; 2025 Smartpay. All Rights Reserved.</p>
         </div>
     </footer>
-    
+
     <script src="assets/js/script.js"></script>
 </body>
 </html>
