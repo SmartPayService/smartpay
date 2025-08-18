@@ -92,6 +92,36 @@ app.post('/api/transaction', (req, res) => {
     });
 });
 
+// API to handle wallet top-up
+app.post('/api/topup', (req, res) => {
+    const { username, amount } = req.body;
+
+    if (!username || !amount || amount <= 0) {
+        return res.status(400).json({ message: "Invalid top-up amount." });
+    }
+
+    if (!users[username]) {
+        return res.status(404).json({ message: "User not found." });
+    }
+
+    users[username].balance += amount;
+
+    // Add a top-up transaction to history for record-keeping
+    users[username].history.push({
+        id: Math.floor(Math.random() * 1000000),
+        date: new Date().toLocaleDateString('en-IN'),
+        service: 'Wallet Top-up',
+        amount: amount,
+        status: 'Successful',
+        fields: { 'Method': 'Online Payment' }
+    });
+
+    res.status(200).json({
+        message: "Top-up successful.",
+        newBalance: users[username].balance
+    });
+});
+
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
