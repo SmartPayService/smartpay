@@ -9,6 +9,27 @@ app.use(express.json());
 // A simple in-memory database to store user data
 const users = {};
 
+// Commission rates for different services
+const commissionRates = {
+    'Mobile Recharge': 0.02, // 2% commission
+    'DTH Recharge': 0.015,   // 1.5% commission
+    'Electricity Bill Payment': 0.005, // 0.5% commission
+    'Water Bill Payment': 0.005,
+    'Gas Bill Payment': 0.005,
+    'Broadband Bill Payment': 0.005,
+    'AEPS Cash Withdrawal': 0.01, // 1% commission on withdrawal amount
+    'AEPS Cash Deposit': 0.01,
+    'New PAN Card': 25,      // Fixed commission of ₹25
+    'Correction PAN': 15,    // Fixed commission of ₹15
+    'New Passport': 50,      // Fixed commission of ₹50
+    'Passport Renewal': 30,    // Fixed commission of ₹30
+    'Bike Insurance': 0.03, // 3% commission
+    'Car Insurance': 0.025,  // 2.5% commission
+    'Commercial Vehicle Insurance': 0.04, // 4% commission
+    'Savings Account Opening': 10,   // Fixed commission of ₹10
+    'Current Account Opening': 20    // Fixed commission of ₹20
+};
+
 // API to handle registration of new users
 app.post('/api/register', (req, res) => {
     const { username, password } = req.body;
@@ -22,8 +43,8 @@ app.post('/api/register', (req, res) => {
     }
 
     users[username] = {
-        password: password, // In a real app, this would be hashed
-        balance: 500,
+        password: password,
+        balance: 500, // Initial balance
         history: []
     };
     
@@ -38,12 +59,10 @@ app.post('/api/login', (req, res) => {
         return res.status(400).json({ message: "Username and password are required." });
     }
 
-    // Check if user exists and password is correct
     if (!users[username] || users[username].password !== password) {
         return res.status(401).json({ message: "Invalid username or password." });
     }
     
-    // If login is successful, return user data
     res.status(200).json({
         username: username,
         balance: users[username].balance,
@@ -51,11 +70,11 @@ app.post('/api/login', (req, res) => {
     });
 });
 
-// API to handle transactions and update user data
+// API to handle transactions and update user data with commission
 app.post('/api/transaction', (req, res) => {
     const { username, service, amount, transactionDetails } = req.body;
 
-    if (!username || !service || amount === undefined) {
+    if (!username || !service) {
         return res.status(400).json({ message: "Invalid transaction data." });
     }
 
@@ -63,32 +82,54 @@ app.post('/api/transaction', (req, res) => {
         return res.status(404).json({ message: "User not found." });
     }
 
-    let currentBalance = users[username].balance;
-    const amountNum = parseFloat(amount);
-    const isCashWithdrawal = service === 'AEPS Cash Withdrawal';
+    const currentBalance = users[username].balance;
+    const amountNum = parseFloat(amount) || 0; // Ensure amount is a number
+    let transactionCost = amountNum;
+    let commissionEarned = 0;
 
-    if (isCashWithdrawal) {
-        currentBalance += amountNum;
-    } else if (currentBalance >= amountNum) {
-        currentBalance -= amountNum;
-    } else {
+    // Calculate commission based on service type
+    const commissionRate = commissionRates[service];
+    if (commissionRate !== undefined) {
+        if (typeof commissionRate === 'number' && commissionRate < 1) {
+            // Percentage-based commission
+            commissionEarned = amountNum * commissionRate;
+        } else {
+            // Fixed amount commission
+            commissionEarned = commissionRate;
+        }
+    }
+
+    const isAEPSWithdrawal = service === 'AEPS Cash Withdrawal';
+    
+    if (!isAEPSWithdrawal && transactionCost > currentBalance) {
         return res.status(402).json({ message: "Insufficient balance." });
     }
 
-    // Add transaction to history
-    users[username].balance = currentBalance;
+    let newBalance;
+    if (isAEPSWithdrawal) {
+        // For cash withdrawal, the user's wallet balance increases, and they also earn commission.
+        newBalance = currentBalance + amountNum + commissionEarned;
+    } else {
+        // For all other services, the cost is deducted, and commission is added back.
+        // We deduct the transaction cost and then add the commission.
+        newBalance = currentBalance - transactionCost + commissionEarned;
+    }
+
+    users[username].balance = newBalance;
     users[username].history.push({
         id: Math.floor(Math.random() * 1000000),
         date: new Date().toLocaleDateString('en-IN'),
         service: service,
-        amount: amount,
+        amount: amountNum,
+        commission: commissionEarned.toFixed(2),
         status: 'Successful',
         fields: transactionDetails
     });
 
     res.status(200).json({
         message: "Transaction successful.",
-        newBalance: currentBalance
+        newBalance: newBalance,
+        commissionEarned: commissionEarned.toFixed(2)
     });
 });
 
@@ -106,7 +147,6 @@ app.post('/api/topup', (req, res) => {
 
     users[username].balance += amount;
 
-    // Add a top-up transaction to history for record-keeping
     users[username].history.push({
         id: Math.floor(Math.random() * 1000000),
         date: new Date().toLocaleDateString('en-IN'),
