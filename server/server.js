@@ -82,40 +82,47 @@ app.post('/api/transaction', (req, res) => {
         return res.status(404).json({ message: "User not found." });
     }
 
-    const currentBalance = users[username].balance;
-    const amountNum = parseFloat(amount) || 0; // Ensure amount is a number
+    let currentBalance = users[username].balance;
+    const amountNum = parseFloat(amount) || 0;
     let transactionCost = amountNum;
     let commissionEarned = 0;
 
-    // Calculate commission based on service type
     const commissionRate = commissionRates[service];
     if (commissionRate !== undefined) {
         if (typeof commissionRate === 'number' && commissionRate < 1) {
-            // Percentage-based commission
             commissionEarned = amountNum * commissionRate;
         } else {
-            // Fixed amount commission
             commissionEarned = commissionRate;
         }
     }
 
     const isAEPSWithdrawal = service === 'AEPS Cash Withdrawal';
-    
-    if (!isAEPSWithdrawal && transactionCost > currentBalance) {
-        return res.status(402).json({ message: "Insufficient balance." });
+    const isBalanceInquiry = service === 'AEPS Balance Inquiry';
+    const isMiniStatement = service === 'AEPS Mini Statement';
+
+    if (isBalanceInquiry || isMiniStatement) {
+        // These services have no cost or withdrawal from wallet
+        // They only generate commission
+        users[username].balance = currentBalance + commissionEarned;
+        res.status(200).json({
+            message: "Transaction successful.",
+            newBalance: users[username].balance,
+            commissionEarned: commissionEarned.toFixed(2)
+        });
+        return;
     }
 
-    let newBalance;
-    if (isAEPSWithdrawal) {
-        // For cash withdrawal, the user's wallet balance increases, and they also earn commission.
-        newBalance = currentBalance + amountNum + commissionEarned;
+    if (!isAEPSWithdrawal) {
+        // For all other services (recharge, bill pay, etc.), check for sufficient balance
+        if (currentBalance < transactionCost) {
+            return res.status(402).json({ message: "Insufficient balance." });
+        }
+        users[username].balance = currentBalance - transactionCost + commissionEarned;
     } else {
-        // For all other services, the cost is deducted, and commission is added back.
-        // We deduct the transaction cost and then add the commission.
-        newBalance = currentBalance - transactionCost + commissionEarned;
+        // For cash withdrawal, the user's wallet balance increases
+        users[username].balance = currentBalance + transactionCost + commissionEarned;
     }
 
-    users[username].balance = newBalance;
     users[username].history.push({
         id: Math.floor(Math.random() * 1000000),
         date: new Date().toLocaleDateString('en-IN'),
@@ -128,7 +135,7 @@ app.post('/api/transaction', (req, res) => {
 
     res.status(200).json({
         message: "Transaction successful.",
-        newBalance: newBalance,
+        newBalance: users[username].balance,
         commissionEarned: commissionEarned.toFixed(2)
     });
 });
