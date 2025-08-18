@@ -2,7 +2,7 @@
 let walletBalance;
 let transactionHistory;
 let currentUser;
-const API_URL = 'http://localhost:3000/api'; // Our new backend API URL
+const API_URL = 'http://localhost:3000/api';
 
 // Function to handle login with a dummy user
 async function handleLogin() {
@@ -328,13 +328,38 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const topupButton = document.getElementById('topup-button');
         if (topupButton) {
-            topupButton.addEventListener('click', () => {
+            topupButton.addEventListener('click', async () => {
                 const topupAmount = prompt("Enter amount to top up:");
                 const amount = parseFloat(topupAmount);
+
                 if (!isNaN(amount) && amount > 0) {
-                    walletBalance += amount;
-                    updateWalletDisplay();
-                    alert(`₹${amount} has been added to your wallet!`);
+                    const username = localStorage.getItem('loggedInUser');
+                    if (!username) {
+                        alert("Please log in to top up your wallet.");
+                        return;
+                    }
+
+                    try {
+                        const response = await fetch(`${API_URL}/topup`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ username: username, amount: amount })
+                        });
+
+                        const result = await response.json();
+
+                        if (response.ok) {
+                            walletBalance = result.newBalance;
+                            updateWalletDisplay();
+                            loadTransactionHistory();
+                            alert(`₹${amount} has been added to your wallet!`);
+                        } else {
+                            alert(result.message);
+                        }
+                    } catch (error) {
+                        console.error('Top-up error:', error);
+                        alert("Could not complete the top-up. Server error.");
+                    }
                 } else if (amount <= 0) {
                     alert("Please enter a valid amount greater than 0.");
                 } else {
