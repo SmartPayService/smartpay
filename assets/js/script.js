@@ -2,7 +2,7 @@
 let walletBalance;
 let transactionHistory;
 let currentUser;
-const API_URL = 'https://smartpay-1fhd.onrender.com';
+const API_URL = 'http://localhost:3000/api';
 
 // Function to handle login with a dummy user
 async function handleLogin() {
@@ -397,4 +397,5 @@ document.addEventListener('DOMContentLoaded', () => {
         loadServiceForm();
     }
 });
+
 
