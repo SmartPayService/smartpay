@@ -397,5 +397,3 @@ document.addEventListener('DOMContentLoaded', () => {
         loadServiceForm();
     }
 });
-
-
