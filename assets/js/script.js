@@ -1,3 +1,8 @@
+// यह आपके सर्वर का URL है।
+// अगर आप Replit का उपयोग कर रहे हैं, तो 'YOUR_REPLIT_SERVER_URL_HERE' की जगह अपना Replit URL डालें।
+// उदाहरण: const BASE_URL = 'https://smartpay-project.replit.app';
+const BASE_URL = 'YOUR_REPLIT_SERVER_URL_HERE'; 
+
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('login-form');
     const registerForm = document.getElementById('register-form');
@@ -28,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const password = loginForm.password.value;
             
             try {
-                const response = await fetch('/api/login', {
+                const response = await fetch(`${BASE_URL}/api/login`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ username, password })
@@ -55,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const password = registerForm.password.value;
             
             try {
-                const response = await fetch('/api/register', {
+                const response = await fetch(`${BASE_URL}/api/register`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ username, password })
@@ -75,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Fetch user data from the server
     async function fetchUserData(username) {
         try {
-            const response = await fetch('/api/login', {
+            const response = await fetch(`${BASE_URL}/api/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, password: '' }) // Password not needed for data fetch
@@ -135,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             
             try {
-                const response = await fetch('/api/topup', {
+                const response = await fetch(`${BASE_URL}/api/topup`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ username, amount })
@@ -227,122 +232,3 @@ document.addEventListener('DOMContentLoaded', () => {
                     <h2>${service}</h2>
                     <label for="bill-number">Bill Number:</label>
                     <input type="text" id="bill-number" placeholder="Enter bill number" required>
-                    <label for="provider">Provider:</label>
-                    <input type="text" id="provider" placeholder="Enter provider name" required>
-                    <label for="amount">Amount:</label>
-                    <input type="number" id="amount" placeholder="Enter amount" required>
-                    <button type="submit">Pay</button>
-                `;
-                break;
-            case 'AEPS Cash Withdrawal':
-            case 'AEPS Cash Deposit':
-                formContent = `
-                    <h2>${service}</h2>
-                    <label for="aadhaar">Aadhaar Number:</label>
-                    <input type="tel" id="aadhaar" pattern="[0-9]{12}" placeholder="Enter 12-digit Aadhaar" required>
-                    <label for="bank">Bank Name:</label>
-                    <input type="text" id="bank" placeholder="Enter bank name" required>
-                    <label for="amount">Amount:</label>
-                    <input type="number" id="amount" placeholder="Enter amount" required>
-                    <button type="submit">Proceed</button>
-                `;
-                break;
-            case 'AEPS Balance Inquiry':
-            case 'AEPS Mini Statement':
-                formContent = `
-                    <h2>${service}</h2>
-                    <label for="aadhaar">Aadhaar Number:</label>
-                    <input type="tel" id="aadhaar" pattern="[0-9]{12}" placeholder="Enter 12-digit Aadhaar" required>
-                    <label for="bank">Bank Name:</label>
-                    <input type="text" id="bank" placeholder="Enter bank name" required>
-                    <button type="submit">Proceed</button>
-                `;
-                break;
-            case 'New PAN Card':
-            case 'Correction PAN':
-                formContent = `
-                    <h2>${service}</h2>
-                    <label for="name">Full Name:</label>
-                    <input type="text" id="name" placeholder="Enter full name" required>
-                    <label for="amount">Fees:</label>
-                    <input type="number" id="amount" value="${service === 'New PAN Card' ? 25 : 15}" readonly>
-                    <button type="submit">Apply</button>
-                `;
-                break;
-            case 'New Passport':
-            case 'Passport Renewal':
-                formContent = `
-                    <h2>${service}</h2>
-                    <label for="name">Full Name:</label>
-                    <input type="text" id="name" placeholder="Enter full name" required>
-                    <label for="amount">Fees:</label>
-                    <input type="number" id="amount" value="${service === 'New Passport' ? 50 : 30}" readonly>
-                    <button type="submit">Apply</button>
-                `;
-                break;
-            case 'Bike Insurance':
-            case 'Car Insurance':
-            case 'Commercial Vehicle Insurance':
-                formContent = `
-                    <h2>${service}</h2>
-                    <label for="vehicle-number">Vehicle Number:</label>
-                    <input type="text" id="vehicle-number" placeholder="Enter vehicle number" required>
-                    <label for="amount">Amount:</label>
-                    <input type="number" id="amount" placeholder="Enter amount" required>
-                    <button type="submit">Pay</button>
-                `;
-                break;
-            case 'Savings Account Opening':
-            case 'Current Account Opening':
-                formContent = `
-                    <h2>${service}</h2>
-                    <label for="name">Full Name:</label>
-                    <input type="text" id="name" placeholder="Enter full name" required>
-                    <label for="amount">Fees:</label>
-                    <input type="number" id="amount" value="${service === 'Savings Account Opening' ? 10 : 20}" readonly>
-                    <button type="submit">Apply</button>
-                `;
-                break;
-            default:
-                formContent = `<h2>Service Not Found</h2>`;
-                break;
-        }
-
-        serviceContainer.innerHTML = formContent;
-        const serviceForm = document.getElementById('service-form');
-        
-        if (serviceForm) {
-            serviceForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                
-                const username = localStorage.getItem('username');
-                const amountInput = document.getElementById('amount');
-                const amount = amountInput ? parseFloat(amountInput.value) : 0;
-                
-                const transactionDetails = {};
-                const inputs = serviceForm.querySelectorAll('input, select');
-                inputs.forEach(input => {
-                    transactionDetails[input.id] = input.value;
-                });
-                
-                try {
-                    const response = await fetch('/api/transaction', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ username, service, amount, transactionDetails })
-                    });
-                    
-                    const data = await response.json();
-                    if (response.ok) {
-                        alert(data.message);
-                        fetchUserData(username); // Refresh balance and history
-                    } else {
-                        alert(data.message);
-                    }
-                } catch (error) {
-                    alert('Transaction failed. Server error.');
-                }
-            });
-        }
-    }
-});
